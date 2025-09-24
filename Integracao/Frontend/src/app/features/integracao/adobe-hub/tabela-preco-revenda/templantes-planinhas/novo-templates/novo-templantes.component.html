@@ -1,0 +1,65 @@
+<div class="app-container create-template-container">
+  <div class="mapping-container">
+    <!-- Cabeçalho -->
+    <div class="mapping-header">
+      <h2 class="page-title">
+        <i class="fas fa-project-diagram"></i>
+        Mapeamento de campos e localização no Excel.
+      </h2>
+
+      <!-- Campo nome + botões -->
+      <div class="header-actions">
+        <div class="input-group">
+          <label for="templateName" class="input-label">Nome do template</label>
+          <input
+            type="text"
+            id="templateName"
+            [(ngModel)]="nomeTemplate"
+            class="input-field"
+            [ngClass]="{ filled: nomeTemplate }"
+            placeholder="Digite o nome do template"
+          />
+        </div>
+
+        <div class="inline-actions">
+          <button
+            class="btn-save"
+            [disabled]="isSaving || !nomeTemplate"
+            (click)="saveTemplate()"
+          >
+            <i class="fas fa-save"></i>
+            <span>{{
+              templateId ? "Atualizar Template" : "Salvar Template"
+            }}</span>
+            <span *ngIf="isSaving" class="spinner"></span>
+          </button>
+
+          <button class="btn-cancel" (click)="cancel()">
+            <i class="fas fa-times"></i>
+            <span>Cancelar</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Lista de Cards -->
+    <div class="mapping-cards">
+      <div
+        class="header-card"
+        *ngFor="let map of mappings; let i = index"
+        [ngClass]="'row-' + getRowIndex(i)"
+      >
+        <div class="card-label">Coluna {{ map.letraColunaPlanilha }}</div>
+        <div class="card-title">
+          <div class="title-label">Nome do Cabeçalho</div>
+          <div class="title-value">{{ map.colunaPlanilha }}</div>
+        </div>
+        <div class="actions">
+          <button class="btn-remove" (click)="removeMapping(i)">
+            <i class="fas fa-trash"></i> Remover
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

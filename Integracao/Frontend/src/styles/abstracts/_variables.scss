@@ -1,0 +1,321 @@
+// ===================================
+// 🎨 CORES BLACK
+// ===================================
+
+/// Cor primária escura usada como base para degradês ou fundos principais.
+/// Ideal para seções hero, banners ou áreas com foco visual.
+/// @name BlackPrimaryStart
+/// @type {color}
+$Black-color-primary-color-start: #010b13;
+
+/// Cor secundária escura para composições com tons mais leves.
+/// Usada em áreas secundárias de fundo ou transições de degradê.
+/// @name BlackSecondaryStart
+/// @type {color}
+$Black-color-secondary-color-start: #1d2124;
+
+/// Cor preta absoluta.
+/// Utilizada em textos, ícones ou contrastes máximos com fundo claro.
+/// @name Black
+/// @type {color}
+$Black-color: #000000;
+
+
+
+// ===================================
+// 🎨 CORES BLUE
+// ===================================
+
+/// Azul vibrante e saturado, com alto brilho.
+/// Excelente para elementos de destaque visual.
+/// @name BlueSkyBright
+/// @type {color}
+$Blue-sky-bright: #327ff3;
+
+/// Azul marinho profundo, tonalidade escura com leve fundo púrpura.
+/// Ideal para composições de contraste alto.
+/// @name BlueNavyDark
+/// @type {color}
+$Blue-navy-dark: #062863;
+
+/// Azul vibrante e saturado, com alto brilho.
+/// Excelente para elementos de destaque visual.
+/// @name BlueSkyBright
+/// @type {color}
+$Blue-royal-dark: #041b83;
+
+/// Azul intermediário para finalização de gradiente em botões.
+/// Ideal para efeitos modernos e contrastes com o azul escuro inicial.
+/// @name BlueButtonGradientEnd
+/// @type {color}
+$Blue-button-gradient-end: #1a2b91;
+
+
+// ===================================
+// 🎨 CORES RED
+// ===================================
+
+/// Cor inicial para alertas ou estados de erro.
+/// Tom mais profundo, usado como base para degradês ou fundos.
+/// @name RedDangerStart
+/// @type {color}
+$Red-danger-color-start: #e00808;
+
+/// Cor final para alertas visuais (como validações ou notificações de erro).
+/// Mais clara, ideal como destaque no gradiente.
+/// @name RedDangerEnd
+/// @type {color}
+$Red-danger-color-end: #ff1c02;
+
+
+
+// ===================================
+// 🎨 CORES GRAY
+// ===================================
+
+/// Cinza neutro para elementos secundários ou textos com menor hierarquia.
+/// Ideal para rótulos, placeholders ou áreas discretas.
+/// @name GraySecondaryEnd
+/// @type {color}
+$Gray-secondary-color-end: #727272;
+
+/// Tom mais claro da paleta de cinza.
+/// Usado como fundo neutro, especialmente em áreas com leve separação visual.
+/// @name Gray50
+/// @type {color}
+$Gray-50: #fafafa;
+
+/// Cinza muito claro para backgrounds suaves ou contornos leves.
+/// @name Gray100
+/// @type {color}
+$Gray-100: #f5f5f5;
+
+/// Cinza claro, ideal para áreas de hover ou containers neutros.
+/// @name Gray200
+/// @type {color}
+$Gray-200: #eeeeee;
+
+/// Cinza intermediário para divisores, linhas e elementos sutis.
+/// @name Gray300
+/// @type {color}
+$Gray-300: #e0e0e0;
+
+/// Cinza médio usado em ícones, bordas e elementos de suporte visual.
+/// @name Gray400
+/// @type {color}
+$Gray-400: #bdbdbd;
+
+/// Cinza padrão para textos desabilitados ou menus de menor destaque.
+/// @name Gray500
+/// @type {color}
+$Gray-500: #9e9e9e;
+
+/// Cinza escuro usado para elementos ativos ou áreas com contraste leve.
+/// @name Gray600
+/// @type {color}
+$Gray-600: #757575;
+
+/// Cinza profundo para textos fortes em fundos claros.
+/// @name Gray700
+/// @type {color}
+$Gray-700: #616161;
+
+/// Cinza quase preto para títulos ou componentes com alta densidade visual.
+/// @name Gray800
+/// @type {color}
+$Gray-800: #424242;
+
+/// Cor mais escura da paleta de cinza (quase preto).
+/// Ideal para textos principais ou fundos de contraste.
+/// @name Gray900
+/// @type {color}
+$Gray-900: #212121;
+
+
+// ===================================
+// 🎨 CORES GREEN
+// ===================================
+
+/// Verde pinho profundo, escuro e elegante.
+/// Adequado para contrastes suaves ou fundos escuros.
+/// @name GreenPineDark
+/// @type {color}
+$Green-pine-dark: #043f38;
+
+/// Verde floresta clássico, com tom natural profundo.
+/// Ideal para seções que representam natureza ou estabilidade.
+/// @name GreenForest
+/// @type {color}
+$Green-forest: #228b22;
+
+/// Verde jade com leve tom azulado, sofisticado e profundo.
+/// Excelente para detalhes elegantes e seções técnicas.
+/// @name GreenJade
+/// @type {color}
+$Green-jade: #00a86b;
+
+/// Verde marinho médio com influência azul oceano.
+/// Bom para composições frias ou áreas mais densas visualmente.
+/// @name GreenSea
+/// @type {color}
+$Green-sea: #20b2aa;
+
+/// Verde médio equilibrado, clássico e neutro.
+/// Pode ser usado em backgrounds suaves ou elementos informativos.
+/// @name GreenMedium
+/// @type {color}
+$Green-medium: #3cb371;
+
+/// Verde chá médio, com aparência natural e suave.
+/// Ótimo para composições limpas, leveza e acessibilidade visual.
+/// @name GreenTea
+/// @type {color}
+$Green-tea: #66cdaa;
+
+/// Verde pastel leve, com aparência refrescante e amigável.
+/// Ideal para elementos de sucesso secundário ou estados inativos.
+/// @name GreenFresh
+/// @type {color}
+$Green-fresh: #6ccf84;
+
+/// Verde amarelado, inspirado no wasabi, altamente vibrante.
+/// Perfeito para destaques energéticos ou interações rápidas.
+/// @name GreenWasabi
+/// @type {color}
+$Green-wasabi: #78d64b;
+
+/// Verde claro e vibrante, com aparência fresca e energética.
+/// Ótimo para destaques visuais ou composições modernas.
+/// @name GreenMintBright
+/// @type {color}
+$Green-mint-bright: #2ecc71;
+
+/// Verde vibrante e moderno, com alto contraste e leveza.
+/// Ideal para botões de sucesso, destaques ou elementos ativos.
+/// @name GreenEmerald
+/// @type {color}
+$Green-emerald: #2ecc71;
+
+/// Verde-água vibrante e alegre, puxando para o turquesa.
+/// Indicado para elementos que exigem frescor e suavidade.
+/// @name GreenTurquoise
+/// @type {color}
+$Green-turquoise: #40e0d0;
+
+
+
+// ===================================
+// 🎨 CORES VIOLET
+// ===================================
+
+/// Cor violeta utilizada em importações ou seções com destaque técnico.
+/// Pode ser aplicada a botões, ícones ou elementos de status.
+/// @name VioletImport
+/// @type {color}
+$Violet-import-color: #7c05fc;
+
+/// Cor branca pura.
+/// Usada como fundo principal, em textos sobre fundos escuros ou áreas neutras.
+/// @name White
+/// @type {color}
+$white-color: #ffffff;
+
+
+
+// ===================================
+// 🔳 BORDAS / RAIO / CONTAINERS
+// ===================================
+
+/// Sombra média para elevação de cartões, modais ou componentes flutuantes.
+/// Utilizada para destacar elementos na hierarquia visual.
+/// @name BoxShadowMedium
+/// @type {shadow}
+$Box-shadow-medium-2-4-px: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+/// Sombra leve, ideal para botões e elementos com baixa profundidade.
+/// Fornece uma elevação sutil no design.
+/// @name BoxShadowSmall
+/// @type {shadow}
+$Box-shadow-small-1-2-px: 0 1px 2px rgba(0, 0, 0, 0.06);
+
+
+
+// ===================================
+// 🔳 BORDAS / RAIO / CONTAINERS
+// ===================================
+
+/// Raio de borda mínimo utilizado em elementos compactos como botões, ícones e labels.
+/// Ideal para componentes menores que exigem cantos discretamente arredondados.
+/// Unidade utilizada: `px`.
+/// @name RadiusTinyXs
+/// @type {length}
+$Radius-tiny-xs-4px: 4px;
+
+/// Raio de borda padrão para botões e campos de entrada.
+/// Usado para fornecer arredondamento consistente em componentes interativos.
+/// @name RadiusSmallSm
+/// @type {length}
+$Radius-small-sm-8px: 8px;
+
+/// Raio de borda padrão para contêineres e cards.
+/// Usado para criar curvas mais visuais em componentes de tamanho médio.
+/// Unidade utilizada: `px`.
+/// @name RadiusDefaultMd
+/// @type {length}
+$Radius-default-md-12px: 12px;
+
+/// Raio de borda de destaque para cards e contêineres grandes.
+/// Ideal para elementos com design mais expressivo ou que precisam chamar atenção.
+/// Unidade utilizada: `px`.
+/// @name RadiusFeatureCard
+/// @type {length}
+$Radius-feature-card-50px: 50px;
+
+/// Raio de borda máximo para criar forma tipo "pílula".
+/// Utilizado em tags, botões ou elementos que exigem bordas totalmente arredondadas.
+/// Unidade utilizada: `px`.
+/// @name RadiusPill
+/// @type {length}
+$Radius-pill-75px: 75px;
+
+// ======================================
+// 🔠 LAYOUT – CONTAINER / ESPAÇAMENTO
+// ======================================
+
+/// Largura máxima para o container principal da aplicação.
+/// Garante limite horizontal e mantém o conteúdo centralizado em telas grandes.
+/// @name MaxWidthContainer
+/// @type {length}
+$max-width-container: 1600px;
+
+/// Espaçamento interno (padding) lateral do container.
+/// Responsável por manter o conteúdo afastado das bordas.
+/// @name PaddingContainer
+/// @type {length}
+$padding-container: 1.5rem;
+
+/// Margem aplicada ao container para centralizá-lo na tela.
+/// `auto` nas laterais garante alinhamento central.
+/// @name MarginContainer
+/// @type {length}
+$margin-container: 2rem auto;
+
+
+
+// ===================================
+// 🔠 TIPOGRAFIA
+// ===================================
+
+/// Fonte padrão utilizada em toda a aplicação.
+/// Define o estilo base para textos, botões e componentes.
+/// @name FontDefault
+/// @type {string}
+$font-default: "Segoe UI", sans-serif;
+
+
+/// Tamanho base da fonte para textos normais.
+/// Usado como referência para escalas tipográficas (rem, em).
+/// @name FontSizeBase
+/// @type {length}
+$font-size-base: 14px;
+

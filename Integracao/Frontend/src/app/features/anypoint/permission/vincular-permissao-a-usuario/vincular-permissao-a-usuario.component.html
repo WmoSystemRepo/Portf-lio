@@ -1,0 +1,34 @@
+<div class="modal">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h2>Vincular usuários à permissão: {{ permission()?.nome }}</h2>
+      <button class="close-btn" (click)="closeModal()">X</button>
+    </div>
+
+    <div class="modal-body">
+      <label>Usuários vinculados:</label>
+      <ul>
+        <li *ngFor="let user of linkedUsers">
+          {{ user.nomeUsuario }}
+          <button class="remove-btn" (click)="removeUser(user.idUsuario)">
+            <i class="fas fa-trash-alt"></i>
+          </button>
+        </li>
+      </ul>
+
+      <label>Selecione novos usuários:</label>
+      <div *ngFor="let user of users">
+        <input type="checkbox"
+               [value]="user.idUsuario"
+               (change)="onUserSelectionChange($event, user.idUsuario)"
+               [checked]="selectedUsers.includes(user.idUsuario)" />
+        <label>{{ user.nomeUsuario }}</label>
+      </div>
+    </div>
+
+    <div class="modal-footer">
+      <button class="btn-primary" (click)="linkUsers()">Vincular</button>
+      <button class="btn-secondary" (click)="closeModal()">Fechar</button>
+    </div>
+  </div>
+</div>

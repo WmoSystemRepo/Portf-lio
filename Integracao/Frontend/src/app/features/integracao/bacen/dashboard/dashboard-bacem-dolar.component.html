@@ -1,0 +1,104 @@
+<div class="dashboard-container">
+  <!-- Cabeçalho -->
+  <div class="header-section" @fadeInUp>
+    <h1 class="dashboard-title">Painel de Cotações de Moedas</h1>
+    <div class="currency-display">
+      <div class="currency-badge">{{ selectedCurrency }}</div>
+      <span class="last-update">
+        Última atualização: {{ dollarRate?.dataHoraCotacao | date: 'dd/MM/yyyy HH:mm' }}
+      </span>
+    </div>
+  </div>
+
+  <!-- Conteúdo -->
+  <div class="content-wrapper">
+    <!-- Coluna Esquerda -->
+    <div class="left-column">
+      <!-- Cotação Atual -->
+      <div class="quote-card elevated-card" @fadeInUp>
+        <div class="card-header">
+          <h2>Cotação Atual</h2>
+        </div>
+        <div class="quote-details">
+          <div class="quote-item">
+            <span class="quote-label">Compra</span>
+            <span class="quote-value">R$ {{ dollarRate?.cotacaoCompra | number: '1.4-4' }}</span>
+          </div>
+          <div class="quote-item">
+            <span class="quote-label">Venda</span>
+            <span class="quote-value">R$ {{ dollarRate?.cotacaoVenda | number: '1.4-4' }}</span>
+          </div>
+          <div class="quote-item">
+            <span class="quote-label">Variação</span>
+            <span class="quote-value">{{ dollarRate?.margem | number: '1.4-4' }}</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Formulário de consulta -->
+      <form class="consulta-card elevated-card consulta-form" [formGroup]="form" (ngSubmit)="buscarCotacoes()" @fadeInUp>
+        <div class="card-header">
+          <h3>Consulta de Cotações</h3>
+          <mat-icon class="search-icon">search</mat-icon>
+        </div>
+
+        <div class="form-group">
+          <label for="moedaSelect" class="form-label">Moeda</label>
+          <mat-form-field appearance="fill" style="width: 100%;">
+            <mat-select id="moedaSelect" formControlName="moeda" (selectionChange)="onCurrencyChange()">
+              <mat-option *ngFor="let moeda of moedasFixas" [value]="moeda.codigo">
+                {{ moeda.nome }}
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="form.get('moeda')?.hasError('required')">
+              Selecione uma moeda
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <div class="form-group date-range-group">
+          <div>
+            <label for="dataInicio" class="form-label">Data Inicial</label>
+            <input id="dataInicio" type="date" matInput formControlName="dataInicio" />
+            <div *ngIf="form.get('dataInicio')?.touched && form.get('dataInicio')?.invalid" class="error-msg">
+              Data inicial obrigatória
+            </div>
+          </div>
+          <div>
+            <label for="dataFim" class="form-label">Data Final</label>
+            <input id="dataFim" type="date" matInput formControlName="dataFim" />
+            <div *ngIf="form.get('dataFim')?.touched && form.get('dataFim')?.invalid" class="error-msg">
+              Data final obrigatória
+            </div>
+          </div>
+        </div>
+
+        <button class="buscar-button" mat-raised-button color="primary" type="submit" [disabled]="form.invalid">
+          <mat-icon>refresh</mat-icon>
+          Atualizar Cotações
+        </button>
+      </form>
+    </div>
+
+    <!-- Coluna Direita - Gráfico -->
+    <div class="right-panel elevated-card chart-container" @fadeInUp>
+      <div class="chart-header">
+        <h3>Histórico de Cotações</h3>
+        <div class="chart-controls">
+          <button (click)="changeRange(7)" [class.active]="activeRange === 7">1S</button>
+          <button (click)="changeRange(30)" [class.active]="activeRange === 30">1M</button>
+          <button (click)="changeRange(180)" [class.active]="activeRange === 180">6M</button>
+          <button (click)="changeRange(365)" [class.active]="activeRange === 365">1A</button>
+        </div>
+      </div>
+
+      <div class="grafico-wrapper">
+        <canvas baseChart
+                [data]="lineChartData"
+                [options]="lineChartOptions"
+                [type]="'line'">
+        </canvas>
+      </div>
+    </div>
+  </div>
+</div>

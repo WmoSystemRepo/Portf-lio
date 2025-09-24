@@ -1,0 +1,37 @@
+<div class="app-container preview">
+  <h2>📄 Pré-visualização da Planilha</h2>
+
+  <p>
+    Template selecionado: <strong>{{ selectedTemplateName }}</strong>
+  </p>
+
+  <!-- Botões -->
+  <div class="buttons">
+    <button (click)="goBack()">🔙 Voltar</button>
+    <button (click)="downloadExcel()">⬇️ Baixar Excel</button>
+    <button (click)="salvarNoMongo()">✅ Salvar</button>
+  </div>
+
+  <!-- Tabela -->
+  <div class="table-wrapper">
+    <table class="preview-table">
+      <!-- Cabeçalho tipo Excel -->
+      <thead>
+        <tr>
+          <th>#</th>
+          <th *ngFor="let col of data[0]; let i = index">{{ getColumnLetter(i) }}</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr
+          *ngFor="let row of data; let rowIndex = index"
+          [class.header-row]="rowIndex === headerIndex"
+        >
+          <td><strong>{{ rowIndex + 1 }}</strong></td>
+          <td *ngFor="let cell of row">{{ cell }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

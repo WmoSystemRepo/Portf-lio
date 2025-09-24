@@ -1,0 +1,15 @@
+<app-lista-crud-integracao
+  [title]="'Lista de Templantes'"
+  [items]="model"
+  [requireDeleteJustification]="true"
+  [justificationMinLength]="10"
+  [justificationPlaceholder]="
+    'Descreva o motivo da exclusão da planilha (mínimo 10 caracteres)...'
+  "
+  (add)="add()"
+  (help)="startTour()"
+  (deleteWithJustification)="onDeleteWithJustification($event)"
+  (refresh)="carregarDadosNovamente()"
+  [showExportSelectedButton]="showExportButton"
+  [showAddProductsButton]="showAddProducts"
+></app-lista-crud-integracao>

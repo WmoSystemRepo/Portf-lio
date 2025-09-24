@@ -1,0 +1,10 @@
+<app-lista-crud
+  [title]="'Lista de Gestao Mapeamentos Campos (De Para)'"
+  [items]="model"
+  [modelRefs]="modelRefs"
+  (add)="add()"
+  (help)="startTour()"
+  (edit)="edit($event)"
+  (delete)="confirmDelete($event)"
+  (refresh)="carregarDadosNovamente()"
+></app-lista-crud>

@@ -1,0 +1,107 @@
+// src/styles/components/_buttons.scss
+
+@use '../abstracts/variables' as *;
+@use '../abstracts/mixins' as *;
+@use '../utils/utilities' as *;
+
+/* === 🔘 BOTÕES GERAIS === */
+
+%btn-base {
+  background: $Blue-royal-dark;
+  color: $white-color;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: $Radius-pill-75px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+    background: $Black-color;
+  }
+}
+
+button,
+.btn-primary,
+.btn-secondary,
+.btn-danger,
+.btn-success,
+.btn-import,
+.btn-novo,
+.btn-details {
+  @extend %btn-base;
+}
+
+/* === 🎨 VARIAÇÕES === */
+.btn-primary {
+  @include gradient-bg($Black-color-primary-color-start, $Blue-sky-bright);
+}
+
+.btn-secondary {
+  @include gradient-bg($Black-color-secondary-color-start, $Gray-secondary-color-end);
+}
+
+.btn-danger {
+  @include gradient-bg($Red-danger-color-start, $Red-danger-color-end);
+}
+
+.btn-success {
+  @include gradient-bg($Green-pine-dark, $Green-mint-bright);
+}
+
+.btn-import {
+  @include gradient-bg($Violet-import-color, $Blue-navy-dark);
+}
+
+.btn-novo {
+  @include gradient-bg($Blue-royal-dark, $Blue-royal-dark);
+}
+
+/* === ⚙️ BOTÕES DE AÇÃO ESPECÍFICOS === */
+
+%action-btn-base {
+  @include btn-reset;
+  border-radius: 50%;
+  width: 38px;
+  height: 38px;
+  font-size: 1.2em;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  transition: transform 0.2s ease;
+
+  &:hover {
+    transform: scale(1.1);
+  }
+}
+
+.action-btn {
+  @extend %action-btn-base;
+
+  &.edit-btn {
+    @include gradient-bg($Green-pine-dark, $Green-mint-bright);
+    color: $white-color;
+  }
+
+  &.delete-btn {
+    @include gradient-bg($Red-danger-color-start, $Red-danger-color-end);
+    color: $white-color;
+  }
+
+  &.config-btn {
+    @include gradient-bg($Black-color-primary-color-start, $Blue-sky-bright);
+    color: $white-color;
+  }
+
+  &.excel-btn {
+    @include gradient-bg($Violet-import-color, $Blue-navy-dark);
+    color: $white-color;
+  }
+}

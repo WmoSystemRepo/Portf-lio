@@ -1,0 +1,207 @@
+<!-- Título e ajuda -->
+<div class="titulo-container">
+  <h1 class="titulo-centralizado">
+    Monitoramento Integração SPP x Bimer Invoce
+  </h1>
+  <div class="ajuda-container">
+    <button class="tour-button" (click)="startTour()" type="button">
+      <i class="fas fa-question-circle"></i> Ajuda
+    </button>
+  </div>
+</div>
+
+<!-- Cards de status -->
+<div class="cards-status">
+  <div
+    class="card total"
+    (click)="filtrarPorStatus(null)"
+    tabindex="0"
+    aria-label="Filtrar todos os registros"
+  >
+    <span class="label">Todos os Registros</span>
+    <span class="valor">{{ totalRegistros() }}</span>
+  </div>
+  <div
+    class="card sucesso"
+    (click)="filtrarPorStatus('S')"
+    tabindex="0"
+    aria-label="Filtrar registros com sucesso"
+  >
+    <span class="label">Sucesso</span>
+    <span class="valor">{{ totalSucesso() }}</span>
+  </div>
+  <div
+    class="card erro"
+    (click)="filtrarPorStatus('N')"
+    tabindex="0"
+    aria-label="Filtrar registros com erro"
+  >
+    <span class="label">Erros</span>
+    <span class="valor">{{ totalErro() }}</span>
+  </div>
+</div>
+
+<!-- Linha de filtros -->
+<div class="linha-filtros">
+  <mat-form-field appearance="outline">
+    <mat-label>Data Início</mat-label>
+    <input
+      matInput
+      [matDatepicker]="pickerInicio"
+      [formControl]="dataInicio"
+      aria-label="Selecionar data de início"
+    />
+    <mat-datepicker-toggle
+      matSuffix
+      [for]="pickerInicio"
+    ></mat-datepicker-toggle>
+    <mat-datepicker #pickerInicio></mat-datepicker>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Data Fim</mat-label>
+    <input
+      matInput
+      [matDatepicker]="pickerFim"
+      [formControl]="dataFim"
+      aria-label="Selecionar data de fim"
+    />
+    <mat-datepicker-toggle matSuffix [for]="pickerFim"></mat-datepicker-toggle>
+    <mat-datepicker #pickerFim></mat-datepicker>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" class="flex-dobro">
+    <mat-label>Buscar por Pedido, Invoice, Fabricante ou Erro</mat-label>
+    <input matInput [formControl]="filtroGeral" aria-label="Buscar registros" />
+  </mat-form-field>
+</div>
+
+<!-- Linha de ações -->
+<div class="linha-acoes">
+  <button
+    mat-flat-button
+    color="primary"
+    (click)="buscar()"
+    aria-label="Executar busca"
+  >
+    <mat-icon>search</mat-icon> Buscar
+  </button>
+
+  <button
+    mat-flat-button
+    color="warn"
+    class="btn-limpar"
+    (click)="limparFiltros()"
+    aria-label="Limpar filtros"
+  >
+    <mat-icon>close</mat-icon> Limpar
+  </button>
+</div>
+
+<!-- Tabela -->
+<div class="tabela-wrapper">
+  <table
+    mat-table
+    [dataSource]="dadosFiltrados()"
+    class="mat-elevation-z1"
+    *ngIf="!loading() && dadosFiltrados().length > 0"
+  >
+    <ng-container matColumnDef="numeroAlterData">
+      <th mat-header-cell *matHeaderCellDef scope="col">N° Alterdata</th>
+      <td mat-cell *matCellDef="let el">{{ el.numeroAlterData }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="pedidoSpp">
+      <th mat-header-cell *matHeaderCellDef scope="col">PEDIDO SPP</th>
+      <td mat-cell *matCellDef="let el">{{ mostrarInvoice(el) }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="fabricante">
+      <th mat-header-cell *matHeaderCellDef scope="col">Fabricante</th>
+      <td mat-cell *matCellDef="let el">{{ el.fabricante }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="dataEmissao">
+      <th mat-header-cell *matHeaderCellDef scope="col">Data</th>
+      <td mat-cell *matCellDef="let el">
+        {{ el.dataEmissao | date : "dd/MM/yyyy HH:mm" }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="valorInvoice">
+      <th mat-header-cell *matHeaderCellDef scope="col">Valor</th>
+      <td mat-cell *matCellDef="let el">
+        R$ {{ el.valorInvoice | number : "1.2-2" }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="statusIntegracao">
+      <th mat-header-cell *matHeaderCellDef scope="col">Status</th>
+      <td mat-cell *matCellDef="let el">
+        <span
+          class="badge"
+          [ngClass]="{
+            sucesso: el.statusIntegracao === 'S',
+            erro: el.statusIntegracao === 'N'
+          }"
+        >
+          <mat-icon>{{
+            el.statusIntegracao === "S" ? "check_circle" : "error"
+          }}</mat-icon>
+          <ng-container *ngIf="el.statusIntegracao === 'S'; else erroTpl">
+            <a
+              href="http://spp.pars.local/sistemaspars/"
+              target="_blank"
+              class="status-link"
+              >Sucesso</a
+            >
+          </ng-container>
+          <ng-template #erroTpl>Erro</ng-template>
+        </span>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="observacaoErro">
+      <th mat-header-cell *matHeaderCellDef scope="col">Erro</th>
+      <td mat-cell *matCellDef="let el">{{ el.observacaoErro }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="acoes">
+      <th mat-header-cell *matHeaderCellDef scope="col">Ações</th>
+      <td mat-cell *matCellDef="let el">
+        <button
+          mat-button
+          color="accent"
+          (click)="reprocessar(el)"
+          *ngIf="el.statusIntegracao === 'N'"
+          aria-label="Reprocessar"
+          [ngStyle]="
+            isRegistroInvalido(el)
+              ? {
+                  'background-color': '#ffeb3b',
+                  color: '#c62828',
+                  'font-weight': 'bold'
+                }
+              : isReprocessadoComSucesso(el)
+              ? {
+                  'background-color': '#4caf50',
+                  color: '#ffffff',
+                  'font-weight': 'bold'
+                }
+              : {}
+          "
+        >
+          Reprocessar
+        </button>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="colunas"></tr>
+    <tr mat-row *matRowDef="let row; columns: colunas"></tr>
+  </table>
+</div>
+
+<!-- Nenhum resultado -->
+<div *ngIf="!loading() && dadosFiltrados().length === 0">
+  Nenhum dado encontrado para os filtros aplicados.
+</div>

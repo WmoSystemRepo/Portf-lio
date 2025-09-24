@@ -1,0 +1,238 @@
+/* ============================= */
+/* Espaçamento externo uniforme  */
+/* ============================= */
+:root{
+  /* margem externa (topo, base e laterais) do container azul */
+  --frame-gap: clamp(12px, 1.6vw, 22px);
+}
+
+/* 📦 Container principal */
+.montar-excel-container {
+  max-width: 1900px;
+  margin: 0 auto;
+  padding: 2rem;
+  font-family: Arial, sans-serif;
+  background: linear-gradient(to right, #002f6c, #0052cc);
+  color: white;
+  border-radius: 1.5rem;
+}
+
+/* 🔘 Botões (base) */
+.actions-bar {
+  display: flex;
+  gap: 1rem;
+  margin: 1.5rem 0;
+}
+
+.btn {
+  padding: 0.6rem 1.2rem;
+  font-size: 1rem;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  color: white;
+  border: 2px solid transparent;
+  transition: all 0.25s ease;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  min-width: 160px;
+}
+.btn:hover { transform: translateY(-1px); }
+
+/* AZUL (Buscar, Limpar, Voltar) */
+button.voltar-button { background-color: #1e88e5; border-color: #1565c0; }
+button.voltar-button:hover { background-color: #2196f3; border-color: #0d47a1; }
+
+/* VERDE (Exportar Excel, Salvar) */
+button.excel-button { background-color: #2ecc71; border-color: #27ae60; }
+button.excel-button:hover { background-color: #58d68d; border-color: #1e8449; }
+
+/* 📊 Tabela com rolagem */
+.table-wrapper {
+  overflow: auto;
+  max-height: 650px;
+  padding-bottom: 1rem;
+  border-radius: 0.5rem;
+  margin-top: 1rem; /* um pouco menor p/ ganhar área ao formulário */
+}
+
+/* 🧩 Tabela */
+.preview-table {
+  width: auto;
+  max-width: 100%;
+  margin: 0 auto;
+  table-layout: auto;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+  background-color: #ffffff;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  color: black;
+  border-radius: 0 !important;
+}
+.preview-table th, .preview-table td { border: 1px solid #ccc; padding: 6px 8px; white-space: nowrap; }
+.preview-table thead th {
+  position: sticky; top: 0; z-index: 3;
+  background-color: #000; color: white; text-align: center; font-weight: bold; border-radius: 0 !important;
+}
+.preview-table thead tr.header-row { background-color: #000000; color: #ffffff; font-weight: bold; text-align: center; }
+.preview-table thead tr.header-row td { background-color: #000000; color: #ffffff; font-weight: bold; text-align: center; border-radius: 0 !important; }
+.preview-table thead tr:nth-child(2) td { position: sticky; top: 34px; z-index: 2; }
+.preview-table td:first-child, .preview-table th:first-child {
+  background-color: #000000; color: white; text-align: center; position: sticky; left: 0; z-index: 4; width: 50px; font-weight: bold; border-radius: 0 !important;
+}
+.preview-table tr:nth-child(even) { background-color: transparent; }
+.text-muted { color: #777; margin-top: 1rem; }
+
+@media (max-width: 768px) {
+  .btn { width: 100%; margin-bottom: 0.5rem; }
+  .preview-table th, .preview-table td { font-size: 0.85rem; min-width: 80px; }
+}
+
+/* Destaques / container azul (moldura) */
+.destaque-titulo { font-weight: 700; color: #ffeb3b; font-size: 1.05rem; text-shadow: 1px 1px 1px rgba(0,0,0,.3); }
+.app-container.preview {
+  /* ← garante MESMO espaçamento nas 4 bordas usando a variável */
+  width: calc(100% - (var(--frame-gap) * 2));
+  margin: var(--frame-gap) auto;
+  padding: 1.25rem; /* padding interno (fundo azul permanece) */
+  font-family: Arial, sans-serif;
+  background: linear-gradient(to right, #002f6c, #0052cc);
+  color: white;
+  border-radius: 2rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  overflow-x: hidden;
+}
+body { margin: 0; padding: 0; background: #eaeef7; } /* só p/ realçar a borda externa */
+main { padding: 0; margin: 0; }
+
+/* Cápsulas nas células */
+.preview-table td .cell-pill {
+  background: #ffffff; border: 1px solid #dfe6f3; border-radius: 12px; min-height: 32px;
+  display: flex; align-items: center; padding: 4px 10px; box-sizing: border-box; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+.preview-table td .cell-pill.empty { background: #f9fbff; border-color: #e7edf7; }
+
+/* ───────────────────────────────────────── */
+/* Cabeçalho topo (UX melhorado)             */
+/* ───────────────────────────────────────── */
+
+/* Colunas: [botões tamanho] | [título central] | [info à direita] */
+.toolbar-top {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: .75rem;
+  margin-bottom: .75rem;
+}
+
+/* Título com limites para não colidir */
+.page-title {
+  grid-column: 2;
+  justify-self: center;
+  margin: 0;
+  font-size: 1.28rem;
+  line-height: 1.2;
+  font-weight: 800;
+  max-width: 60vw;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Info à direita, compacta e legível */
+.meta-compact {
+  grid-column: 3;
+  justify-self: end;
+  display: flex; align-items: center; gap: .6rem;
+  padding: .25rem .5rem;
+  background: rgba(255,255,255,.06);
+  border: 1px solid rgba(255,255,255,.14);
+  border-radius: 10px;
+  white-space: nowrap;
+}
+.meta-compact.meta-single .destaque-titulo { font-weight: 700; }
+.meta-compact .meta-value { font-weight: 600; }
+
+/* Botões de tamanho (laranja) */
+.size-switch-bar { grid-column: 1; justify-self: start; display: flex; align-items: center; gap: .5rem; }
+.config-button { background-color: #fb8c00; border: 2px solid #ef6c00; color: #fff; }
+.config-button:hover { background-color: #ffa726; border-color: #e65100; }
+.config-button.active { outline: 2px solid #fff; background-color: #e67e22; }
+.config-sm { padding: .45rem .8rem; font-size: .95rem; min-width: 118px; border-radius: 10px; }
+
+/* Linha do PN + ações */
+.toolbar-second {
+  display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 1rem; margin-bottom: .5rem;
+}
+.pn-inline {
+  display: grid; grid-template-columns: auto minmax(220px, 1fr) auto auto; align-items: center; gap: .6rem; min-width: 0;
+}
+.pn-inline .pn-label { font-weight: 700; white-space: nowrap; }
+.pn-inline .pn-input { width: 100%; min-width: 220px; padding: 8px 10px; border: 1px solid #cfd8dc; border-radius: 8px; outline: none; }
+.pn-inline .pn-btn { min-width: 110px; }
+.meta-actions { display: inline-flex; gap: .6rem; flex-wrap: nowrap; }
+
+/* ───────────────────────────────────────── */
+/* Responsividade do topo                     */
+/* ───────────────────────────────────────── */
+@media (max-width: 1200px) {
+  .page-title { max-width: 50vw; font-size: 1.2rem; }
+}
+@media (max-width: 1024px) {
+  .toolbar-top { grid-template-columns: 1fr; row-gap: .5rem; }
+  .size-switch-bar { justify-self: start; }
+  .page-title { grid-column: 1; justify-self: center; max-width: 80vw; }
+  .meta-compact { grid-column: 1; justify-self: start; }
+  .toolbar-second { grid-template-columns: 1fr; }
+  .meta-actions { width: 100%; flex-wrap: wrap; }
+  .meta-actions .btn { flex: 1 1 220px; min-width: 0; }
+}
+@media (max-width: 768px) {
+  .pn-inline { grid-template-columns: 1fr; }
+  .pn-inline .pn-btn, .meta-actions .btn { width: 100%; min-width: 0; }
+  .app-container.preview { padding: 1rem; }
+}
+@media (max-width: 420px) {
+  .page-title { font-size: 1.05rem; }
+  .meta-compact { gap: .4rem; padding: .2rem .4rem; }
+}
+
+/* ───────────────────────────────────────── */
+/* Formulário (RESPONSIVO + SCROLL)          */
+/* ───────────────────────────────────────── */
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  column-gap: clamp(16px, 2vw, 28px);
+  row-gap: clamp(6px, 1vw, 12px);
+  max-height: 46vh;  /* base; modos abaixo sobrescrevem */
+  overflow-y: auto;
+  padding-right: 6px;
+}
+.form-card-title { color: #fff; font-weight: 600; margin-bottom: 4px; font-size: 14px; }
+.form-grid input, .form-grid select { padding: 8px 10px; min-height: 34px; }
+@media (min-width: 1440px) { .form-grid { column-gap: 28px; row-gap: 12px; } }
+.form-grid .form-card-title { margin-bottom: 4px; }
+
+/* === Modos controlados pelo container (layoutMode) ========================= */
+/* Compacta → como está hoje */
+.app-container.preview.compacto .form-grid { max-height: 40vh; }
+.app-container.preview.compacto .form-grid input,
+.app-container.preview.compacto .form-grid select { padding: 6px 8px; min-height: 30px; }
+
+/* Média → cresce um pouco, sem encostar na moldura */
+.app-container.preview.medio .form-grid { max-height: 58vh; }
+.app-container.preview.medio .form-grid input,
+.app-container.preview.medio .form-grid select { padding: 9px 12px; min-height: 36px; }
+
+/* Ampla → ocupa bem a área interna, mas RESPEITA o frame-gap externo */
+.app-container.preview.amplo .form-grid { max-height: 74vh; }
+.app-container.preview.amplo .form-grid input,
+.app-container.preview.amplo .form-grid select { padding: 10px 14px; min-height: 40px; }
+
+/* (Compatibilidade retro) — se ainda houver classe direto na .form-grid */
+.form-grid.compacto { row-gap: 4px; max-height: 38vh; }
+.form-grid.compacto input, .form-grid.compacto select { padding: 6px 8px; min-height: 30px; }
+.form-grid.amplo { row-gap: 14px; max-height: 54vh; }
+.form-grid.amplo input, .form-grid.amplo select { padding: 10px 14px; min-height: 40px; }

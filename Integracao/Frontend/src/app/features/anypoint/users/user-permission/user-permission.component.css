@@ -1,0 +1,145 @@
+/* Overlay escuro cobrindo toda a tela */
+.container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: safe center;
+  align-items: center;
+  z-index: 2000;
+}
+
+/* Caixa branca centralizada (o modal) */
+.user-permission-container {
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+  width: 100%;
+  max-width: 520px;
+  padding: 24px;
+  position: relative;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+/* Header do modal */
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #e0e0e0;
+  padding-bottom: 10px;
+  margin-bottom: 16px;
+}
+
+h2 {
+  font-size: 1.5rem;
+  color: #003b80;
+  margin: 0;
+}
+
+.sub-title {
+  margin-bottom: 10px;
+  font-weight: bold;
+  color: #444;
+}
+
+.modal-body {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* Lista de checkboxes */
+.modal-body label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 1rem;
+  color: #333;
+}
+
+/* Rodapé com botões */
+.modal-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 24px;
+  border-top: 1px solid #e0e0e0;
+  padding-top: 16px;
+}
+
+/* Botão padrão (Salvar) */
+.save-btn {
+  padding: 10px 24px;
+  font-size: 1rem;
+  background: linear-gradient(to right, #50a0f0, #0357ac);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.save-btn:hover {
+  background: #003b80;
+  transform: translateY(-2px);
+  box-shadow: 0px 5px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* Botão secundário (Fechar) */
+.close-btn2 {
+  padding: 10px 24px;
+  font-size: 1rem;
+  background: #888;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.close-btn2:hover {
+  background: #555;
+  transform: translateY(-2px);
+  box-shadow: 0px 5px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* Botão de fechar no canto superior direito */
+.close-btn {
+  background: none;
+  border: none;
+  font-size: 1.4rem;
+  color: #999;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.close-btn:hover {
+  color: #000;
+}
+
+/* Animação de entrada suave */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.container {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100vw;
+  height: 100vh;
+  z-index: 2000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

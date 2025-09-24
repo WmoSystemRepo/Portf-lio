@@ -1,0 +1,28 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Entities\AnyPoint\GestaoMapeamento\**" />
+    <Compile Remove="Entities\GestaoMapearCampos\**" />
+    <EmbeddedResource Remove="Entities\AnyPoint\GestaoMapeamento\**" />
+    <EmbeddedResource Remove="Entities\GestaoMapearCampos\**" />
+    <None Remove="Entities\AnyPoint\GestaoMapeamento\**" />
+    <None Remove="Entities\GestaoMapearCampos\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Identity" Version="2.3.1" />
+    <PackageReference Include="Microsoft.Extensions.Identity.Stores" Version="9.0.2" />
+    <PackageReference Include="MongoDB.Bson" Version="3.2.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\PARS.Inhouse.Systems.Shared\PARS.Inhouse.Systems.Shared.csproj" />
+  </ItemGroup>
+
+</Project>

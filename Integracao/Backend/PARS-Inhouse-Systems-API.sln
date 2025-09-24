@@ -1,0 +1,46 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PARS-Inhouse-Systems-API", "PARS-Inhouse-Systems-API\PARS-Inhouse-Systems-API.csproj", "{806021EE-2870-49D5-B884-02C179339FA6}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PARS.Inhouse.Systems.Application", "PARS.Inhouse.Systems.Application\PARS.Inhouse.Systems.Application.csproj", "{BED256CB-DDE6-4D5B-8680-B95F1E02B310}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PARS.Inhouse.Systems.Infrastructure", "PARS.Inhouse.Systems.Infrastructure\PARS.Inhouse.Systems.Infrastructure.csproj", "{F20BCA26-F94F-4F86-811F-16BB89AB1487}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PARS.Inhouse.Systems.Shared", "PARS.Inhouse.Systems.Shared\PARS.Inhouse.Systems.Shared.csproj", "{D22A5294-89A0-4913-9997-0D74A34D7920}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PARS.Inhouse.Systems.Domain", "PARS.Inhouse.Systems.Domain\PARS.Inhouse.Systems.Domain.csproj", "{CBA7ADD2-729F-4E9B-B08A-6C55B7628A1A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{806021EE-2870-49D5-B884-02C179339FA6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{806021EE-2870-49D5-B884-02C179339FA6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{806021EE-2870-49D5-B884-02C179339FA6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{806021EE-2870-49D5-B884-02C179339FA6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BED256CB-DDE6-4D5B-8680-B95F1E02B310}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BED256CB-DDE6-4D5B-8680-B95F1E02B310}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BED256CB-DDE6-4D5B-8680-B95F1E02B310}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BED256CB-DDE6-4D5B-8680-B95F1E02B310}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F20BCA26-F94F-4F86-811F-16BB89AB1487}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F20BCA26-F94F-4F86-811F-16BB89AB1487}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F20BCA26-F94F-4F86-811F-16BB89AB1487}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F20BCA26-F94F-4F86-811F-16BB89AB1487}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D22A5294-89A0-4913-9997-0D74A34D7920}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D22A5294-89A0-4913-9997-0D74A34D7920}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D22A5294-89A0-4913-9997-0D74A34D7920}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D22A5294-89A0-4913-9997-0D74A34D7920}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CBA7ADD2-729F-4E9B-B08A-6C55B7628A1A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CBA7ADD2-729F-4E9B-B08A-6C55B7628A1A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CBA7ADD2-729F-4E9B-B08A-6C55B7628A1A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CBA7ADD2-729F-4E9B-B08A-6C55B7628A1A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

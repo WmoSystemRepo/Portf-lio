@@ -1,0 +1,264 @@
+.app-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 90vh;
+  padding: 16px;
+}
+
+/* Caixa do formulário */
+.form-box {
+  background: #fff;
+  padding: 22px 40px;
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+  width: 100%;
+  max-width: 500px;
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Título */
+.form-box h2 {
+  margin-bottom: 24px;
+  font-size: 2.6rem;
+  text-align: center;
+  color: #1107a0;
+}
+
+/* Subtítulo (X Origem X Destino) */
+.form-box h3 {
+  font-size: 1.1rem;
+  color: #1107a0;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+/* Grupo de campo */
+.form-group {
+  margin-bottom: 20px;
+}
+
+/* Labels */
+.form-group label {
+  display: block;
+  margin-bottom: 6px;
+  font-weight: 600;
+  color: #1107a0;
+}
+
+/* Inputs */
+input[type="text"] {
+  width: 100%;
+  padding: 14px 14px;
+  border-radius: 8px;
+  border: 1px solid #0a0a0a;
+  font-size: 1rem;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+/* Animação ao focar */
+input[type="text"]:focus {
+  border-color: #36b3ff;
+  box-shadow: 0 0 0 3px rgba(54, 179, 255, 0.3);
+  outline: none;
+}
+
+/* Validação */
+.is-invalid {
+  border-color: #e21802 !important;
+}
+
+.invalid-feedback {
+  color: #e21802;
+  font-size: 0.9em;
+  margin-top: 4px;
+}
+
+/* Botões */
+.button-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 26px;
+  margin-top: 24px;
+  justify-content: center;
+}
+
+button[type="submit"],
+.cancel-button {
+  padding: 16px 24px;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.25s ease, transform 0.2s ease;
+}
+
+/* Botão salvar/atualizar */
+button[type="submit"] {
+  border-radius: var(--radius-pill);
+  background: linear-gradient(90deg, #36b3ff 0%, #0857b6 100%);
+  color: #fff;
+}
+
+button[type="submit"]:hover {
+  background: #144b03;
+  transform: translateY(-2px);
+}
+
+/* Botão cancelar */
+.cancel-button {
+  border-radius: var(--radius-pill);
+  background: linear-gradient(90deg, #646464, #121313, #646464);
+  color: #fff;
+}
+
+.cancel-button:hover {
+  background: #7a7a7a;
+  transform: translateY(-2px);
+}
+
+/* Botão de tour */
+.tour-button {
+  border-radius: var(--radius-pill);
+  /* Bordas arredondadas (configurável por variável) */
+  padding: 0.6rem 1.2rem;
+  /* Espaçamento interno */
+  font-size: 0.95rem;
+  /* Tamanho da fonte */
+  cursor: pointer;
+  /* Cursor em forma de mãozinha */
+  border: none;
+  /* Remove borda padrão */
+  background: linear-gradient(90deg, var(--button-gradient-start), var(--button-gradient-end));
+  /* Gradiente colorido */
+  color: #fff;
+  /* Texto branco */
+}
+
+.tour-button:hover {
+  background: linear-gradient(90deg, var(--button-gradient-start), var(--button-gradient-start));
+  transform: translateY(-2px);
+}
+
+
+@media (max-width: 600px) {
+  .form-box {
+    padding: 24px 20px;
+  }
+
+  button[type="submit"],
+  .cancel-button {
+    width: 100%;
+  }
+}
+
+/* Select moderno e acessível */
+select {
+  width: 100%;
+  padding: 14px;
+  border-radius: 8px;
+  border: 1px solid #0a0a0a;
+  font-size: 1rem;
+  background-color: #fff;
+  color: #333;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20width%3D%2225%22%20height%3D%2225%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%3E%3Cpath%20d%3D%22M7%2010l5%205%205-5H7z%22%20fill%3D%22%23333%22/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  background-size: 18px;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+select:focus {
+  border-color: #36b3ff;
+  box-shadow: 0 0 0 3px rgba(54, 179, 255, 0.3);
+  outline: none;
+}
+
+select option {
+  padding: 10px;
+}
+
+/* Estilo visual para a primeira opção */
+select option[ngvalue="null"],
+select option[value=""][disabled] {
+  color: #888;
+  font-style: italic;
+}
+
+.checkbox-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  padding: 0.5rem 0;
+}
+
+.checkbox-item {
+  flex: 1 1 45%; /* 2 por linha */
+  min-width: 180px;
+  background: #f4f4f4;
+  padding: 0.5rem 0.75rem;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  transition: background 0.3s;
+}
+
+.checkbox-item:hover {
+  background: #e6efff;
+}
+
+.checkbox-item input[type="checkbox"] {
+  margin-right: 0.5rem;
+}
+
+.checkbox-option label {
+  font-weight: 500;
+  color: var(--text-dark);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+input[type="text"],
+input[type="number"],
+input[type="email"],
+input[type="date"] {
+  width: 100%;
+  padding: 14px;
+  border-radius: 8px;
+  border: 1px solid #0a0a0a;
+  font-size: 1rem;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+input[type="text"]:focus,
+input[type="number"]:focus,
+input[type="email"]:focus,
+input[type="date"]:focus {
+  border-color: #36b3ff;
+  box-shadow: 0 0 0 3px rgba(54, 179, 255, 0.3);
+  outline: none;
+}
+
+
+@media (max-width: 600px) {
+  select {
+    font-size: 0.95rem;
+    padding: 12px;
+  }
+}

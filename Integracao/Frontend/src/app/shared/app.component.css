@@ -1,0 +1,17 @@
+/* 🔹 Container específico da home */
+.home-container {
+  height: 100vh;
+  transition: margin-left 0.3s ease-in-out;
+  padding: 20px;
+}
+
+.home-container.expanded {
+  margin-left: 80px;
+}
+
+/* 🔹 Conteúdo central com largura máxima */
+.content {
+  max-width: 600px;
+  transition: all 0.3s ease-in-out;
+  /* Não precisa text-align nem flex-center se já estiver no global */
+}

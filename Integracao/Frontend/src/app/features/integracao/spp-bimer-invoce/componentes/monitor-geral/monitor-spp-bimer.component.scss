@@ -1,0 +1,254 @@
+:host {
+  display: block;
+  padding: 1.5rem;
+  background-color: #fafafa;
+}
+
+/* Título e botão ajuda */
+.titulo-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 2rem;
+
+  .titulo-centralizado {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #003366;
+    margin-bottom: 1rem;
+  }
+
+  .ajuda-container {
+    align-self: flex-start;
+
+    .tour-button{
+      border-radius: var(--radius-pill);
+      padding: 0.6rem 1.2rem;
+      font-size: 0.95rem;
+      cursor: pointer;
+      border: none;
+      background: linear-gradient(to right, #3f51b5, #00bcd4);
+      color: white;
+    }
+  }
+}
+
+/* Cards de status */
+.cards-status {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+
+  .card {
+    flex: 1;
+    min-width: 200px;
+    padding: 1rem;
+    border-radius: 16px;
+    color: white;
+    text-align: center;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease;
+
+    &:hover {
+      transform: translateY(-2px);
+    }
+
+    // Acessibilidade: foco visível para teclado
+    &:focus-visible {
+      outline: 2px solid #2196f3; // cor com bom contraste (WCAG ≥ 3:1) :contentReference[oaicite:1]{index=1}
+      outline-offset: 3px; // espaço externo ao limite do card :contentReference[oaicite:2]{index=2}
+    }
+
+    // Fallback para navegadores que não suportam :focus-visible
+    &:focus {
+      outline: 2px solid transparent;
+    }
+
+    .label {
+      font-size: 14px;
+      margin-bottom: 5px;
+    }
+
+    .valor {
+      font-size: 24px;
+      font-weight: bold;
+    }
+  }
+
+  .total {
+    background: #2196f3;
+    box-shadow: 0 4px 6px rgb(3, 5, 133);
+  }
+
+  .sucesso {
+    background: #4caf50;
+    box-shadow: 0 4px 6px rgb(3, 80, 0);
+  }
+
+  .erro {
+    background: #f44336;
+    box-shadow: 0 4px 6px rgb(71, 11, 3);
+  }
+}
+
+.linha-filtros {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  background: #fff;
+  padding: 1rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(6, 4, 12, 0.726);
+  margin-bottom: 1rem;
+
+  mat-form-field {
+    flex: 1;
+    min-width: 200px;
+  }
+
+  .flex-dobro {
+    flex: 2;
+  }
+}
+
+.linha-acoes {
+  display: flex;
+  gap: 1rem;
+  background: #fff;
+  padding: 1rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(6, 4, 12, 0.726);
+  margin-bottom: 2rem;
+
+  button {
+    flex: 1;
+    height: 56px;
+    font-weight: bold;
+    white-space: nowrap;
+
+    mat-icon {
+      margin-right: 4px;
+    }
+  }
+
+  .btn-limpar {
+    background-color: #f44336;
+    color: white;
+  }
+}
+
+table {
+  width: 100%;
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.06);
+  border-collapse: collapse;
+
+  th {
+    background-color: #f9f9f9;
+    font-weight: bold;
+    text-transform: uppercase;
+    padding: 0.75rem;
+    font-size: 13px;
+    border-bottom: 1px solid #ddd;
+  }
+
+  td {
+    padding: 0.75rem;
+    font-size: 14px;
+    border-bottom: 1px solid #eee;
+    color: #444;
+  }
+
+  td:last-child {
+    text-align: right;
+  }
+
+  button.mat-button {
+    color: #e91e63;
+    font-weight: 600;
+  }
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.4rem 1rem;
+  border-radius: 8px;
+  font-weight: bold;
+
+  &.sucesso {
+    background: #c8f7c5;
+    color: #2e7d32;
+  }
+
+  &.erro {
+    background: #ffcdd2;
+    color: #c62828;
+  }
+
+  .status-link {
+    text-decoration: underline;
+    color: inherit;
+  }
+}
+
+mat-spinner {
+  margin: 2rem auto;
+  display: block;
+}
+
+.tabela-wrapper {
+  width: 100%;
+  overflow-x: auto;
+  border-radius: 12px;
+  background-color: white;
+}
+
+@media (max-width: 768px) {
+  .cards-status,
+  .linha-filtros,
+  .linha-acoes {
+    flex-direction: column;
+
+    mat-form-field,
+    button {
+      width: 100%;
+    }
+  }
+
+  .tabela-wrapper {
+    margin-top: 1rem;
+  }
+}
+
+::ng-deep .mat-datepicker-toggle .mat-icon {
+  color: #1908fa !important;
+}
+
+::ng-deep .mat-datepicker-toggle-appearance-outline.mat-focused .mat-icon {
+  color: #1976d2 !important;
+}
+
+::ng-deep .mat-calendar-body-selected {
+  background-color: #1976d2 !important;
+  color: white !important;
+}
+
+::ng-deep .mat-calendar-body-cell:hover {
+  background-color: rgba(25, 118, 210, 0.15) !important;
+}
+
+::ng-deep .mat-datepicker-toggle-default-icon {
+  background-color: transparent !important;
+  border-radius: 50%;
+  padding: 4px;
+}
+
+::ng-deep .swal2-popup.swal2-rounded {
+  border-radius: 16px !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}

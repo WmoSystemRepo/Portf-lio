@@ -1,0 +1,130 @@
+<div class="app-container preview" [ngClass]="layoutMode">
+  <!-- Linha 1: título + tipo/template -->
+  <div class="toolbar-top">
+    <div class="size-switch-bar" *ngIf="formEnabled">
+      <button
+        type="button"
+        class="btn config-button config-sm"
+        [class.active]="layoutMode === 'compacto'"
+        (click)="setLayoutMode('compacto')"
+      >
+        Tela compacta
+      </button>
+
+      <button
+        type="button"
+        class="btn config-button config-sm"
+        [class.active]="layoutMode === 'medio'"
+        (click)="setLayoutMode('medio')"
+      >
+        Tela média
+      </button>
+
+      <button
+        type="button"
+        class="btn config-button config-sm"
+        [class.active]="layoutMode === 'amplo'"
+        (click)="setLayoutMode('amplo')"
+      >
+        Tela ampla
+      </button>
+    </div>
+
+    <h2 class="page-title">
+      Adicionar produto: {{ fileNameNoExt }}
+    </h2>
+
+    <div class="meta-compact meta-single">
+      <span class="destaque-titulo">Tipo de template:</span>
+      <span class="meta-value">{{ selectedTemplate }}</span>
+    </div>
+  </div>
+
+  <!-- Linha 2: Part Number + Ações -->
+  <div class="toolbar-second">
+    <div class="pn-inline">
+      <label class="pn-label" for="pnInput">Part Number:</label>
+      <input
+        id="pnInput"
+        class="pn-input"
+        type="text"
+        [(ngModel)]="pnQuery"
+        (keyup.enter)="buscarPN()"
+        placeholder="Digite o PN e pressione Enter ou clique em Buscar"
+      />
+
+      <button class="btn voltar-button pn-btn" (click)="buscarPN()">
+        Buscar
+      </button>
+
+      <button class="btn voltar-button pn-btn" (click)="limparPN()">
+        Limpar
+      </button>
+    </div>
+
+    <div class="meta-actions">
+      <button class="btn voltar-button" (click)="voltar()">🔙 Voltar</button>
+      <button class="btn excel-button" (click)="exportarExcel()">⬇️ Exportar Excel</button>
+      <button
+        class="btn excel-button"
+        (click)="salvar()"
+        [disabled]="!canSave"
+        [attr.aria-disabled]="!canSave"
+      >
+        💾 Salvar
+      </button>
+    </div>
+  </div>
+
+  <!-- Form (cards) só aparece quando o PN NÃO é encontrado -->
+  <ng-container *ngIf="formEnabled">
+    <div class="form-grid">
+      <ng-container *ngFor="let field of headers">
+        <div class="form-card">
+          <div class="form-card-title">{{ field }}</div>
+          <div class="form-card-body">
+            <input
+              class="form-input"
+              type="text"
+              [value]="formValues[field] || ''"
+              (input)="onFormInput(field, $any($event.target).value)"
+              (blur)="onFieldBlur(field, $any($event.target).value)"
+              [readonly]="viewingFiltered"
+              placeholder="Preencha o valor"
+            />
+          </div>
+        </div>
+      </ng-container>
+    </div>
+  </ng-container>
+
+  <!-- Preview / tabela -->
+  <div class="table-wrapper" *ngIf="displayHeaders?.length; else semDados">
+    <table class="preview-table">
+      <thead>
+        <tr>
+          <th *ngIf="showIndex" class="sticky-index">#</th>
+          <th *ngFor="let col of displayHeaders; let i = index">
+            <div class="header-top">{{ getColumnLetter(i) }}</div>
+            <div class="header-bottom">{{ col }}</div>
+          </th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr *ngFor="let linha of rowsToDisplay; let idx = index; trackBy: trackByIndex">
+          <td *ngIf="showIndex" class="index-col">{{ idx + 1 }}</td>
+          <td *ngFor="let col of displayHeaders">
+            <div class="cell-pill" [class.empty]="!(linha[col] ?? '').toString().trim()">
+              {{ linha[col] || '' }}
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <ng-template #semDados>
+    <p class="text-muted">⚠️ Nenhum dado disponível.</p>
+  </ng-template>
+</div>

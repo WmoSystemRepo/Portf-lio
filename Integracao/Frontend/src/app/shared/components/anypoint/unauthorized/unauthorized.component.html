@@ -1,0 +1,19 @@
+<div class="unauthorized-container">
+  <img
+    src="https://media.istockphoto.com/id/1472612294/vector/error-403-flat-illustration.jpg?s=612x612&w=0&k=20&c=7iFKhtih3ip1_PT6Pj6nlD6qOWNYAtxvVvvdJxVep14="
+    alt="Acesso não autorizado"
+    class="error-image"
+  />
+  <div class="error-message">
+    <p class="error-title">403 - Acesso não autorizado</p>
+    <p class="error-description">
+      Você não tem permissão para acessar esta página.
+    </p>
+    <p class="countdown-text">
+      Redirecionando em <span class="countdown-number">{{ countdown }}</span> segundos...
+    </p>
+    <button (click)="redirectNow()" class="redirect-button">
+      Voltar agora
+    </button>
+  </div>
+</div>

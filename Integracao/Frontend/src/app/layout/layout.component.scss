@@ -1,0 +1,53 @@
+@use '../../styles/abstracts/variables' as *;
+
+/* #region layout-container */
+.layout-container {
+  display: flex;
+  min-height: 100vh;
+  width: 100%;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+/* #endregion */
+
+/* #region sidebar */
+app-sidebar {
+  width: 240px;
+  flex-shrink: 0;
+  transition: width 0.3s ease;
+  background: linear-gradient(to bottom, $Black-color-primary-color-start, $Blue-sky-bright);
+  color: $white-color;
+}
+
+.layout-container.expanded app-sidebar {
+  width: 80px;
+}
+/* #endregion */
+
+/* #region content */
+.content {
+  flex-grow: 1;
+  width: 100%;
+  padding: 1.5rem;
+  overflow-y: auto;
+  background: $Gray-300;
+  transition: all 0.3s ease;
+}
+/* #endregion */
+
+/* #region responsive */
+@media (max-width: 768px) {
+  .layout-container {
+    flex-direction: column;
+  }
+
+  app-sidebar {
+    width: 100%;
+    height: auto;
+  }
+
+  .layout-container.expanded app-sidebar {
+    width: 100%;
+  }
+}
+/* #endregion */

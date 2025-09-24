@@ -1,0 +1,160 @@
+<div class="dashboard-container">
+  <h1 class="dashboard-title">Dashboard VExpenses x Bimer - Visão Geral</h1>
+
+  <!-- 🔹 Seção: KPIs -->
+  <div class="dashboard-kpi-container">
+    <!-- 🔄 Card Pagos -->
+    <div class="dashboard-kpi-card kpi-pago" [class.loading]="carregandoPagos">
+      <h2>Relatório - VExpenses <span class="status-destaque">Pagos</span></h2>
+      <p>{{ totalPago }}</p>
+      <button class="card-btn" (click)="onClickCardPago($event)" [disabled]="carregandoPagos">
+        <ng-container *ngIf="!carregandoPagos">🔄 Atualizar Status</ng-container>
+        <ng-container *ngIf="carregandoPagos">⏳ Atualizando...</ng-container>
+      </button>
+      <div class="card-info pago" *ngIf="dataUltimaAtualizacaoPagos">
+        Atualizado: {{ dataUltimaAtualizacaoPagos }}
+      </div>
+    </div>
+
+    <!-- 🔄 Card Aprovados -->
+    <div class="dashboard-kpi-card kpi-aprovados" [class.loading]="carregandoAprovados">
+      <h2>Relatório - VExpenses <span class="status-destaque">Aprovados</span></h2>
+      <p>{{ totalAprovados }}</p>
+      <button class="card-btn" (click)="onClickCardAprovados($event)" [disabled]="carregandoAprovados">
+        <ng-container *ngIf="!carregandoAprovados">🔄 Atualizar Status</ng-container>
+        <ng-container *ngIf="carregandoAprovados">⏳ Atualizando...</ng-container>
+      </button>
+      <div class="card-info aprovados" *ngIf="dataUltimaAtualizacaoAprovados">
+        Atualizado: {{ dataUltimaAtualizacaoAprovados }}
+      </div>
+    </div>
+
+    <!-- 🔄 Card Abertos -->
+    <div class="dashboard-kpi-card kpi-abertos" [class.loading]="carregandoAbertos">
+      <h2>Relatório - VExpenses <span class="status-destaque">Abertos</span></h2>
+      <p>{{ totalAbertos }}</p>
+      <button class="card-btn" (click)="onClickCardAbertos($event)" [disabled]="carregandoAbertos">
+        <ng-container *ngIf="!carregandoAbertos">🔄 Atualizar Status</ng-container>
+        <ng-container *ngIf="carregandoAbertos">⏳ Atualizando...</ng-container>
+      </button>
+      <div class="card-info abertos" *ngIf="dataUltimaAtualizacaoAbertos">
+        Atualizado: {{ dataUltimaAtualizacaoAbertos }}
+      </div>
+    </div>
+
+    <!-- 🔄 Card Enviados -->
+    <div class="dashboard-kpi-card kpi-enviados" [class.loading]="carregandoEnviados">
+      <h2>Relatório - VExpenses <span class="status-destaque">Enviados</span></h2>
+      <p>{{ totalEnviados }}</p>
+      <button class="card-btn" (click)="onClickCardEnviados($event)" [disabled]="carregandoEnviados">
+        <ng-container *ngIf="!carregandoEnviados">🔄 Atualizar Status</ng-container>
+        <ng-container *ngIf="carregandoEnviados">⏳ Atualizando...</ng-container>
+      </button>
+      <div class="card-info enviados" *ngIf="dataUltimaAtualizacaoEnviados">
+        Atualizado: {{ dataUltimaAtualizacaoEnviados }}
+      </div>
+    </div>
+
+    <!-- 🔄 Card Reabertos -->
+    <div class="dashboard-kpi-card kpi-reabertos" [class.loading]="carregandoReabertos">
+      <h2>Relatório - VExpenses <span class="status-destaque">Reabertos</span></h2>
+      <p>{{ totalReabertos }}</p>
+      <button class="card-btn" (click)="onClickCardReabertos($event)" [disabled]="carregandoReabertos">
+        <ng-container *ngIf="!carregandoReabertos">🔄 Atualizar Status</ng-container>
+        <ng-container *ngIf="carregandoReabertos">⏳ Atualizando...</ng-container>
+      </button>
+      <div class="card-info reabertos" *ngIf="dataUltimaAtualizacaoReabertos">
+        Atualizado: {{ dataUltimaAtualizacaoReabertos }}
+      </div>
+    </div>
+
+    <!-- 🔄 Card Reprovados -->
+    <div class="dashboard-kpi-card kpi-reprovados" [class.loading]="carregandoReprovados">
+      <h2>Relatório - VExpenses <span class="status-destaque">Reprovados</span></h2>
+      <p>{{ totalReprovados }}</p>
+      <button class="card-btn" (click)="onClickCardReprovados($event)" [disabled]="carregandoReprovados">
+        <ng-container *ngIf="!carregandoReprovados">🔄 Atualizar Status</ng-container>
+        <ng-container *ngIf="carregandoReprovados">⏳ Atualizando...</ng-container>
+      </button>
+      <div class="card-info reprovados" *ngIf="dataUltimaAtualizacaoReprovados">
+        Atualizado: {{ dataUltimaAtualizacaoReprovados }}
+      </div>
+    </div>
+  </div>
+
+  <!-- 🔹 Seção: Gráficos principais -->
+  <h2 class="dashboard-section-title">
+    Processamento da Integração de Dados - VExpenses × Bimer
+  </h2>
+  <div class="dashboard-charts-container">
+    <div class="dashboard-chart-card">
+      <h3>Pendências por Mês</h3>
+      <canvas baseChart [data]="chartPendenciasData" [options]="lineChartOptions" type="line"></canvas>
+    </div>
+
+    <div class="dashboard-chart-card">
+      <h3>Pendências Resolvidas por Mês</h3>
+      <canvas baseChart [data]="chartPendenciasResolvidasData" [options]="lineChartOptions" type="line"></canvas>
+    </div>
+
+    <div class="dashboard-chart-card">
+      <h3>Erros por Mês</h3>
+      <canvas baseChart [data]="chartErrosData" [options]="lineChartOptions" type="line"></canvas>
+    </div>
+
+    <div class="dashboard-chart-card">
+      <h3>Sucesso por Mês</h3>
+      <canvas baseChart [data]="chartSucessoData" [options]="lineChartOptions" type="line"></canvas>
+    </div>
+
+    <div class="dashboard-chart-card">
+      <h3>Processamento por Mês (Combinado)</h3>
+      <canvas baseChart [data]="chartProcessamentoLinhaData" [options]="lineChartOptions" type="line"></canvas>
+    </div>
+
+    <div class="dashboard-chart-card">
+      <h3>Comparativo: Pendências × Erros × Sucesso</h3>
+      <canvas baseChart [data]="chartComparativoData" [options]="barChartUsersOptions" type="bar"></canvas>
+    </div>
+
+    <div class="dashboard-chart-card">
+      <h3>Comparativo Geral de Processamento</h3>
+      <canvas baseChart [data]="chartTotalComparativoData" [options]="barChartUsersOptions" type="bar"></canvas>
+    </div>
+  </div>
+
+  <div class="dashboard-triple-chart-grid">
+    <div class="dashboard-chart-card pizza-chart-card">
+      <h3>Monitoramento de Pendências por Status</h3>
+      <canvas
+        *ngIf="chartPendenciasStatusPizzaData?.datasets?.length"
+        baseChart
+        [data]="chartPendenciasStatusPizzaData"
+        [options]="pieChartOptions"
+        type="pie"
+      ></canvas>
+    </div>
+
+    <div class="dashboard-chart-card pizza-chart-card">
+      <h3>Monitoramento de Pendências Resolvidas por Usuários</h3>
+      <canvas
+        *ngIf="chartPendenciasExcluidasPorUsuariosPizzaData?.datasets?.length"
+        baseChart
+        [data]="chartPendenciasExcluidasPorUsuariosPizzaData"
+        [options]="pieChartOptions"
+        type="pie"
+      ></canvas>
+    </div>
+
+    <div class="dashboard-chart-card pizza-chart-card">
+      <h3>Monitoramento de Erros</h3>
+      <canvas
+        *ngIf="chartErrosPizzaData?.datasets?.length"
+        baseChart
+        [data]="chartErrosPizzaData"
+        [options]="pieChartOptions"
+        type="pie"
+      ></canvas>
+    </div>
+  </div>
+</div>

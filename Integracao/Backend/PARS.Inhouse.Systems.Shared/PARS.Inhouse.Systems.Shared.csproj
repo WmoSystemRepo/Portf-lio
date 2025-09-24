@@ -1,0 +1,29 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="DTOs\NovaPasta\**" />
+    <Compile Remove="Enums\Extensions\**" />
+    <EmbeddedResource Remove="DTOs\NovaPasta\**" />
+    <EmbeddedResource Remove="Enums\Extensions\**" />
+    <None Remove="DTOs\NovaPasta\**" />
+    <None Remove="Enums\Extensions\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="Enums\Class1.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Http.Features" Version="5.0.17" />
+    <PackageReference Include="MongoDB.Bson" Version="3.2.1" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageReference Include="System.ComponentModel.Annotations" Version="5.0.0" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,84 @@
+/* Container principal */
+.unauthorized-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh; /* Ocupa toda a altura da tela */
+  background-color: #f3f4f6; /* Cor de fundo suave */
+  text-align: center;
+  padding: 2rem; /* Espaçamento interno */
+}
+
+/* Imagem de erro */
+.error-image {
+  width: 100%; /* Largura responsiva */
+  max-width: auto; /* Largura máxima */
+  height: auto; /* Altura ajustável */
+  margin-bottom: 2rem; /* Espaçamento abaixo da imagem */
+  border-radius: 8px; /* Bordas arredondadas */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra suave */
+}
+
+/* Mensagem de erro */
+.error-message {
+  max-width: 600px; /* Largura máxima da mensagem */
+  margin: 0 auto; /* Centraliza horizontalmente */
+}
+
+.error-title {
+  font-size: 2rem; /* Tamanho da fonte */
+  color: #1f2937; /* Cor do texto (cinza escuro) */
+  margin-bottom: 1rem; /* Espaçamento abaixo do título */
+  font-weight: bold; /* Texto em negrito */
+}
+
+.error-description {
+  font-size: 1.25rem; /* Tamanho da fonte */
+  color: #4b5563; /* Cor do texto (cinza médio) */
+  line-height: 1.6; /* Espaçamento entre linhas */
+  margin-bottom: 1.5rem; /* Espaçamento abaixo da descrição */
+}
+
+.countdown-text {
+  font-size: 1.25rem; /* Tamanho da fonte */
+  color: #4b5563; /* Cor do texto (cinza médio) */
+  margin-bottom: 2rem; /* Espaçamento abaixo do texto */
+}
+
+.countdown-number {
+  font-weight: bold; /* Número em negrito */
+  color: #1f2937; /* Cor do número */
+}
+
+/* Botão de redirecionamento */
+.redirect-button {
+  background-color: #3b82f6; /* Cor de fundo azul */
+  color: white; /* Cor do texto */
+  padding: 0.75rem 1.5rem; /* Espaçamento interno */
+  border: none; /* Remove a borda */
+  border-radius: 8px; /* Bordas arredondadas */
+  font-size: 1rem; /* Tamanho da fonte */
+  cursor: pointer; /* Cursor de ponteiro */
+  transition: background-color 0.3s ease; /* Transição suave */
+}
+
+.redirect-button:hover {
+  background-color: #2563eb; /* Cor de fundo azul mais escura ao passar o mouse */
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .error-image {
+    max-width: 200px; /* Reduz o tamanho da imagem em telas menores */
+  }
+
+  .error-title {
+    font-size: 1.75rem; /* Reduz o tamanho da fonte do título */
+  }
+
+  .error-description,
+  .countdown-text {
+    font-size: 1rem; /* Reduz o tamanho da fonte do texto */
+  }
+}

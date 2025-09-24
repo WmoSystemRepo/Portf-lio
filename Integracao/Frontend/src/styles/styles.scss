@@ -1,0 +1,46 @@
+// =========================
+// 🌐 ABSTRACTS (variáveis, mixins, placeholders, animações)
+// =========================
+@use 'abstracts/variables' as *;
+@use 'abstracts/mixins' as *;
+@use 'abstracts/placeholders' as *;
+@use 'abstracts/animations' as *;
+
+// =========================
+// 🧱 BASE (estilos globais)
+// =========================
+@use 'base/reset' as *;
+@use 'base/typography' as *;
+@use 'base/titles' as *;
+
+// =========================
+// 📐 LAYOUT (estrutura geral)
+// =========================
+@use 'layout/header' as *;
+@use 'layout/containers' as *;
+@use 'layout/modal' as *;
+@use 'layout/table' as *;
+@use 'layout/filters' as *;
+@use 'layout/grids' as *;
+
+// =========================
+// 🧩 COMPONENTS (componentes visuais)
+// =========================
+@use 'components/buttons' as *;
+@use 'components/cards' as *;
+@use 'components/form' as *;
+@use 'components/dashboard' as *;
+@use 'components/login' as *;
+
+// =========================
+// 🎨 THEMES (temas customizáveis)
+// =========================
+@use 'themes/default-theme' as *;
+
+// =========================
+// 🛠️ UTILS (helpers e utilitários visuais)
+// =========================
+@use 'utils/helpers' as *;
+@use 'utils/backgrounds' as *;
+@use 'utils/responsive' as *;
+@use 'utils/utilities' as *;

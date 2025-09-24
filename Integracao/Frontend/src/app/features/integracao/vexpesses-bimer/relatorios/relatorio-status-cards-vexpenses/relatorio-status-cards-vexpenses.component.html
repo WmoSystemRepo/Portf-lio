@@ -1,0 +1,36 @@
+<div class="cards-container">
+  <div class="card" [class.active]="selectedFilter === null" (click)="filterByCard(null)">
+    <div class="card-title">Total Geral</div>
+    <div class="card-value">{{ totalGeral }}</div>
+  </div>
+
+  <div class="card card-aberto" [class.active]="selectedFilter === 'ABERTO'" (click)="filterByCard('ABERTO')">
+    <div class="card-title">Abertos</div>
+    <div class="card-value">{{ totalAbertos }}</div>
+  </div>
+
+  <div class="card card-reaberto" [class.active]="selectedFilter === 'REABERTO'" (click)="filterByCard('REABERTO')">
+    <div class="card-title">Reabertos</div>
+    <div class="card-value">{{ totalReaberto }}</div>
+  </div>
+
+  <div class="card card-aprovado" [class.active]="selectedFilter === 'APROVADO'" (click)="filterByCard('APROVADO')">
+    <div class="card-title">Aprovados</div>
+    <div class="card-value">{{ totalAprovados }}</div>
+  </div>
+
+  <div class="card card-reprovado" [class.active]="selectedFilter === 'REPROVADO'" (click)="filterByCard('REPROVADO')">
+    <div class="card-title">Reprovados</div>
+    <div class="card-value">{{ totalReprovado }}</div>
+  </div>
+
+  <div class="card card-enviado" [class.active]="selectedFilter === 'ENVIADO'" (click)="filterByCard('ENVIADO')">
+    <div class="card-title">Enviados</div>
+    <div class="card-value">{{ totalEnviado }}</div>
+  </div>
+
+  <div class="card card-pago" [class.active]="selectedFilter === 'PAGO'" (click)="filterByCard('PAGO')">
+    <div class="card-title">Pagos</div>
+    <div class="card-value">{{ totalPago }}</div>
+  </div>
+</div>

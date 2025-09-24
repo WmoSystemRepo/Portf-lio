@@ -1,0 +1,25 @@
+:root {
+  /* 🎨 Cores */
+  --primary-color: #003b80;
+  --secondary-color: #ecf0f3;
+  --accent-color: #ff9800;
+  --text-color: #333;
+  --text-muted-color: #666;
+  --card-background: #fff;
+
+  /* 📏 Espaçamentos */
+  --spacing-small: 8px;
+  --spacing-medium: 16px;
+  --spacing-large: 24px;
+
+  /* 🔠 Tipografia */
+  --font-family-base: 'Roboto', sans-serif;
+  --font-size-base: 16px;
+  --font-size-large: 2.5rem;
+  --font-size-medium: 1.2rem;
+  --font-size-small: 1rem;
+
+  /* 🧱 Outros */
+  --border-radius: 8px;
+  --box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}

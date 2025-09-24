@@ -1,0 +1,596 @@
+<!-- #region Informações do Container
+Este container encapsula toda a funcionalidade da tela de Integrações.
+Inclui:
+  - Cabeçalho com título e botões
+  - KPIs de resumo
+  - Tabela com filtros, ações e dados
+  - Modais dinâmicos: exclusão, colunas, detalhes, referências
+
+DOM:
+<div class="app-container">
+  ├── .header
+  ├── .summary-kpis
+  ├── .table-wrapper
+  ├── .modals (diversos)
+-->
+<!-- #endregion -->
+<!-- #region Container principal da tela de integrações -->
+<div class="app-container">
+  <!-- #region Cabeçalho da tela -->
+  <div class="header">
+    <button class="tour-button" (click)="onHelp()" type="button">
+      <i class="fas fa-question-circle"></i> Ajuda
+    </button>
+
+    <h2 class="title">{{ title }}</h2>
+
+    <button class="new-integration-btn" (click)="onAdd()" type="button">
+      <i class="fas fa-plus"></i> Novo
+    </button>
+  </div>
+  <!-- #endregion -->
+
+  <!-- #region Tabela de dados com filtros e ações -->
+  <div class="table-wrapper">
+    <div class="crud-table">
+
+      <div class="crud-table-header">
+        <ng-container *ngFor="let field of fields">
+
+          <ng-container *ngIf="isFieldVisible(field.name)">
+            <div
+              class="crud-col"
+              [ngClass]="[field.columnClass, getAlignClass(field.align)]"
+            >
+              {{ field.label.trim() || formatLabel(field.name) }}
+            </div>
+          </ng-container>
+
+          <ng-container *ngIf="isComplexField(field.name)">
+            <ng-container *ngFor="let sub of visibleSubColumnsOf(field.name)">
+              <div class="crud-col">
+                {{ (field.label || formatLabel(field.name)) + ' • ' + formatLabel(sub) }}
+              </div>
+            </ng-container>
+          </ng-container>
+        </ng-container>
+
+        <div
+          class="crud-col actions-col"
+          [ngClass]="{ 'wide-actions': hasReferenceButton }"
+        >
+          Ações
+          <button
+            class="action-btn config-btn"
+            (click)="openGridConfig()"
+            type="button"
+            title="Configurar colunas"
+          >
+            <i class="fas fa-cog"></i>
+          </button>
+          <div
+            class="resizer"
+            (mousedown)="startResize($event, 'actions-col')"
+          ></div>
+        </div>
+      </div>
+
+      <div class="crud-table-header filters-row">
+        <ng-container *ngFor="let field of fields">
+
+          <div
+            class="crud-col"
+            [ngClass]="field.columnClass"
+            *ngIf="isFieldVisible(field.name)"
+          >
+            <input
+              [type]="isDateField(field.name) ? 'date' : 'text'"
+              [(ngModel)]="columnFilters[field.name]"
+              [placeholder]="isDateField(field.name) ? 'Selecionar...' : 'Filtrar...'"
+              class="column-filter-input"
+            />
+          </div>
+
+          <ng-container *ngIf="isComplexField(field.name)">
+            <ng-container *ngFor="let sub of visibleSubColumnsOf(field.name)">
+              <div class="crud-col">
+                <input
+                  type="text"
+                  [(ngModel)]="columnFilters[field.name + '.' + sub]"
+                  placeholder="Filtrar..."
+                  class="column-filter-input"
+                />
+              </div>
+            </ng-container>
+          </ng-container>
+        </ng-container>
+
+        <div
+          class="crud-col actions-col"
+          [ngClass]="{ 'wide-actions': hasReferenceButton }"
+        >
+          <button class="btn-secondary" (click)="clearFilters()">Limpar</button>
+        </div>
+      </div>
+
+      <div class="table-body">
+        <div class="crud-table-row" *ngFor="let item of filteredItems">
+          <ng-container *ngFor="let field of fields">
+
+            <ng-container *ngIf="isFieldVisible(field.name)">
+              <div
+                class="crud-col"
+                [ngClass]="[field.columnClass, getAlignClass(field.align)]"
+              >
+                {{
+                  isDateField(field.name) && isDate(item[field.name])
+                    ? (item[field.name] | date : "dd/MM/yyyy")
+                    : item[field.name]
+                }}
+              </div>
+            </ng-container>
+
+            <ng-container *ngIf="isComplexField(field.name)">
+              <ng-container *ngFor="let sub of visibleSubColumnsOf(field.name)">
+                <div class="crud-col">
+                  {{ getValueByPath(item, field.name + '.' + sub) }}
+                </div>
+              </ng-container>
+            </ng-container>
+          </ng-container>
+
+          <div
+            class="crud-col actions-col"
+            [ngClass]="{ 'wide-actions': hasReferenceButton }"
+          >
+            <button
+              class="action-btn edit-btn"
+              (click)="onEdit(item)"
+              title="Editar"
+            >
+              <i class="fas fa-pencil-alt"></i>
+            </button>
+            <button
+              class="action-btn delete-btn"
+              (click)="onAskDelete(item)"
+              title="Excluir"
+            >
+              <i class="fas fa-trash-alt"></i>
+            </button>
+            <button
+              class="action-btn detail-btn"
+              (click)="openDetailsModal(item)"
+              title="Detalhes"
+            >
+              <i class="fas fa-eye"></i>
+            </button>
+
+            <ng-container *ngIf="modelRefs?.length">
+              <button
+                *ngFor="let ref of modelRefs"
+                class="action-btn reference-btn"
+                (click)="onReference(ref.key, item)"
+                [title]="ref.label"
+              >
+                <i class="fas" [ngClass]="ref.icon || 'fa-link'"></i>
+              </button>
+            </ng-container>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- #endregion -->
+
+  <!-- #region Modal de Exclusão Simples-->
+  <div *ngIf="isDeleteModalOpen" class="app-modal-overlay">
+    <div class="app-modal-container">
+      <div class="modal-header">
+        <i class="fas fa-exclamation-triangle warning-icon"></i>
+        <h3 class="modal-title">Excluir Registro</h3>
+      </div>
+      <p>
+        Tem certeza que deseja excluir o item
+        <strong>{{ itemToDelete?.nome }}</strong
+        >?
+      </p>
+      <div class="app-modal-buttons">
+        <button class="btn-danger" (click)="onConfirmDelete()">
+          Sim, excluir
+        </button>
+        <button class="btn-secondary" (click)="closeDeleteModal()">
+          Cancelar
+        </button>
+      </div>
+    </div>
+  </div>
+  <!-- #endregion -->
+
+  <!-- #region Modal de Justificativa -->
+  <div *ngIf="isJustificationModalOpen" class="app-modal-overlay">
+    <div class="app-modal-container">
+      <div class="modal-header">
+        <i class="fas fa-exclamation-triangle warning-icon"></i>
+        <h3 class="modal-title">Justificativa para Exclusão</h3>
+      </div>
+      <div class="modal-body">
+        <p>
+          Você está prestes a excluir o item
+          <strong>{{ itemToDeleteWithJustification?.nome || itemToDeleteWithJustification?.nomeArquivo }}</strong>.
+          Por favor, informe o motivo:
+        </p>
+        <textarea
+          [(ngModel)]="justificationText"
+          [placeholder]="justificationPlaceholder"
+          rows="4"
+          class="form-control"
+          style="width: 100%; resize: none; margin-top: 10px;"
+        ></textarea>
+        <div 
+          *ngIf="justificationText.length > 0 && justificationText.length < justificationMinLength"
+          class="error-message"
+          style="color: rgb(135, 106, 106); margin-top: 5px; font-size: 12px;">
+          Justificativa deve ter pelo menos {{ justificationMinLength }} caracteres.
+        </div>
+        <div 
+          style="color: #666; margin-top: 5px; font-size: 12px;">
+          {{ justificationText.length }}/{{ justificationMinLength }} caracteres mínimos
+        </div>
+      </div>
+      <div class="app-modal-buttons">
+        <button class="btn-secondary" (click)="closeJustificationModal()">
+          Cancelar
+        </button>
+        <button 
+          class="btn-danger" 
+          (click)="confirmDeleteWithJustification()"
+          [disabled]="!isJustificationValid()">
+          <i class="fas fa-trash-alt"></i>
+          Confirmar Exclusão
+        </button>
+      </div>
+    </div>
+  </div>
+  <!-- #endregion -->
+
+  <!-- #region Modal de Justificativa + Referências -->
+  <div *ngIf="isJustificationRefModalOpen" class="app-modal-overlay">
+    <div class="app-modal-container">
+      <div class="modal-header">
+        <i class="fas fa-exclamation-triangle warning-icon"></i>
+        <h3 class="modal-title">Justificativa para Exclusão</h3>
+      </div>
+      <div class="modal-body">
+        <p>
+          Você está prestes a excluir o item
+          <strong>{{ itemToDeleteWithJustificationRef?.nome || itemToDeleteWithJustificationRef?.nomeArquivo }}</strong>.
+          Por favor, informe o motivo:
+        </p>
+        <textarea
+          [(ngModel)]="justificationRefText"
+          [placeholder]="justificationPlaceholder"
+          rows="4"
+          class="form-control"
+          style="width: 100%; resize: none; margin-top: 10px;"
+        ></textarea>
+        <div 
+          *ngIf="justificationRefText.length > 0 && justificationRefText.length < justificationMinLength"
+          class="error-message"
+          style="color: rgb(135, 106, 106); margin-top: 5px; font-size: 12px;">
+          Justificativa deve ter pelo menos {{ justificationMinLength }} caracteres.
+        </div>
+        <div 
+          style="color: #666; margin-top: 5px; font-size: 12px;">
+          {{ justificationRefText.length }}/{{ justificationMinLength }} caracteres mínimos
+        </div>
+      </div>
+      <div class="app-modal-buttons">
+        <button class="btn-secondary" (click)="closeJustificationRefModal()">
+          Cancelar
+        </button>
+        <button 
+          class="btn-danger" 
+          (click)="confirmDeleteWithJustificationRef()"
+          [disabled]="!isJustificationValid()">
+          <i class="fas fa-trash-alt"></i>
+          Confirmar Exclusão
+        </button>
+      </div>
+    </div>
+  </div>
+  
+  <!-- #endregion -->
+
+  <!-- #region Modal de Configuração de Colunas -->
+  <div *ngIf="isConfigModalOpen" class="app-modal-overlay">
+    <div class="app-modal-container">
+      <div class="modal-header">
+        <i class="fas fa-sliders-h text-blue"></i>
+        <h3 class="modal-title">Configurar Colunas Visíveis</h3>
+      </div>
+      <p>Selecione os campos que você deseja exibir:</p>
+
+      <div class="select-all-row-centralizado">
+        <input
+          type="checkbox"
+          [checked]="allFieldsVisible()"
+          (change)="toggleAllFields()"
+          id="checkAllFields"
+        />
+        <label for="checkAllFields" class="label-select-all">
+          <strong>Selecionar Todos</strong>
+        </label>
+      </div>
+
+      <div class="field-visibility-list">
+        <ng-container *ngFor="let field of fields">
+          <div
+            *ngIf="!isComplexField(field.name)"
+            class="field-visibility-item"
+          >
+            <input
+              type="checkbox"
+              [checked]="isFieldVisible(field.name)"
+              (change)="toggleFieldVisibility(field.name)"
+              id="{{ 'col-' + field.name }}"
+            />
+            <label [for]="'col-' + field.name">
+              {{ field.label.trim() || formatLabel(field.name) }}
+            </label>
+          </div>
+          <div
+            *ngIf="isComplexField(field.name)"
+            class="field-visibility-item item-with-expand"
+          >
+            <div class="inline">
+              <button
+                class="btn-expand"
+                (click)="toggleExpandComplexField(field.name)"
+                type="button"
+                [attr.aria-expanded]="isComplexExpanded(field.name)"
+                [title]="
+                  isComplexExpanded(field.name) ? 'Recolher' : 'Expandir'
+                "
+              >
+                <i
+                  class="fas"
+                  [ngClass]="{
+                    'fa-angle-down': isComplexExpanded(field.name),
+                    'fa-angle-right': !isComplexExpanded(field.name)
+                  }"
+                ></i>
+              </button>
+              <input
+                type="checkbox"
+                [checked]="isFieldVisible(field.name)"
+                (change)="toggleFieldVisibility(field.name)"
+                id="{{ 'col-' + field.name }}"
+              />
+              <label [for]="'col-' + field.name">
+                {{ field.label.trim() || formatLabel(field.name) }}
+              </label>
+            </div>
+            <div class="subfields" *ngIf="isComplexExpanded(field.name)">
+              <div
+                class="subfield-item"
+                *ngFor="let sub of getSubKeysOf(field.name)"
+              >
+                <input
+                  type="checkbox"
+                  [checked]="isFieldVisible(field.name + '.' + sub)"
+                  (change)="toggleFieldVisibility(field.name + '.' + sub)"
+                  id="{{ 'col-' + field.name + '.' + sub }}"
+                />
+                <label [for]="'col-' + field.name + '.' + sub">
+                  {{ formatLabel(sub) }}
+                </label>
+              </div>
+            </div>
+          </div>
+        </ng-container>
+      </div>
+      <div class="app-modal-buttons">
+        <button class="btn-secondary" (click)="closeGridConfig()">Fechar</button>
+      </div>
+    </div>
+  </div>
+  <!-- #endregion -->
+
+  <!-- #region Modal de Detalhes -->
+  <div *ngIf="isDetailsModalOpen" class="app-modal-overlay">
+    <div class="app-modal-container modal-md details-modal-modern">
+      <div class="modal-header">
+        <i class="fas fa-eye"></i>
+        <h3 class="modal-title">Detalhes do Registro</h3>
+      </div>
+
+      <div *ngIf="itemToView" class="details-fields-list-modern">
+        <ng-container *ngFor="let field of fields">
+
+          <div *ngIf="!isComplexField(field.name)" class="field-details-card">
+            <div class="field-details-label">
+              {{ field.label || formatLabel(field.name) }}:
+            </div>
+            <div class="field-details-value">
+              {{ itemToView[field.name] ?? "(sem valor)" }}
+            </div>
+          </div>
+
+          <div *ngIf="isComplexField(field.name)" class="field-details-card card-expandable">
+            <div class="field-details-expand-head" (click)="toggleDetailsExpand(field.name)">
+              <button
+                class="details-expand-btn-modern"
+                type="button"
+                [attr.aria-expanded]="isDetailsExpanded(field.name)"
+                [title]="isDetailsExpanded(field.name) ? 'Recolher' : 'Expandir'">
+                <i
+                  class="fas"
+                  [ngClass]="{
+                    'fa-angle-down': isDetailsExpanded(field.name),
+                    'fa-angle-right': !isDetailsExpanded(field.name)
+                  }"
+                ></i>
+              </button>
+              <span class="field-details-label field-details-group">
+                {{ field.label || formatLabel(field.name) }}
+                <span class="field-details-count">({{ getSubKeysOf(field.name).length }} itens)</span>
+              </span>
+            </div>
+
+            <div *ngIf="isDetailsExpanded(field.name)" class="details-subfields-list-modern">
+              <div
+                class="details-subfield-item-modern"
+                *ngFor="let sub of getSubKeysOf(field.name)">
+                <span class="details-key-modern">{{ formatLabel(sub) }}:</span>
+                <span class="details-val-modern">
+                  {{ getValueByPath(itemToView, field.name + '.' + sub) ?? "(sem valor)" }}
+                </span>
+              </div>
+            </div>
+          </div>
+        </ng-container>
+      </div>
+
+      <div *ngIf="!itemToView" class="no-details-message">
+        <i class="fas fa-eye-slash text-red"></i>
+        <p>Nenhum detalhe para exibir.</p>
+      </div>
+
+      <div class="app-modal-buttons">
+        <button class="btn-secondary" (click)="closeDetailsModal()">Fechar</button>
+      </div>
+    </div>
+  </div>
+  <!-- #endregion -->
+
+  <!-- #region Modal de Referência (vínculo/desvínculo de integrações) -->
+  <div *ngIf="refModalOpen" class="app-modal-overlay">
+    <div class="app-modal-container" [ngClass]="getModalSizeClass()">
+      <div class="modal-header">
+        <i class="fas" [ngClass]="activeRef?.icon || 'fa-link'"></i>
+        <h3 class="modal-title">{{ refModalTitle }}</h3>
+      </div>
+      <p>Associe os itens desejados.</p>
+
+      <div class="search-bar" style="display: flex; gap: 1rem; align-items: center">
+        <input
+          type="text"
+          placeholder="Buscar por Item..."
+          (input)="onApplyFilter($event)"
+        />
+      </div>
+
+      <div
+        class="field-visibility-list"
+        style="max-height: 300px; overflow-y: auto"
+      >
+        <div *ngIf="refModalLoading">Carregando...</div>
+
+        <ng-container
+          *ngIf="!refModalLoading && refModalData.length; else semDados"
+        >
+          <div
+            class="ref-grid-header field-visibility-item"
+            style="display: flex; border-bottom: 2px solid #ccc"
+          >
+            <strong
+              style="
+                width: 50%;
+                border-right: 1px solid #ccc;
+                padding-right: 0.5rem;
+              "
+              >Item</strong
+            >
+            <strong style="width: 20%; text-align: center">Status</strong>
+            <strong
+              style="
+                width: 30%;
+                border-left: 1px solid #ccc;
+                padding-right: 0.5rem;
+              "
+              >Ações</strong
+            >
+          </div>
+
+          <div
+            *ngFor="let ref of refModalFilteredData"
+            class="ref-grid-row field-visibility-item"
+            style="display: flex; border-top: 1px solid #ccc; padding: 0.5rem 0"
+          >
+            <div
+              style="
+                width: 50%;
+                border-right: 1px solid #ccc;
+                padding-right: 0.5rem;
+              "
+            >
+              <ng-container
+                *ngIf="activeRef?.displayFields as campos; else fallbackLabel"
+              >
+                <ng-container *ngFor="let f of campos">
+                  <div [ngStyle]="{ 'text-align': f.align || 'left' }">
+                    <strong>{{ f.label }}:</strong> {{ ref[f.name] }}
+                  </div>
+                </ng-container>
+              </ng-container>
+              <ng-template #fallbackLabel>
+                {{ ref.nome || ref.descricao || "Sem nome" }}
+              </ng-template>
+            </div>
+
+            <div style="width: 20%; text-align: center">
+              <span
+                [class.text-success]="ref._checked"
+                [class.text-muted]="!ref._checked"
+              >
+                {{ ref._checked ? "Vinculado" : "Não vinculado" }}
+              </span>
+            </div>
+
+            <div
+              style="
+                width: 30%;
+                display: flex;
+                justify-content: center;
+                gap: 1rem;
+                border-left: 1px solid #ccc;
+                padding-right: 0.5rem;
+              "
+            >
+              <button
+                class="icon-btn"
+                type="button"
+                (click)="vincularItem(ref)"
+                [disabled]="ref._checked"
+                title="Vincular"
+              >
+                <i class="fas fa-link text-success"></i>
+              </button>
+              <button
+                class="icon-btn"
+                type="button"
+                (click)="desvincularItem(ref)"
+                [disabled]="!ref._checked"
+                title="Desvincular"
+              >
+                <i class="fas fa-unlink text-danger"></i>
+              </button>
+            </div>
+          </div>
+        </ng-container>
+
+        <ng-template #semDados>
+          <div class="text-muted mt-2">Nenhum item disponível.</div>
+        </ng-template>
+      </div>
+
+      <div class="app-modal-buttons">
+        <button class="btn-primary" (click)="closeReferenceModal()">
+          Fechar
+        </button>
+      </div>
+    </div>
+  </div>
+  <!-- #endregion -->
+</div>
+<!-- #endregion -->

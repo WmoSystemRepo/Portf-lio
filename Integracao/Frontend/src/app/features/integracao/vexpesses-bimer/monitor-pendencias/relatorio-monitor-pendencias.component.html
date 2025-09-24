@@ -1,0 +1,191 @@
+<div class="container" role="region" aria-labelledby="relatorios-heading">
+  <h2 id="relatorios-heading" class="section-heading">
+    Monitoramento Integração Vexpenses x Bimmer - Pendências
+  </h2>
+
+  <div class="controls-container">
+    <div class="search-bar">
+      <input
+        type="text"
+        placeholder="Buscar pendências..."
+        (input)="applyFilterPendenciasTodas($event)"
+      />
+      <button type="button" class="search-button">
+        <mat-icon>search</mat-icon>
+      </button>
+    </div>
+
+    <div class="excluir-container">
+      <button
+        mat-raised-button
+        color="warn"
+        (click)="abrirModalJustificativa()"
+        [disabled]="selection.selected.length === 0"
+      >
+        Excluir Selecionados
+      </button>
+    </div>
+
+    <div class="tour-container">
+      <button class="tour-button" (click)="iniciarTourRelatorioMoeda()">
+        <i class="fas fa-question-circle"></i> Ajuda
+      </button>
+    </div>
+  </div>
+
+  <div class="pendencias-container">
+    <div class="grid-scroll-container" tabindex="0" role="application">
+      <div class="scroll-content">
+        <table mat-table [dataSource]="dataSourcePendenciasMoeda" class="mat-elevation-z8">
+
+          <!-- Checkbox -->
+          <ng-container matColumnDef="select">
+            <th mat-header-cell *matHeaderCellDef>
+              <mat-checkbox
+                (change)="masterToggle()"
+                [checked]="isAllSelected()"
+                [indeterminate]="selection.hasValue() && !isAllSelected()"
+                [aria-label]="checkboxLabel()"
+              ></mat-checkbox>
+            </th>
+            <td mat-cell *matCellDef="let row">
+              <mat-checkbox
+                (click)="$event.stopPropagation()"
+                (change)="selection.toggle(row)"
+                [checked]="selection.isSelected(row)"
+                [aria-label]="checkboxLabel(row)"
+              ></mat-checkbox>
+            </td>
+          </ng-container>
+
+          <!-- Título -->
+          <ng-container matColumnDef="id">
+            <th mat-header-cell *matHeaderCellDef>Título</th>
+            <td mat-cell *matCellDef="let element">{{ element.idResponse }}</td>
+          </ng-container>
+
+          <!-- Data Cadastro -->
+          <ng-container matColumnDef="dataCadastro">
+            <th mat-header-cell *matHeaderCellDef>Data Cadastro</th>
+            <td mat-cell *matCellDef="let element">
+              {{ element.dataCadastro | date: 'dd/MM/yyyy HH:mm' }}
+            </td>
+          </ng-container>
+
+          <!-- Status -->
+          <ng-container matColumnDef="status">
+            <th mat-header-cell *matHeaderCellDef>Status</th>
+            <td mat-cell *matCellDef="let element">{{ element.status }}</td>
+          </ng-container>
+
+          <!-- Observação -->
+          <ng-container matColumnDef="observacao">
+            <th mat-header-cell *matHeaderCellDef>Observação</th>
+            <td mat-cell *matCellDef="let element">{{ element.observacao }}</td>
+          </ng-container>
+
+          <!-- Ações -->
+          <ng-container matColumnDef="acoes">
+            <th mat-header-cell *matHeaderCellDef>Ações</th>
+            <td mat-cell *matCellDef="let element">
+              <button mat-icon-button matTooltip="Ver Detalhes" (click)="abrirDetalhesPendencia(element)">
+                <mat-icon>visibility</mat-icon>
+              </button>
+            </td>
+          </ng-container>
+
+          <!-- Linhas -->
+          <tr mat-header-row *matHeaderRowDef="displayedColumnsPendenciasMoeda"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumnsPendenciasMoeda"></tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- Paginador -->
+    <mat-paginator
+      #pendenciasMoedaPaginator
+      [pageSizeOptions]="[10, 20, 50, 100]"
+      [length]="totalItensPendenciasMoeda"
+      [pageSize]="pageSizePendenciasMoeda"
+      (page)="onPagePendenciasMoedaChange($event)"
+      showFirstLastButtons
+    ></mat-paginator>
+  </div>
+
+  <!-- Modal Justificativa -->
+  <div *ngIf="exibindoModalJustificativa" class="modal-overlay" (click)="fecharModalJustificativa()">
+    <div class="modal-content" (click)="$event.stopPropagation()">
+      <h3>Justificativa para exclusão</h3>
+      <form [formGroup]="formJustificativa">
+        <textarea
+          formControlName="justificativa"
+          placeholder="Descreva o motivo da exclusão..."
+          rows="4"
+          style="width: 100%; resize: none;"
+        ></textarea>
+        <div *ngIf="formJustificativa.get('justificativa')?.invalid && formJustificativa.get('justificativa')?.touched"
+             style="color: red; margin-top: 5px;">
+          Justificativa obrigatória (mínimo 10 caracteres).
+        </div>
+        <div style="text-align: right; margin-top: 10px;">
+          <button mat-button type="button" (click)="fecharModalJustificativa()">Cancelar</button>
+          <button
+            mat-raised-button
+            color="primary"
+            type="button"
+            (click)="confirmarExclusao()"
+            [disabled]="formJustificativa.invalid"
+          >
+            Confirmar Exclusão
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Modal Sucesso -->
+  <div *ngIf="exibindoModalSucesso" class="modal-overlay" (click)="fecharModalSucesso()">
+    <div class="modal-content sucesso" (click)="$event.stopPropagation()">
+      <h3>Resultado da Exclusão</h3>
+      <p>{{ mensagemSucesso }}</p>
+      <div style="text-align: right; margin-top: 15px;">
+        <button mat-raised-button color="primary" (click)="fecharModalSucesso()">OK</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal de Detalhes -->
+  <div *ngIf="modalAberto" class="custom-modal-backdrop" (click)="fecharDetalhesPendencia()">
+    <div class="custom-modal" (click)="$event.stopPropagation()">
+      <div class="modal-header">
+        <h2 class="modal-title">Detalhes do Relatório</h2>
+        <button class="close-button" (click)="fecharDetalhesPendencia()" aria-label="Fechar">×</button>
+      </div>
+      <div class="modal-body">
+        <div class="detail-item">
+          <strong>Título:</strong>
+          <span>{{ pendenciaSelecionada?.idResponse }}</span>
+        </div>
+        <div class="detail-item">
+          <strong>Código Usuário Vexpenses:</strong>
+          <span>{{ pendenciaSelecionada?.userId }}</span>
+        </div>
+        <div class="detail-item">
+          <strong>Descrição:</strong>
+          <span>{{ pendenciaSelecionada?.descricao }}</span>
+        </div>
+        <div class="detail-item">
+          <strong>Valor:</strong>
+          <span>{{ pendenciaSelecionada?.valor | currency: 'BRL' }}</span>
+        </div>
+        <div class="detail-item">
+          <strong>Response:</strong>
+          <span>{{ pendenciaSelecionada?.response || '-' }}</span>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button mat-raised-button color="primary" (click)="fecharDetalhesPendencia()">Fechar</button>
+      </div>
+    </div>
+  </div>
+</div>

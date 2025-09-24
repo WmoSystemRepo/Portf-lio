@@ -1,0 +1,14 @@
+.app-container {
+  max-width: var(--max-width-container);
+  margin: var(--margin-container);
+  padding: var(--padding-container);
+  border-radius: var(--radius-card);
+  background: linear-gradient(
+    to right,
+    var(--primary-color-start),
+    var(--primary-color-end),
+    var(--primary-color-start),
+    var(--primary-color-end)
+  );
+  color: var(--text-light);
+}

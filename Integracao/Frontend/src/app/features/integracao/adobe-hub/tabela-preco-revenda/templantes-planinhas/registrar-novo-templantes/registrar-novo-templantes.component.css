@@ -1,0 +1,543 @@
+.import-container {
+  max-width: 1900px;
+  margin: 1rem auto;
+  padding: 1.5rem;
+}
+
+.import-card {
+  border-radius: 90px;
+  padding: 2rem 1rem;
+  text-align: center;
+  background: linear-gradient(to right, #0357ac, #0a57d3);
+  color: white;
+  transition: all 1.3s ease;
+}
+
+.import-card.dragover {
+  border-color: #033625;
+  background: linear-gradient(to right, #10b981, #0b9b7d);
+  transform: translateY(-5px);
+}
+
+/* 🔙 Cabeçalho com botão voltar */
+.header-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.back-button {
+  background: #f59e0b;
+  border: none;
+  color: white;
+  padding: 0.5rem 1.5rem;
+  border-radius: 50px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.15);
+}
+
+.back-button:hover {
+  background: #d97706;
+  transform: translateY(-2px);
+}
+
+/* 🔽 Botões de upload */
+.file-actions {
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.green-button {
+  background: #0b9b7d;
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border-radius: 80px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  border: none;
+  text-align: center;
+}
+
+.green-button:hover {
+  background: #01352a;
+  transform: translateY(-2px);
+}
+
+.green-button:disabled {
+  background-color: #9ca3af;
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.file-input-label input[type="file"] {
+  display: none;
+}
+
+/* 📄 Preview do arquivo */
+.file-preview {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  background: #f8fafc;
+  padding: 1rem;
+  border-radius: 90px;
+  margin-top: 1.5rem;
+  animation: slideIn 0.3s ease;
+}
+
+.file-icon {
+  font-size: 3.5rem;
+  color: #0b9b7d;
+}
+
+.file-info {
+  flex: 5;
+  text-align: center;
+}
+
+.file-name {
+  display: block;
+  font-weight: 600;
+  color: #080808;
+}
+
+.file-size {
+  font-size: 1.5rem;
+  color: #686868;
+}
+
+.remove-file-btn {
+  border: none;
+  background: transparent;
+  color: red;
+  cursor: pointer;
+  font-size: 1.2rem;
+  transition: all 0.3s ease;
+}
+
+.remove-file-btn:hover {
+  transform: scale(1.2);
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 🟦 Checkbox de tipos */
+.template-type-checkboxes {
+  margin: 2.5rem auto 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.template-option {
+  background: rgba(255, 255, 255, 0.15);
+  color: #fff;
+  border: none;
+  border-radius: 30px;
+  padding: 0.9rem 1.8rem;
+  font-weight: 600;
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.template-option:hover {
+  background: rgba(255, 255, 255, 0.25);
+}
+
+.template-option input[type="checkbox"] {
+  appearance: none;
+  width: 16px;
+  height: 16px;
+  border-radius: 4px;
+  border: 2px solid white;
+  background-color: transparent;
+  position: relative;
+  cursor: pointer;
+}
+
+.template-option input[type="checkbox"]:checked {
+  background-color: #10b981;
+  border-color: #10b981;
+}
+
+.template-option input[type="checkbox"]::after {
+  content: '';
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 6px;
+  height: 6px;
+  background: white;
+  border-radius: 2px;
+  display: none;
+}
+
+.template-option input[type="checkbox"]:checked::after {
+  display: block;
+}
+
+.template-option.selected {
+  background-color: rgba(16, 185, 129, 0.4);
+  box-shadow: 0 0 0 2px #10b981;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .header-container {
+    flex-direction: column;
+    gap: 1rem;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .file-preview {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .template-option {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .import-container {
+    padding: 1rem;
+  }
+
+  .import-card {
+    padding: 1.5rem 1rem;
+  }
+}
+
+.title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: white;
+  margin: 0;
+  flex-shrink: 0;
+}
+
+/* Garante que os botões de arquivo tenham o mesmo estilo */
+.file-actions .file-input-label {
+  background: #0b9b7d !important;
+  color: white !important;
+  padding: 0.75rem 1.5rem;
+  border-radius: 80px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  border: none;
+  text-align: center;
+  justify-content: center;
+  min-width: 180px;
+}
+
+.file-actions .file-input-label:hover {
+  background: #01352a !important;
+  transform: translateY(-2px);
+}
+
+/* 🟦 Modal customizado (SweetAlert2) - padrão .import-card */
+.swal2-popup.custom-bigblue-rounded-popup {
+  border-radius: 90px !important;
+  /* Igual ao .import-card */
+  padding: 2.7rem 2.5rem;
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(to right, #0357ac, #0a57d3) !important;
+  color: white !important;
+  box-shadow: 0 6px 24px 0 rgba(0, 0, 0, 0.18);
+}
+
+.swal2-popup.custom-bigblue-rounded-popup .swal2-title,
+.swal2-popup.custom-bigblue-rounded-popup .swal2-html-container {
+  color: white !important;
+}
+
+.swal2-popup.custom-bigblue-rounded-popup .swal2-title {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 0.6rem;
+  letter-spacing: 0.01em;
+}
+
+.swal2-popup.custom-bigblue-rounded-popup .swal2-html-container {
+  font-size: 1.12rem;
+  margin-bottom: 0.7rem;
+}
+
+.swal2-popup.custom-bigblue-rounded-popup .swal2-actions {
+  margin-top: 1.5rem !important;
+  display: flex;
+  justify-content: center;
+  gap: 1.2rem;
+}
+
+.swal2-popup.custom-bigblue-rounded-popup .swal2-confirm,
+.swal2-popup.custom-bigblue-rounded-popup .swal2-cancel {
+  border-radius: 50px !important;
+  min-width: 110px;
+  font-weight: bold;
+  padding: 0.65rem 1.6rem;
+  font-size: 1.13rem;
+  margin: 0 0.3rem;
+  border: none;
+  outline: none;
+  box-shadow: none;
+  transition: background 0.22s;
+}
+
+.swal2-popup.custom-bigblue-rounded-popup .swal2-confirm {
+  background-color: #10b981 !important;
+  /* Verde */
+  color: white !important;
+}
+
+.swal2-popup.custom-bigblue-rounded-popup .swal2-confirm:hover,
+.swal2-popup.custom-bigblue-rounded-popup .swal2-confirm:focus {
+  background-color: #13c498 !important;
+}
+
+.swal2-popup.custom-bigblue-rounded-popup .swal2-cancel {
+  background-color: #f59e0b !important;
+  /* Laranja */
+  color: white !important;
+}
+
+.swal2-popup.custom-bigblue-rounded-popup .swal2-cancel:hover,
+.swal2-popup.custom-bigblue-rounded-popup .swal2-cancel:focus {
+  background-color: #d97706 !important;
+}
+
+.swal2-popup.custom-bigblue-rounded-popup .swal2-icon {
+  margin-bottom: 0.5rem !important;
+}
+
+/* 🔄 Responsivo para telas pequenas */
+@media (max-width: 600px) {
+  .swal2-popup.custom-bigblue-rounded-popup {
+    border-radius: 38px !important;
+    padding: 1.3rem 0.5rem;
+  }
+
+  .swal2-popup.custom-bigblue-rounded-popup .swal2-title {
+    font-size: 1.3rem;
+  }
+}
+
+/* 🔹 Modal com bordas arredondadas e sombra (outro padrão antigo) */
+.swal2-popup.custom-success-popup {
+  border-radius: 2rem !important;
+  padding: 2.5rem;
+  font-family: 'Segoe UI', sans-serif;
+  animation: pulseSuccess 1s ease-in-out infinite;
+}
+
+.swal2-popup .swal2-icon.swal2-success {
+  border-color: #0f9960;
+  color: #0f9960;
+}
+
+@keyframes pulseSuccess {
+  0% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.03);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+.swal2-popup.custom-blue-rounded-popup {
+  border-radius: 2rem !important;
+  padding: 2.5rem 2rem;
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(to right, #0357ac, #0a57d3) !important;
+  color: white !important;
+  box-shadow: 0 6px 24px 0 rgba(0, 0, 0, 0.18);
+}
+
+.swal2-popup.custom-blue-rounded-popup .swal2-title,
+.swal2-popup.custom-blue-rounded-popup .swal2-html-container {
+  color: white !important;
+}
+
+.swal2-popup.custom-blue-rounded-popup .swal2-actions .swal2-confirm,
+.swal2-popup.custom-blue-rounded-popup .swal2-actions .swal2-cancel {
+  border-radius: 30px !important;
+  min-width: 100px;
+  font-weight: bold;
+  padding: 0.5rem 1.4rem;
+  font-size: 1.15rem;
+}
+
+.swal2-popup.custom-blue-rounded-popup .swal2-confirm {
+  background-color: #10b981 !important;
+  color: white !important;
+}
+
+.swal2-popup.custom-blue-rounded-popup .swal2-cancel {
+  background-color: #f59e0b !important;
+  color: white !important;
+}
+
+/* --- Modal padrão antigo (caso algum componente use) --- */
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-box {
+  background: white;
+  padding: 2rem;
+  border-radius: 90px;
+  width: 400px;
+  max-width: 90%;
+  text-align: center;
+}
+
+.modal-box h3 {
+  margin-bottom: 1rem;
+}
+
+.modal-box label {
+  display: block;
+  margin-top: 1rem;
+  font-weight: 600;
+  text-align: left;
+}
+
+.modal-box input {
+  width: 100%;
+  padding: 0.5rem;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1.5rem;
+}
+
+.confirm-btn {
+  background-color: #0b9b7d;
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+}
+
+.cancel-btn {
+  background-color: #ccc;
+  color: black;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+}
+
+.integracao-info {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 12px;
+  font-size: 14px;
+}
+
+.integracao-info .label {
+  font-weight: bold;
+  color: #333;
+}
+
+.integracao-info .valor {
+  color: #0b9b7d;
+  font-weight: bold;
+}
+
+.integracao-info .nome {
+  color: #0b9b7d;
+  font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 240px;
+}
+
+.swal2-popup:not(.custom-bigblue-rounded-popup):not(.custom-success-popup):not(.custom-blue-rounded-popup) {
+  border-radius: 90px !important;
+  background: linear-gradient(to right, #0357ac, #0a57d3) !important;
+  color: white !important;
+}
+
+.modal-template-sucesso {
+  text-align: left;
+  font-size: 1.13rem;
+  margin: 0 auto 1rem;
+  max-width: 90%;
+}
+
+.dados-template {
+  text-align: left;
+  font-size: 1.13rem;
+  margin: 0 auto 1rem;
+  max-width: 90%;
+}
+
+.mensagem-destaque {
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-top: 1rem;
+}

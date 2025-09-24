@@ -1,0 +1,30 @@
+<div class="container">
+  <div class="user-permission-container">
+    <div class="modal-header">
+      <h2>Gerenciamento de permissões:</h2>
+      <button class="close-btn" (click)="closeModal()">X</button>
+    </div>
+
+    <div class="sub-title">
+      <h4>Rotas:</h4>
+    </div>
+
+    <div class="modal-body">
+      <div *ngFor="let menu of availableMenus">
+        <label>
+          <input
+            type="checkbox"
+            [checked]="userPermissions.includes(menu.id)"
+            (change)="togglePermission(menu.id)"
+          />
+          {{ menu.rota }}
+        </label>
+      </div>
+    </div>
+
+    <div class="modal-footer">
+      <!-- <button class="save-btn" (click)="savePermissions()">Salvar</button> -->
+      <button class="close-btn2" (click)="closeModal()">Fechar</button>
+    </div>
+  </div>
+</div>

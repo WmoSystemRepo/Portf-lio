@@ -1,0 +1,52 @@
+<div class="preview-container app-container">
+  <h2>📦 Pré-visualização de Template</h2>
+
+  <p class="text-white">
+    Clique em uma célula que contenha pelo menos um caractere para marcar o início do cabeçalho.
+  </p>
+
+  <!-- ⚠️ Mensagem de erro -->
+  <div *ngIf="invalidCellMessage" class="cell-warning">
+    {{ invalidCellMessage }}
+  </div>
+
+  <!-- 📊 Tabela de dados -->
+  <div class="data-grid">
+    <table class="preview-table">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th *ngFor="let col of data[0]; let colIndex = index">
+            {{ getColumnLetter(colIndex) }}
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let row of data; let rowIndex = index">
+          <td class="row-index">{{ rowIndex + 1 }}</td>
+          <td
+            *ngFor="let cell of row; let colIndex = index"
+            [class.selected]="isSelected(rowIndex, colIndex)"
+            [class.invalid]="isInvalidCell(rowIndex, colIndex)"
+            [class.merged]="isMergedCell(rowIndex, colIndex)"
+            (click)="selectCell(rowIndex, colIndex)"
+          >
+            {{ cell }}
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- 🔘 Ações -->
+  <div class="preview-actions">
+    <button class="btn-secondary" (click)="goBack()">⬅ Voltar</button>
+    <button
+      class="btn-primary"
+      [disabled]="selectedRow === null || selectedCol === null || !!invalidCellMessage"
+      (click)="proceedToCreate()"
+    >
+      ✅ Confirmar cabeçalho em {{ getColumnLetter(selectedCol!) }}{{ selectedRow! + 1 }}
+    </button>
+  </div>
+</div>

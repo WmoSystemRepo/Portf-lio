@@ -1,0 +1,38 @@
+<div class="relatorios-nav">
+  <button
+    [class.active]="abaSelecionada === 'integracao'"
+    (click)="selecionar('integracao')"
+  >
+    <mat-icon>sync_alt</mat-icon>
+    Integração
+  </button>
+
+  <button
+    [class.active]="abaSelecionada === 'pendencias'"
+    (click)="selecionar('pendencias')"
+  >
+    <mat-icon>hourglass_empty</mat-icon>
+    Pendências
+  </button>
+
+  <button
+    [class.active]="abaSelecionada === 'erros'"
+    (click)="selecionar('erros')"
+  >
+    <mat-icon>error_outline</mat-icon>
+    Erros
+  </button>
+</div>
+
+<!-- Conteúdo renderizado dinamicamente -->
+<ng-container *ngIf="abaSelecionada === 'integracao'">
+  <app-relatorio-monitor-integracao></app-relatorio-monitor-integracao>
+</ng-container>
+
+<ng-container *ngIf="abaSelecionada === 'pendencias'">
+  <app-relatorio-monitor-pendencias></app-relatorio-monitor-pendencias>
+</ng-container>
+
+<ng-container *ngIf="abaSelecionada === 'erros'">
+  <app-relatorio-monitor-erros></app-relatorio-monitor-erros>
+</ng-container>

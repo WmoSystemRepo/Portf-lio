@@ -1,0 +1,74 @@
+<!-- #region sidebar-container -->
+<div class="sidebar" [class.closed]="isCollapsed">
+<!-- #endregion -->
+
+  <!-- #region logo/topo -->
+  <div class="logo-container">
+    <button class="toggle-btn" (click)="toggleSidebar()">☰</button>
+    <p class="nomeEmpresa" *ngIf="!isCollapsed">AnyPoint Store</p>
+  </div>
+  <!-- #endregion -->
+
+  <!-- #region user-info -->
+  <div class="user-menu">
+    <div class="user-info">
+      <span class="user-name" *ngIf="!isCollapsed">{{ user?.Name || 'Usuário' }}</span>
+      <div *ngIf="user?.Email && !isCollapsed">
+        <span class="user-email">{{ user?.Email }}</span>
+      </div>
+    </div>
+
+    <ul class="user-options">
+      <li (click)="navigateTo('profile')">
+        <i class="fas fa-user"></i>
+        <span *ngIf="!isCollapsed">Perfil</span>
+      </li>
+      <li (click)="navigateTo('settings')" *ngIf="canViewConfiguration()">
+        <i class="fas fa-cog"></i>
+        <span *ngIf="!isCollapsed">Configurações</span>
+      </li>
+      <li (click)="logout()">
+        <i class="fas fa-sign-out-alt"></i>
+        <span *ngIf="!isCollapsed">Sair</span>
+      </li>
+    </ul>
+  </div>
+  <!-- #endregion -->
+
+  <!-- #region menu -->
+  <ul class="menu">
+    <li *ngFor="let menu of parentMenus" class="menu-item">
+
+      <!-- Menu pai: expandir e navegar -->
+      <div class="menu-title"
+           [routerLink]="menu.rota"
+           routerLinkActive="active"
+           [routerLinkActiveOptions]="{ exact: true }"
+           (click)="handleMenuClick($event, menu)">
+        <i class="{{ menu.icone }}"></i>
+        <span *ngIf="!isCollapsed">{{ menu.nome }}</span>
+        <i *ngIf="menu.subMenus?.length > 0"
+           class="fas"
+           [ngClass]="{
+             'fa-chevron-down': !menu.isExpanded,
+             'fa-chevron-up': menu.isExpanded
+           }">
+        </i>
+      </div>
+
+      <!-- Submenus -->
+      <ul *ngIf="menu.isExpanded && menu.subMenus?.length > 0" class="submenu">
+        <li *ngFor="let subMenu of menu.subMenus"
+            [routerLink]="subMenu.rota"
+            routerLinkActive="active-submenu"
+            [routerLinkActiveOptions]="{ exact: true }">
+          <i class="{{ subMenu.icone }}"></i>
+          <span *ngIf="!isCollapsed">{{ subMenu.nome }}</span>
+        </li>
+      </ul>
+
+    </li>
+  </ul>
+  <!-- #endregion -->
+
+</div>

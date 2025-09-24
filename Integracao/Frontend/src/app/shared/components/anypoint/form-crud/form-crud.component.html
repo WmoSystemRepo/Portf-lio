@@ -1,0 +1,161 @@
+<!-- #region Container principal da tela de integrações -->
+<div class="app-container">
+  <form *ngIf="form" [formGroup]="form" (ngSubmit)="onSubmit()" class="form-box">
+    <!-- #region Cabeçalho do formulário -->
+    <button class="tour-button" (click)="onHelp()" type="button">
+      <i class="fas fa-question-circle"></i> Ajuda
+    </button>
+    <h2>{{ isEditMode ? "Editar Registro" : "Novo Cadastro" }}</h2>
+    <!-- #endregion -->
+
+    <!-- #region Campos do formulário -->
+    <div
+      *ngFor="let field of fields"
+      class="form-group"
+      [hidden]="field.hidden"
+    >
+      <label [for]="field.key">{{ field.label }}</label>
+
+      <div [ngSwitch]="field.type">
+        <input
+          *ngSwitchCase="'text'"
+          [id]="field.key"
+          type="text"
+          [formControlName]="field.key"
+          [ngClass]="{
+            'is-invalid':
+              form.get(field.key)?.invalid && form.get(field.key)?.touched
+          }"
+        />
+
+        <input
+          *ngSwitchCase="'number'"
+          [id]="field.key"
+          type="number"
+          [formControlName]="field.key"
+          [min]="field.min || 0"
+          [max]="field.max || 999"
+          [step]="field.step || 1"
+          [ngClass]="{
+            'is-invalid':
+              form.get(field.key)?.invalid && form.get(field.key)?.touched
+          }"
+        />
+
+        <input
+          *ngSwitchCase="'email'"
+          [id]="field.key"
+          type="email"
+          [formControlName]="field.key"
+          [ngClass]="{
+            'is-invalid':
+              form.get(field.key)?.invalid && form.get(field.key)?.touched
+          }"
+        />
+
+        <input
+          *ngSwitchCase="'date'"
+          [id]="field.key"
+          type="date"
+          [formControlName]="field.key"
+          [ngClass]="{
+            'is-invalid':
+              form.get(field.key)?.invalid && form.get(field.key)?.touched
+          }"
+        />
+
+        <select
+          *ngSwitchCase="'select'"
+          [id]="field.key"
+          [formControlName]="field.key"
+          [ngClass]="{
+            'is-invalid':
+              form.get(field.key)?.invalid && form.get(field.key)?.touched
+          }"
+        >
+          <option [ngValue]="null">-- Nenhum selecionado --</option>
+          <option *ngFor="let opt of field.options" [ngValue]="opt.value">
+            {{ opt.label }}
+          </option>
+        </select>
+
+        <select
+          *ngSwitchCase="'multiselect'"
+          [id]="field.key"
+          multiple
+          [formControlName]="field.key"
+          [ngClass]="{
+            'is-invalid':
+              form.get(field.key)?.invalid && form.get(field.key)?.touched
+          }"
+        >
+          <option *ngFor="let opt of field.options" [ngValue]="opt.value">
+            {{ opt.label }}
+          </option>
+        </select>
+
+        <input
+          *ngSwitchCase="'checkbox'"
+          type="checkbox"
+          [formControlName]="field.key"
+          [id]="field.key"
+          [ngClass]="{
+            'is-invalid':
+              form.get(field.key)?.invalid && form.get(field.key)?.touched
+          }"
+        />
+
+        <div *ngSwitchCase="'checkbox-list'" class="checkbox-list">
+          <div *ngFor="let opt of field.options" class="checkbox-item">
+            <label>
+              <input
+                type="checkbox"
+                [value]="opt.value"
+                (change)="onCheckboxListChange(field.key, $event)"
+                [checked]="form.get(field.key)?.value?.includes(opt.value)"
+              />
+              {{ opt.label }}
+            </label>
+          </div>
+        </div>
+
+        <input
+          *ngSwitchDefault
+          [id]="field.key"
+          type="text"
+          [formControlName]="field.key"
+          [ngClass]="{
+            'is-invalid':
+              form.get(field.key)?.invalid && form.get(field.key)?.touched
+          }"
+        />
+        
+        <div
+          class="invalid-feedback"
+          *ngIf="form.get(field.key)?.errors && (form.get(field.key)?.dirty || form.get(field.key)?.touched || form.get(field.key)?.errors?.['serverError'])"
+        >
+          <ng-container *ngIf="form.get(field.key)?.errors?.['required']">
+            Campo obrigatório.
+          </ng-container>
+          <ng-container *ngIf="form.get(field.key)?.errors?.['serverError']">
+            {{ form.get(field.key)?.errors?.['serverError'] }}
+          </ng-container>
+        </div>
+      </div>
+    </div>
+    <!-- #endregion -->
+
+    <!-- #region Botôes -->
+    <div class="button-group">
+      <button type="submit">
+        {{ isEditMode ? "Atualizar" : "Salvar" }}
+      </button>
+
+      <button type="button" class="cancel-button" (click)="onCancel()">
+        Cancelar
+      </button>
+    </div>
+    <!-- #endregion -->
+  </form>
+</div>
+<!-- #endregion -->

@@ -1,0 +1,37 @@
+<div class="details-page">
+  <h2>📋 Detalhes do Histórico de Importação do Excel</h2>
+
+  <!-- Loading -->
+  <div *ngIf="isLoading">Carregando detalhes...</div>
+
+  <!-- Erro -->
+  <div *ngIf="errorMessage">{{ errorMessage }}</div>
+
+  <!-- Dados do histórico -->
+  <div *ngIf="history as h">
+    <p><strong>ID:</strong> {{ h.id }}</p>
+    <p><strong>Template:</strong> {{ h.templateName }}</p>
+    <p><strong>Arquivo:</strong> {{ h.fileName }}</p>
+    <p><strong>Data:</strong> {{ h.attemptDate | date : "short" }}</p>
+    <p><strong>Status:</strong> {{ h.success ? "Sucesso" : "Falha" }}</p>
+
+    <!-- Pendências -->
+    <h3>Pendências:</h3>
+    <table class="details-table">
+      <thead>
+        <tr>
+          <th>Linha</th>
+          <th>Coluna</th>
+          <th>Mensagem</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let p of h.pendencias">
+          <td>{{ p.row ?? "-" }}</td>
+          <td>{{ p.column ?? "-" }}</td>
+          <td>{{ p.message ?? "Sem mensagem" }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

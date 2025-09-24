@@ -1,0 +1,42 @@
+<div class="app-container" [class.expanded]="isSidebarCollapsed">
+  <div class="dashboard-wrapper">
+    <div class="content" *ngIf="canViewConfiguration(); else unauthorized">
+      <div class="text-header">
+        <h1 class="text-title">Bem-vindo à configuração do Sistema</h1>
+        <p class="text-subtitle">
+          Selecione as opções disponíveis abaixo.
+        </p>
+      </div>
+
+      <div class="modern-dashboard-grid">
+        <div class="modern-card card-menu">
+          <div class="icon">&#9776;</div>
+          <h3>Menu</h3>
+          <button class="btn-primary" (click)="navigateTo('/Menu/Lista')">Abrir Menu</button>
+        </div>
+
+        <div class="modern-card card-permissoes">
+          <div class="icon">&#128272;</div>
+          <h3>Permissões</h3>
+          <button class="btn-primary" (click)="navigateTo('/Permissoes/Lista')">Abrir Permissão</button>
+        </div>
+
+        <div class="modern-card card-regras">
+          <div class="icon">&#9881;</div>
+          <h3>Regras</h3>
+          <button class="btn-primary" (click)="navigateTo('/Regras/Lista')">Abrir Regra</button>
+        </div>
+
+        <div class="modern-card card-integracoes">
+          <div class="icon">&#128200;</div>
+          <h3>Integrações</h3>
+          <button class="btn-primary" (click)="navigateTo('/GestaoIntegracoes/Lista')">Abrir Integrações</button>
+        </div>
+      </div>
+    </div>
+
+    <ng-template #unauthorized>
+      <ng-container *ngComponentOutlet="unauthorizedComponent"></ng-container>
+    </ng-template>
+  </div>
+</div>

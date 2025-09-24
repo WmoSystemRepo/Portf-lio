@@ -1,0 +1,18 @@
+<app-lista-crud-integracao
+  [title]="'Lista de excel Importados'"
+  [items]="model"
+  [fields]="campos"
+  [requireDeleteJustification]="true"
+  [justificationMinLength]="10"
+  [justificationPlaceholder]="
+    'Descreva o motivo da exclusão da planilha (mínimo 10 caracteres)...'
+  "
+  (add)="add()"
+  (help)="startTour()"
+  (deleteWithJustification)="onDeleteWithJustification($event)"
+  (refresh)="carregarDadosNovamente()"
+  (viewExcel)="verExcel($event)"
+  (exportSelectedToExcel)="exportSelectedToExcel()"
+  (selectedChange)="onSelectedItemsChanged($event)"
+  (addProductsToSelected)="onAddProductsToSelected($event)"
+></app-lista-crud-integracao>

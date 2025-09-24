@@ -1,0 +1,94 @@
+.cards-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  gap: 12px;
+  margin-bottom: 2rem;
+}
+
+.card {
+  /* Fundo azul escuro com degradê */
+  background: linear-gradient(to bottom, #444546, #79b0e4);
+  border-radius: 20px;
+  padding: 1.5rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: 12px solid transparent;
+  box-shadow: 0 8px 8px rgba(0, 0, 0, 0.1);
+  outline: none;
+  color: white;
+
+  /* Centralização do conteúdo */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 6px 15px rgba(33, 150, 243, 0.2);
+}
+
+.card:focus-visible {
+  outline: 20px solid #2196f3;
+}
+
+.card.active {
+  border-color: #2196f3;
+}
+
+.card-title {
+  margin: 0 0 0.5rem;
+  color: #ffffff;
+  font-size: 1rem;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.card-value {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #ffffff;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+/* 🎨 Estilos por status */
+
+.card-aberto {
+  background: linear-gradient(to bottom, #444546, #ffc107);
+}
+
+.card-reaberto {
+  background: linear-gradient(to bottom, #444546, #ff6f00);
+}
+
+.card-aprovado {
+  background: linear-gradient(to bottom, #444546, #4caf50);
+}
+
+.card-reprovado {
+  background: linear-gradient(to bottom, #444546, #f44336);
+}
+
+.card-enviado {
+  background: linear-gradient(to bottom, #444546, #6ed39d);
+}
+
+.card-pago {
+  background: linear-gradient(to bottom, #444546, #735be0);
+}
+
+/* 📱 Responsividade */
+@media (max-width: 768px) {
+  .cards-container {
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  }
+
+  .card-title {
+    font-size: 1.25rem;
+  }
+
+  .card-value {
+    font-size: 1.5rem;
+  }
+}

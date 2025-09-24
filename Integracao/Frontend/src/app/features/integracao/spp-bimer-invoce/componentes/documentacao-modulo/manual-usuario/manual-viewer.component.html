@@ -1,0 +1,23 @@
+<div id="manual-container" class="manual-container">
+  <div class="doc-header">
+    <h2>Manual do Usuário: Monitoramento SPP x Bimer Invoice</h2>
+    <button (click)="downloadPdf()" class="download-btn">
+      Baixar PDF (.pdf)
+    </button>
+  </div>
+
+  <div class="toolbar">
+    <button (click)="prevPage()" [disabled]="page === 1">⬅ Anterior</button>
+    <span>Página {{ page }} / {{ totalPages || '?' }}</span>
+    <button (click)="nextPage()" [disabled]="page === totalPages">Próxima ➡</button>
+  </div>
+
+  <pdf-viewer
+    [src]="pdfSrc"
+    [page]="page"
+    [render-text]="true"
+    [original-size]="false"
+    style="display: center;"
+    (after-load-complete)="onPdfLoaded($event)">
+  </pdf-viewer>
+</div>

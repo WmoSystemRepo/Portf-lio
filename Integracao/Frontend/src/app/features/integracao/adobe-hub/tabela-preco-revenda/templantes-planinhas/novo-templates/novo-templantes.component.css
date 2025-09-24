@@ -1,0 +1,250 @@
+/* === Container Principal === */
+.create-template-container {
+  padding: 2rem 1rem;
+}
+
+.mapping-container {
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+/* === Título === */
+.page-title {
+  font-size: 1.8rem;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  color: var(--text-light, #fff);
+  margin-bottom: 1.5rem;
+}
+
+/* === Header com Input e Botões === */
+.mapping-header {
+  margin-bottom: 2rem;
+}
+
+.header-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  align-items: flex-end;
+  justify-content: space-between;
+}
+
+.input-group {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex: 1;
+}
+
+.input-label {
+  font-size: 1.2rem;
+  color: var(--text-light, #fff);
+  width: 180px;
+}
+
+.input-field {
+  flex: 1;
+  padding: 0.5rem 1rem;
+  border-radius: var(--radius-sm, 6px);
+  border: none;
+  background: rgba(255, 255, 255, 0.9);
+  color: #333;
+  min-width: 250px;
+  font-size: 1rem;
+}
+
+.input-field.filled {
+  background: #fff;
+}
+
+/* === Botões === */
+.inline-actions {
+  display: flex;
+  gap: 1rem;
+}
+
+.btn-save {
+  background: #2ecc71;
+  color: white;
+  border: none;
+  padding: 0.6rem 1.2rem;
+  border-radius: 25px;
+  cursor: pointer;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-width: 160px;
+  justify-content: center;
+  font-size: 0.95rem;
+}
+
+.btn-save:hover {
+  background: #27ae60;
+}
+
+.btn-cancel {
+  background: #555;
+  color: white;
+  border: none;
+  padding: 0.6rem 1.2rem;
+  border-radius: 25px;
+  cursor: pointer;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-width: 140px;
+  justify-content: center;
+  font-size: 0.95rem;
+}
+
+.btn-cancel:hover {
+  background: #3d3d3d;
+}
+
+/* === Spinner === */
+.spinner {
+  width: 1rem;
+  height: 1rem;
+  border: 2px solid white;
+  border-top: 2px solid transparent;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* === Cards container === */
+.mapping-cards {
+  margin-top: 2rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.5rem;
+}
+
+/* === Card individual === */
+.header-card {
+  border-radius: 20px;
+  padding: 1.5rem 1.2rem;
+  text-align: center;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  transition: transform 0.2s ease;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 180px;
+  min-width: 220px;
+}
+
+.header-card:hover {
+  transform: scale(1.02);
+}
+
+/* === Texto dentro dos cards === */
+.card-label {
+  background-color: rgba(255, 255, 255, 0.25);
+  padding: 0.5rem 0.8rem;
+  border-radius: 10px;
+  box-shadow:
+    0 4px 8px rgba(0, 0, 0, 0.3),
+    0 1px 3px rgba(0, 0, 0, 0.2) inset;
+  margin-bottom: 0.6rem;
+  display: inline-block;
+  backdrop-filter: blur(6px);
+  font-weight: 600;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  font-size: 1rem;
+}
+
+.card-title {
+  font-size: 0.95rem;
+  margin-bottom: 1rem;
+  line-height: 1.4;
+}
+
+/* === Botão remover dentro do card === */
+.actions {
+  margin-top: auto;
+}
+
+.btn-remove {
+  background: #e74c3c;
+  border: none;
+  color: white;
+  padding: 0.4rem 0.8rem;
+  border-radius: 20px;
+  cursor: pointer;
+  font-weight: 500;
+  font-size: 0.85rem;
+}
+
+.btn-remove:hover {
+  background: #c0392b;
+}
+
+/* === Cores por Linha === */
+.row-0 {
+  background: #db0546;
+  color:  #fff;
+}
+.row-1 {
+  background: #c59308;
+  color: #fff;
+}
+.row-2 {
+  background: #413402;
+  color:  #fff;
+}
+.row-3 {
+  background: #e67e22;
+  color: #fff;
+}
+.row-4 {
+  background: #4f056d;
+  color:  #fff;
+}
+.row-5 {
+  background: #023026;
+  color: #fff;
+}
+.row-6 {
+  background: #bed304;
+  color:  #fff;
+}
+.row-7 {
+  background: #e91e63;
+  color: #fff;
+}
+
+/* === Responsividade === */
+@media (max-width: 768px) {
+  .mapping-cards {
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  }
+
+  .header-card {
+    height: auto;
+  }
+}
+
+/* Nome do Cabeçalho */
+.card-title .title-label {
+  font-weight: bold;
+  color: inherit; /* mantém a cor do texto do card */
+  display: block;
+  margin-bottom: 0.2rem;
+}
+
+/* Valor do cabeçalho */
+.card-title .title-value {
+  font-weight: normal;
+  display: block;
+}

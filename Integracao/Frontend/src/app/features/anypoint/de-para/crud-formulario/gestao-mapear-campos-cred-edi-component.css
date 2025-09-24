@@ -1,0 +1,279 @@
+:host {
+  display: block;
+  max-width: 800px;
+  margin: 20px auto;
+  padding: 30px;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  color: #1f2937;
+}
+
+/* Títulos principais */
+h2 {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #003b80;
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+/* Seções do formulário */
+.section {
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 25px;
+}
+
+.section h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #003b80;
+  margin-bottom: 15px;
+}
+
+/* Formulário */
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.subtitle {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #64748b;
+  margin-bottom: 8px;
+  display: block;
+}
+
+/* Inputs e Select */
+input,
+select {
+  width: 100%;
+  font-size: 0.95rem;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  background: #f8fafc;
+  transition: all 0.3s ease;
+  height: 42px;
+}
+
+input:focus,
+select:focus {
+  outline: none;
+  border-color: #3498db;
+  box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
+  background: #ffffff;
+}
+
+/* Botões */
+.button-group {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  max-width: 900px;
+  margin: 20px 0;
+  gap: 10px;
+}
+
+.button-group button {
+  flex: 1;
+  padding: 12px;
+  font-size: 1rem;
+  height: 42px;
+  line-height: 1;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+button[type="submit"] {
+  background: linear-gradient(to right, #50a0f0, #0357ac);
+  color: #fff;
+}
+
+button[type="submit"]:hover {
+  background: #003b80;
+  transform: translateY(-2px);
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+}
+
+button[type="submit"]:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.3);
+}
+
+button[type="button"] {
+  background: linear-gradient(to right, #656363, #535353);
+  color: #fff;
+}
+
+button[type="button"]:hover {
+  background: #343434;
+  transform: translateY(-2px);
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+}
+
+button[type="button"]:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.3);
+}
+
+/* Validação */
+.text-danger {
+  font-size: 0.875rem;
+  color: #dc3545;
+  margin-top: 6px;
+  display: block;
+}
+
+.ng-invalid.ng-touched {
+  border-color: #fecaca;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  :host {
+    padding: 20px;
+    margin: 15px;
+  }
+
+  h2 {
+    font-size: 1.75rem;
+    margin-bottom: 25px;
+  }
+
+  .button-group {
+    flex-direction: column;
+  }
+
+  .button-group button {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  input,
+  select {
+    font-size: 0.9rem;
+  }
+
+  .button-group button {
+    padding: 12px;
+    font-size: 0.95rem;
+  }
+}
+
+.accordion-section {
+  margin-bottom: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.accordion-header {
+  padding: 1rem;
+  margin: 0;
+  background-color: #f8f9fa;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: background-color 0.2s;
+}
+
+.accordion-header:hover {
+  background-color: #e9ecef;
+}
+
+.accordion-content {
+  padding: 1rem;
+  background-color: white;
+}
+
+.toggle-icon {
+  font-size: 0.8em;
+  margin-left: 1rem;
+}
+
+.section-acoes {
+  margin-top: 2rem;
+  border-top: 1px solid #eee;
+  padding-top: 1rem;
+}
+
+/* Estilização personalizada para o SweetAlert */
+.custom-swal {
+  width: 80%;
+  max-width: 600px;
+  padding: 2rem;
+}
+
+.swal2-form {
+  text-align: left;
+  width: 100%;
+}
+
+.swal2-form .form-group {
+  margin-bottom: 1.5rem;
+}
+
+.swal2-form label {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: #2d3748;
+  font-weight: 500;
+}
+
+.swal2-input {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+  margin-top: 0.25rem;
+}
+
+.swal2-input:focus {
+  border-color: #4299e1;
+  box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.2);
+}
+
+joyride-step .joyride-step__holder {
+  overflow: visible !important;
+}
+
+.accordion-section {
+  margin: 15px 0;
+}
+
+.tour-button {
+  background: linear-gradient(135deg, #3f51b5, #00bcd4);
+  color: #fff;
+  padding: 10px 20px;
+  font-weight: 500;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.2s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  width: 310px;
+  float: right;
+}
+
+.tour-button:hover {
+  background: linear-gradient(135deg, #303f9f, #00acc1);
+  transform: translateY(-2px);
+}
+
+.tour-button:active {
+  transform: scale(0.98);
+}

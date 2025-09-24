@@ -1,0 +1,24 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <ItemGroup>
+    <PackageReference Include="EPPlus" Version="7.6.0" />
+    <PackageReference Include="FluentValidation" Version="11.11.0" />
+    <PackageReference Include="Hangfire.Core" Version="1.8.18" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity" Version="2.3.1" />
+    <PackageReference Include="MongoDB.Driver" Version="3.2.1" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="7.2.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\PARS.Inhouse.Systems.Domain\PARS.Inhouse.Systems.Domain.csproj" />
+    <ProjectReference Include="..\PARS.Inhouse.Systems.Infrastructure\PARS.Inhouse.Systems.Infrastructure.csproj" />
+    <ProjectReference Include="..\PARS.Inhouse.Systems.Shared\PARS.Inhouse.Systems.Shared.csproj" />
+  </ItemGroup>
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+</Project>

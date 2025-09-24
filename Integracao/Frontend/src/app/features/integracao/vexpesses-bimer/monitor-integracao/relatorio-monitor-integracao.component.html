@@ -1,0 +1,369 @@
+<div class="container" role="region" aria-labelledby="relatorios-heading">
+  <!-- Tiulo Pagina -->
+  <h2 id="relatorios-heading" class="section-heading">
+    Monitoramento Integração Vexpenses x Bimer
+  </h2>
+
+  <div class="tab-container">
+    <div
+      class="table-wrapper"
+      role="group"
+      aria-describedby="table-instructions"
+    >
+      <div id="table-instructions" class="sr-only">
+        Tabela interativa de relatórios com ordenação implícita
+      </div>
+
+      <div class="tour-container">
+        <button class="tour-button" (click)="iniciarTourRelatorioVexpense()">
+          <i class="fas fa-question-circle"></i>Ajuda
+        </button>
+      </div>
+
+      <div
+        class="cards-container"
+        joyrideStep="cards-container"
+        title="Filtra os relatórios por STATUS"
+        text="Selecione o STATUS que deseja filtrar, e exibirá apenas os relatórios com aquele status selecionado."
+        aria-label="Enviar relatórios selecionados"
+      >
+        <!-- Componentes do Card VExpenses -->
+        <app-relatorio-status-cards-vexpenses
+          [totalGeral]="totalGeral"
+          [selectedFilter]="selectedFilter"
+          [totalAbertos]="totalAbertos"
+          [totalReaberto]="totalReaberto"
+          [totalAprovados]="totalAprovados"
+          [totalReprovado]="totalReprovado"
+          [totalEnviado]="totalEnviado"
+          [totalPago]="totalPago"
+          (filterChange)="filterByCard($event)"
+        ></app-relatorio-status-cards-vexpenses>
+      </div>
+
+      <!-- Controles -->
+      <div class="controls-container">
+        <div class="search-bar">
+          <input
+            type="text"
+            placeholder="Buscar relatório..."
+            (input)="applyFilter($event)"
+            joyrideStep="search-bar"
+            title="Buscar Relatórios"
+            text="Digite aqui para filtrar relatórios rapidamente."
+          />
+          <button type="button" class="search-button">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+              <path
+                d="M15.5 14h-.79l-.28-.27a6.471 6.471 0 001.48-5.34C15.23 5.13 12.78 3 10 3S4.77 5.13 4.09 8.39a6.471 6.471 0 001.48 5.34L5.29 14h-.79l-5 5 1.5 1.5 5-5v-.79l.27-.28c1.5 1.32 3.52 2.14 5.73 2.14s4.23-.82 5.73-2.14l.27.28v.79l5 5 1.5-1.5-5-5zM10 14c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4z"
+              />
+            </svg>
+          </button>
+        </div>
+
+        <div class="filter-container">
+          <div class="submit-container">
+            <button
+              class="submit-button"
+              color="primary"
+              (click)="submitSelected()"
+              joyrideStep="enviar"
+              title="Enviar Relatórios"
+              text="Envie os relatórios selecionados para validação ou processamento."
+              [disabled]="selectedIds.length === 0"
+              aria-label="Enviar relatórios selecionados"
+            >
+              Enviar Relatórios Selecionados ({{ selectedIds.length }})
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tabela Principal -->
+      <div
+        class="grid-container"
+        tabindex="0"
+        role="application"
+        aria-label="Tabela de relatórios com scroll"
+      >
+        <div class="scroll-content">
+          <!-- Mensagem quando não há relatórios com o filtro -->
+          <div
+            *ngIf="dataSource.filteredData.length === 0"
+            class="no-results-message"
+          >
+            Nenhum relatório encontrado com o status selecionado.
+          </div>
+
+          <!-- Tabela apenas se houver dados -->
+          <table
+            *ngIf="dataSource.filteredData.length !== 0"
+            mat-table
+            lang="pt-br"
+            [dataSource]="dataSource"
+            class="mat-elevation-z8 interactive-table"
+            joyrideStep="tabela"
+            title="Visualização Relatórios"
+            text="Visualize os todos os relatórios aqui."
+            role="grid"
+          >
+            <!-- Colunas -->
+            <ng-container matColumnDef="select">
+              <th
+                mat-header-cell
+                *matHeaderCellDef
+                role="columnheader"
+                scope="col"
+                joyrideStep="select"
+                title="Selecionar todos ou alguns relatórios"
+                text="Marque esta opção para selecionar todos os relatórios ou alguns relatorios com status APROVADO."
+              >
+                <mat-checkbox
+                  (change)="toggleAll($event)"
+                  [checked]="allSelected()"
+                  [indeterminate]="someSelected()"
+                  aria-label="Selecionar todos"
+                ></mat-checkbox>
+              </th>
+              <td mat-cell *matCellDef="let relatorio" role="gridcell">
+                <mat-checkbox
+                  *ngIf="relatorio.status === 'APROVADO'"
+                  (click)="$event.stopPropagation()"
+                  (change)="toggleSelection(relatorio.idResponse)"
+                  [checked]="isSelected(relatorio.idResponse)"
+                  aria-label="Selecionar relatório"
+                ></mat-checkbox>
+              </td>
+            </ng-container>
+            <ng-container matColumnDef="id">
+              <th
+                mat-header-cell
+                *matHeaderCellDef
+                role="columnheader"
+                scope="col"
+              >
+                ID
+              </th>
+              <td mat-cell *matCellDef="let relatorio" role="gridcell">
+                <span class="cell-content">{{ relatorio.idResponse }}</span>
+              </td>
+            </ng-container>
+
+            <ng-container matColumnDef="nome">
+              <th
+                mat-header-cell
+                *matHeaderCellDef
+                role="columnheader"
+                scope="col"
+              >
+                Descrição
+              </th>
+              <td mat-cell *matCellDef="let relatorio" role="gridcell">
+                <span class="cell-content">{{ relatorio.description }}</span>
+              </td>
+            </ng-container>
+            <ng-container matColumnDef="valorDespesa">
+              <th
+                mat-header-cell
+                *matHeaderCellDef
+                role="columnheader"
+                scope="col"
+              >
+                Valor Total
+              </th>
+              <td mat-cell *matCellDef="let relatorio" role="gridcell">
+                <span class="cell-content"
+                  >R${{ relatorio.expensesTotalValue }}</span
+                >
+              </td>
+            </ng-container>
+
+            <ng-container matColumnDef="status">
+              <th
+                mat-header-cell
+                *matHeaderCellDef
+                role="columnheader"
+                scope="col"
+              >
+                Status
+              </th>
+              <td mat-cell *matCellDef="let relatorio" role="gridcell">
+                <span
+                  class="status-badge"
+                  [class]="'status-' + relatorio.status.toLowerCase()"
+                  role="status"
+                  [attr.aria-label]="'Status: ' + relatorio.status"
+                >
+                  {{ relatorio.status }}
+                  <span class="status-icon" aria-hidden="true"></span>
+                </span>
+              </td>
+            </ng-container>
+
+            <ng-container matColumnDef="data">
+              <th
+                mat-header-cell
+                *matHeaderCellDef
+                role="columnheader"
+                scope="col"
+              >
+                Data
+              </th>
+              <td mat-cell *matCellDef="let relatorio" role="gridcell">
+                <time
+                  [attr.datetime]="relatorio.approval_date"
+                  class="cell-content"
+                >
+                  {{ relatorio.approval_date | date : "dd/MM/yyyy" }}
+                </time>
+              </td>
+            </ng-container>
+            <ng-container matColumnDef="actions">
+              <th
+                mat-header-cell
+                *matHeaderCellDef
+                role="columnheader"
+                scope="col"
+              >
+                Ações
+              </th>
+              <td mat-cell *matCellDef="let relatorio" role="gridcell">
+                <button
+                  class="btn btn-primary"
+                  (click)="openDetails(relatorio)"
+                  aria-label="Ver detalhes"
+                >
+                  <i class="fas fa-eye"></i>
+                </button>
+              </td>
+            </ng-container>
+
+            <!-- Atualizar a definição das colunas -->
+            <tr
+              mat-header-row
+              *matHeaderRowDef="[
+                'select',
+                'id',
+                'nome',
+                'valorDespesa',
+                'data',
+                'status',
+                'actions'
+              ]"
+              role="row"
+            ></tr>
+
+            <tr
+              mat-row
+              *matRowDef="
+                let row;
+                columns: [
+                  'select',
+                  'id',
+                  'nome',
+                  'valorDespesa',
+                  'data',
+                  'status',
+                  'actions'
+                ]
+              "
+              role="row"
+              tabindex="0"
+              (click)="onRowClick(row)"
+              (keydown.enter)="onRowClick(row)"
+              (keydown.space)="onRowClick(row)"
+              aria-label="Pressione Enter ou Espaço para ver detalhes"
+              class="clickable-row"
+            ></tr>
+          </table>
+        </div>
+      </div>
+
+      <!-- Paginação Principal -->
+      <mat-paginator
+        *ngIf="currentTabIndex === 0"
+        [length]="totalItems"
+        [pageSize]="pageSize"
+        [pageIndex]="pageNumber - 1"
+        [pageSizeOptions]="[5, 10, 20, 30, 50, 100]"
+        (page)="onPageChange($event)"
+        aria-label="Navegação de páginas"
+        class="accessible-paginator"
+      >
+      </mat-paginator>
+
+      <!-- MODAL CUSTOMIZADO - Detalhes do Relatório -->
+      <div
+        class="custom-modal-backdrop"
+        *ngIf="modalAberto"
+        (click)="fecharModal()"
+      >
+        <div class="custom-modal" (click)="$event.stopPropagation()">
+          <div class="modal-header">
+            <h2>Detalhes do Relatório</h2>
+            <button
+              class="close-button"
+              (click)="fecharModal()"
+              aria-label="Fechar"
+            >
+              ×
+            </button>
+          </div>
+
+          <div class="modal-body">
+            <div class="detail-item">
+              <strong>ID Response:</strong>
+              <span>{{ relatorioSelecionado?.idResponse }}</span>
+            </div>
+
+            <div class="detail-item">
+              <strong>Descrição:</strong>
+              <span>{{ relatorioSelecionado?.description }}</span>
+            </div>
+
+            <div class="detail-item">
+              <strong>Status:</strong>
+              <span>{{ relatorioSelecionado?.status }}</span>
+            </div>
+
+            <div class="detail-item">
+              <strong>Observações:</strong>
+              <span>
+                {{
+                  relatorioSelecionado?.observacao ||
+                    "Nenhuma observação cadastrada"
+                }}
+              </span>
+            </div>
+
+            <div class="detail-item">
+              <strong>Tipo de Despesa:</strong>
+              <span>{{ relatorioSelecionado?.expenseTypeId }}</span>
+            </div>
+
+            <div class="detail-item">
+              <strong>Centro de Custo:</strong>
+              <span>{{ relatorioSelecionado?.expensePayingCompanyId }}</span>
+            </div>
+
+            <div class="detail-item">
+              <strong>Data de Aprovação:</strong>
+              <span>
+                {{
+                  relatorioSelecionado?.approval_date
+                    | date : "dd/MM/yyyy HH:mm"
+                }}
+              </span>
+            </div>
+          </div>
+
+          <div class="modal-footer">
+            <button class="btn btn-secondary" (click)="fecharModal()">
+              Fechar
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

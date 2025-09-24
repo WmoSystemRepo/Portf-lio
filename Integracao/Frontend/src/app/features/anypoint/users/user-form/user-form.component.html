@@ -1,0 +1,9 @@
+<app-form-componete-crud
+  [fields]="fields"
+  [initialData]="registroSelecionado"
+  [isEditMode]="isEditMode"
+  (help)="startTour()"
+  (create)="salvarNovo($event)"
+  (update)="salvarEdicao($event)"
+  (cancel)="cancelar()"
+/>

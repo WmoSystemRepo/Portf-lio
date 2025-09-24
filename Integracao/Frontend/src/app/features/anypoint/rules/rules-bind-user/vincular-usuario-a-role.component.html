@@ -1,0 +1,32 @@
+<div class="modal">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h3>Vincular Usuário à Role: {{ role }}</h3>
+      <button class="close-btn" (click)="closeModal()">X</button>
+    </div>
+    <div class="modal-body">
+      <!-- Lista de usuários já vinculados com opção de remoção -->
+      <div *ngIf="linkedUsers && linkedUsers.length > 0">
+        <h4>Usuários já vinculados:</h4>
+        <ul>
+          <li *ngFor="let linkedUser of linkedUsers">
+            {{ linkedUser.userName }}
+            <button (click)="removeUser(linkedUser.id)">Remover</button>
+          </li>
+        </ul>
+      </div>
+      <hr>
+      <label>Selecione um usuário para vincular:</label>
+      <select [(ngModel)]="selectedUserId">
+        <option value="" disabled>Selecione</option>
+        <option *ngFor="let user of users" [value]="user.id">
+          {{ user.userName }}
+        </option>
+      </select>
+    </div>
+    <div class="modal-footer">
+      <button (click)="assignUser()">Vincular</button>
+      <button (click)="closeModal()">Fechar</button>
+    </div>
+  </div>
+</div>

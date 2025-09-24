@@ -1,0 +1,215 @@
+/* === CONTAINER PRINCIPAL === */
+.app-container {
+  padding: 2rem;
+  font-family: Arial, sans-serif;
+}
+
+/* === CABEÇALHO === */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-bottom: 1.5rem;
+}
+
+.title {
+  flex: 1 1 100%;
+  text-align: center;
+  margin: 1rem 0;
+  font-size: 1.8rem;
+  font-weight: bold;
+}
+
+.tour-button {
+  border-radius: 20px;
+  padding: 0.6rem 1.2rem;
+  font-size: 0.95rem;
+  cursor: pointer;
+  background: linear-gradient(90deg, #ececec, #fafbfc 90%);
+  color: #333;
+  border: none;
+}
+
+/* === WRAPPER TABELA === */
+.table-wrapper {
+  width: 100%;
+  overflow-x: auto;
+}
+
+/* === TABELA FLEX === */
+.crud-table {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  overflow: hidden;
+  min-width: 900px;
+  font-size: 14px;
+}
+
+/* === CABEÇALHO DE FILTROS === */
+.crud-table-header {
+  display: flex;
+  background-color: #f4f4f4;
+  font-weight: bold;
+  border-bottom: 1px solid #ddd;
+}
+
+.filters-row .crud-col {
+  padding: 0.5rem 1rem;
+}
+
+.column-filter-input {
+  width: 100%;
+  padding: 0.4rem 0.6rem;
+  font-size: 13px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: #fff;
+  color: #000;
+}
+
+/* === COLUNAS === */
+.crud-col {
+  flex: 1;
+  padding: 0.75rem 1rem;
+  border-right: 1px solid #ddd;
+  display: flex;
+  align-items: center;
+}
+
+.crud-col:last-child {
+  border-right: none;
+}
+
+.actions-col {
+  min-width: 100px;
+  justify-content: center;
+}
+
+/* === LINHAS === */
+.crud-table-row {
+  display: flex;
+  border-bottom: 1px solid #eee;
+  transition: background-color 0.2s ease;
+}
+
+.crud-table-row:hover {
+  background-color: #fafafa;
+}
+
+/* === BOTÃO DE AÇÃO VISUALIZAR === */
+.action-btn {
+  border-radius: 50%;
+  width: 38px;
+  height: 38px;
+  font-size: 1.2em;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  cursor: pointer;
+  background: linear-gradient(135deg, #2196f3 20%, #1565c0);
+  color: #fff;
+  transition: transform 0.2s ease;
+}
+
+.action-btn:hover {
+  transform: scale(1.1);
+}
+
+/* === MODAL === */
+.app-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.4);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+.app-modal-container {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 2rem 2rem 1.5rem;
+  max-width: 520px;
+  width: 95%;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.25);
+  animation: slideFadeIn 0.35s ease;
+  text-align: center;
+}
+
+@keyframes slideFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.modal-header {
+  font-size: 2.8rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 1rem;
+}
+
+.modal-title {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: #222;
+}
+
+.app-modal-buttons {
+  margin-top: 1.5rem;
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.btn-secondary {
+  background: linear-gradient(90deg, #646464, #121313, #646464);
+  color: #fff;
+  padding: 0.6rem 1.5rem;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  font-size: 0.95rem;
+  font-weight: 600;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.btn-secondary:hover {
+  background: #7a7a7a;
+  transform: translateY(-2px);
+}
+
+/* === DETALHES - CAMPOS OCULTOS === */
+.field-visibility-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.5rem 0;
+  border-bottom: 1px dashed #ddd;
+}
+
+.no-details-message {
+  padding: 1rem;
+  font-size: 1rem;
+  color: #e53935;
+  text-align: center;
+}
+
+.text-red {
+  color: #e53935;
+}

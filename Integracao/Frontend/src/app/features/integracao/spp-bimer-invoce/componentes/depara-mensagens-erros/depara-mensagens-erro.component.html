@@ -1,0 +1,213 @@
+<!-- Cabeçalho permanece igual -->
+<div class="titulo-container">
+  <h1 class="titulo-centralizado">De/Para de Mensagens de Erro</h1>
+  <div class="ajuda-container">
+    <button class="tour-button" (click)="startTour()" type="button">
+      <i class="fas fa-question-circle"></i> Ajuda
+    </button>
+  </div>
+</div>
+
+<!-- Linha de filtros -->
+<div class="linha-filtros">
+  <mat-form-field appearance="outline">
+    <mat-label>Padrão (contém)**</mat-label>
+    <input matInput [(ngModel)]="current.mensagemPadrao" name="padrao" />
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" class="flex-dobro">
+    <mat-label>Mensagem mapeada**</mat-label>
+    <input
+      matInput
+      [(ngModel)]="current.mensagemModificada"
+      name="mensagem"
+    />
+  </mat-form-field>
+</div>
+
+<!-- Linha de ações -->
+<div class="linha-acoes">
+  <div class="toggle-wrapper">
+    <mat-slide-toggle [(ngModel)]="current.ativo" name="ativo">
+      Ativo
+    </mat-slide-toggle>
+  </div>
+
+  <button
+    mat-flat-button
+    color="primary"
+    (click)="salvarNovo()"
+    aria-label="Salvar mapeamento"
+  >
+    <mat-icon>save</mat-icon>
+    Salvar
+  </button>
+</div>
+
+<!-- Cards de resumo -->
+<div class="cards-status cards-resumo">
+  <div class="card total" tabindex="0" aria-label="Total de mensagens únicas do monitor">
+    <span class="label">Mensagens únicas</span>
+    <span class="valor">{{ totalMensagensUnicas }}</span>
+  </div>
+
+  <div class="card info" tabindex="0" aria-label="Mensagens com depara configurado">
+    <span class="label">Com De/Para</span>
+    <span class="valor">{{ totalMensagensComDepara }}</span>
+  </div>
+
+  <div class="card sucesso" tabindex="0" aria-label="De/Para ativos">
+    <span class="label">De/Para ativos</span>
+    <span class="valor">{{ totalDeparasAtivos }}</span>
+  </div>
+
+  <div class="card erro" tabindex="0" aria-label="De/Para inativos">
+    <span class="label">De/Para inativos</span>
+    <span class="valor">{{ totalDeparasInativos }}</span>
+  </div>
+</div>
+
+<!-- Grid com os dois cards -->
+<div class="cards-grid">
+  <!-- Card 1: Mensagens da API -->
+  <section class="card">
+    <h3 class="subtitulo">Mensagens de erro da API</h3>
+
+    <mat-spinner *ngIf="loadingMensagens" diameter="36"></mat-spinner>
+
+    <div class="tabela-wrapper" *ngIf="!loadingMensagens">
+      <div class="scroll-mensagens-container">
+        <table
+          mat-table
+          [dataSource]="mensagensUnicas"
+          class="mat-elevation-z1"
+          *ngIf="mensagensUnicas.length; else vazioMensagens"
+        >
+          <ng-container matColumnDef="mensagem">
+            <th mat-header-cell *matHeaderCellDef>Mensagem</th>
+            <td mat-cell *matCellDef="let mensagem" class="col-mensagem">
+              {{ mensagem }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="acao">
+            <th mat-header-cell *matHeaderCellDef class="col-acao">Ação</th>
+            <td mat-cell *matCellDef="let mensagem" class="col-acao">
+              <button
+                class="botao-selecionar-alterar"
+                type="button"
+                (click)="selecionarMensagem(mensagem)"
+              >
+                <mat-icon>edit</mat-icon>
+                Selecionar para alterar
+              </button>
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="mensagensColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: mensagensColumns"></tr>
+        </table>
+
+        <ng-template #vazioMensagens>
+          <div class="vazio">Nenhuma mensagem encontrada no monitoramento.</div>
+        </ng-template>
+      </div>
+    </div>
+  </section>
+
+  <!-- Card 2: Mapeamentos cadastrados -->
+  <section class="card">
+    <h3 class="subtitulo">Mapeamentos cadastrados</h3>
+
+    <div class="tabela-wrapper">
+      <div class="scroll-mensagens-container">
+        <table
+          mat-table
+          [dataSource]="model"
+          class="mat-elevation-z1"
+          *ngIf="model.length; else vazioMapeamentos"
+        >
+          <!-- Id -->
+          <ng-container matColumnDef="id">
+            <th mat-header-cell *matHeaderCellDef>Id</th>
+            <td mat-cell *matCellDef="let item">{{ item.id }}</td>
+          </ng-container>
+
+          <!-- Padrão -->
+          <ng-container matColumnDef="padrao">
+            <th mat-header-cell *matHeaderCellDef>Padrão</th>
+            <td mat-cell *matCellDef="let item">{{ item.mensagemPadrao }}</td>
+          </ng-container>
+
+          <!-- Mensagem -->
+          <ng-container matColumnDef="mensagem">
+            <th mat-header-cell *matHeaderCellDef>Mensagem</th>
+            <td mat-cell *matCellDef="let item">
+              {{ item.mensagemModificada }}
+            </td>
+          </ng-container>
+
+          <!-- Ativo -->
+          <ng-container matColumnDef="ativo">
+            <th mat-header-cell *matHeaderCellDef>Ativo</th>
+            <td mat-cell *matCellDef="let item">
+              {{ item.ativo ? 'Sim' : 'Não' }}
+            </td>
+          </ng-container>
+
+          <!-- Ações -->
+          <ng-container matColumnDef="acoes">
+            <th mat-header-cell *matHeaderCellDef>Ações</th>
+            <td mat-cell *matCellDef="let item">
+              <button
+                mat-icon-button
+                color="primary"
+                (click)="editar(item)"
+                aria-label="Editar"
+              >
+                <mat-icon>edit</mat-icon>
+              </button>
+              <button
+                mat-icon-button
+                color="warn"
+                (click)="remover(item)"
+                aria-label="Remover"
+              >
+                <mat-icon>delete</mat-icon>
+              </button>
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="colunas"></tr>
+          <tr mat-row *matRowDef="let row; columns: colunas"></tr>
+        </table>
+      </div>
+
+      <ng-template #vazioMapeamentos>
+        <div class="vazio">Nenhum mapeamento cadastrado.</div>
+      </ng-template>
+    </div>
+  </section>
+</div>
+
+<!-- #region Modal de Exclusão Simples-->
+<div *ngIf="isDeleteModalOpen" class="app-modal-overlay">
+  <div class="app-modal-container">
+    <div class="modal-header">
+      <i class="fas fa-exclamation-triangle warning-icon"></i>
+      <h3 class="modal-title">Excluir Registro</h3>
+    </div>
+    <p>
+      Tem certeza que deseja excluir o item?
+    </p>
+    <div class="app-modal-buttons">
+      <button class="btn-danger" (click)="confirmDelete()">
+        Sim, excluir
+      </button>
+      <button class="btn-secondary" (click)="closeDeleteModal()">
+        Cancelar
+      </button>
+    </div>
+  </div>
+</div>
+<!-- #endregion -->

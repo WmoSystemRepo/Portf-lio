@@ -1,0 +1,161 @@
+<div class="import-container">
+  <div
+    class="import-card"
+    (dragover)="onDragOver($event)"
+    (dragleave)="onDragLeave($event)"
+    (drop)="onDrop($event)"
+    [class.dragover]="isDragging"
+  >
+    <div class="header-container">
+      <button class="back-button" (click)="voltar()" aria-label="Voltar">
+        <i class="fas fa-arrow-left"></i>
+        Voltar
+      </button>
+
+      <h2 class="title">
+        <i class="fas fa-file-excel"></i>
+        Importar Planilha (Excel ou CSV) para Gerar Template de Dados
+      </h2>
+    </div>
+
+    <div class="template-type-checkboxes">
+      <ng-container *ngIf="tiposTemplate.length > 0; else semTemplates">
+        <label
+          class="template-option"
+          *ngFor="let tipo of tiposTemplate"
+          [class.selected]="isTipoSelecionado(tipo)"
+        >
+          <input
+            type="checkbox"
+            [checked]="isTipoSelecionado(tipo)"
+            (change)="onTipoCheckboxChange(tipo, $event)"
+            [disabled]="integracaoBloqueada"
+          />
+          {{ tipo.sigla }}
+        </label>
+      </ng-container>
+
+      <ng-template #semTemplates>
+        <div class="empty-template-message">
+          Nenhum tipo de template cadastrado até o momento.
+        </div>
+      </ng-template>
+    </div>
+
+    <div class="import-content">
+      <i class="import-icon fas fa-cloud-upload-alt"></i>
+      <h3 class="import-title">Arraste seu arquivo aqui</h3>
+      <p class="import-subtitle">ou</p>
+
+      <div
+        *ngIf="integracaoBloqueada; else botoesDeAcao"
+        class="blocked-message"
+      >
+        <div class="blocked-icon">
+          <i class="fas fa-ban"></i>
+        </div>
+        <p class="blocked-text">
+          Integração não vinculada. Procure o administrador do sistema para
+          liberar esta funcionalidade.
+        </p>
+      </div>
+
+      <ng-template #botoesDeAcao>
+        <div class="file-actions">
+          <label class="file-input-label green-button">
+            <input
+              type="file"
+              class="file-input"
+              (change)="onFileChange($event)"
+              accept=".csv, .xlsx, .xls"
+            />
+            Selecionar Arquivo
+          </label>
+
+          <button
+            class="file-input-label green-button"
+            *ngIf="file && liberarVinculo"
+            (click)="processFile()">
+            <i class="fas fa-link"></i>
+            Vincular CSV
+          </button>
+
+        </div>
+      </ng-template>
+    </div>
+
+    <div class="file-preview" *ngIf="file">
+      <div class="file-icon">
+        <i class="fas fa-file-excel"></i>
+      </div>
+      <div class="file-info">
+        <span class="file-name">{{ file.name }}</span>
+        <span class="file-size"
+          >{{ file.size / 1024 | number : "1.0-2" }} KB</span
+        >
+      </div>
+      <button class="remove-file-btn" (click)="clearFile()">
+        <i class="fas fa-times"></i>
+      </button>
+    </div>
+  </div>
+</div>
+
+<div class="modal-backdrop" *ngIf="novoTemplateModalVisible">
+  <div class="modal-box">
+    <h3>Novo Tipo de Template</h3>
+
+    <div class="integracao-info">
+      <span class="label">Integração:</span>
+      <span class="valor">{{ integracaoSelecionada?.id }}</span>
+      <span class="nome">- {{ integracaoSelecionada?.nome }}</span>
+    </div>
+
+    <label for="nomeCompleto">Nome do Tipo de Template</label>
+    <input
+      id="nomeCompleto"
+      type="text"
+      [(ngModel)]="novoTemplate.nomeCompleto"
+    />
+
+    <label for="nomeAbreviado">Nome abreviado</label>
+    <input
+      id="nomeAbreviado"
+      type="text"
+      maxlength="60"
+      [(ngModel)]="novoTemplate.nomeAbreviado"
+    />
+
+    <label for="sigla">Sigla</label>
+    <input
+      id="sigla"
+      type="text"
+      maxlength="50"
+      [(ngModel)]="novoTemplate.sigla"
+    />
+
+    <div class="modal-actions">
+      <button class="confirm-btn" (click)="confirmarCadastroTemplate()">
+        Confirmar
+      </button>
+      <button class="cancel-btn" (click)="cancelarCadastroTemplate()">
+        Cancelar
+      </button>
+    </div>
+  </div>
+</div>
+
+<ng-template #templateSucessoCadastro>
+  <div class="modal-template-sucesso">
+    <div class="dados-template">
+      <strong>Sigla:</strong> {{ templateCriado?.sigla }} <br />
+      <strong>Nome:</strong> {{ templateCriado?.nomeCompleto }} <br />
+      <strong>Nome abreviado:</strong>
+      {{ templateCriado?.nomeAbreviado ?? "-" }} <br />
+    </div>
+
+    <div class="mensagem-destaque">
+      Deseja continuar cadastrando o template?
+    </div>
+  </div>
+</ng-template>

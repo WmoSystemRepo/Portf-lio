@@ -1,0 +1,282 @@
+/* 📦 Container principal */
+.montar-excel-container {
+  max-width: 1900px;
+  margin: 0 auto;
+  padding: 2rem;
+  font-family: Arial, sans-serif;
+  background: linear-gradient(to right, #002f6c, #0052cc);
+  color: white;
+  border-radius: 1.5rem;
+}
+
+/* 🔘 Botões */
+.actions-bar {
+  display: flex;
+  gap: 1rem;
+  margin: 1.5rem 0;
+}
+
+.btn {
+  padding: 0.6rem 1.2rem;
+  font-size: 0.95rem;
+  font-weight: bold;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.btn:hover {
+  transform: scale(1.05);
+}
+
+.btn-secondary {
+  background-color: #444;
+  color: white;
+}
+
+.btn-success {
+  background-color: #28a745;
+  color: white;
+}
+
+.btn-danger {
+  background-color: #dc3545;
+  color: white;
+}
+
+/* 📊 Tabela com rolagem */
+.table-wrapper {
+  overflow: auto;
+  max-height: 650px;
+  padding-bottom: 1rem;
+  border-radius: 0.5rem;
+  margin-top: 3rem;
+}
+
+
+/* 🧩 Tabela de preview */
+.preview-table {
+  width: auto;
+  max-width: 100%;
+  margin: 0 auto;
+  table-layout: auto;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+  background-color: #ffffff;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  color: black;
+  border-radius: 0 !important;
+}
+
+/* 🧠 Células */
+.preview-table th,
+.preview-table td {
+  border: 1px solid #ccc;
+  padding: 0.5rem 0.75rem;
+  white-space: nowrap;
+}
+
+/* 🔠 Linha A, B, C... */
+.preview-table thead th {
+  position: sticky;
+  top: 0;
+  z-index: 3;
+  background-color: #1e88e5;
+  color: white;
+  text-align: center;
+  font-weight: bold;
+  border-radius: 0 !important;
+}
+
+.preview-table thead tr.header-row {
+  background-color: #000000;
+  color: #ffffff;
+  font-weight: bold;
+  text-align: center;
+}
+
+.preview-table thead tr.header-row td {
+  background-color: #000000;
+  color: #ffffff;
+  font-weight: bold;
+  text-align: center;
+  border-radius: 0 !important;
+}
+
+/* 🔝 Fixa a linha de campos (abaixo de A, B, C...) */
+.preview-table thead tr:nth-child(2) td {
+  position: sticky;
+  top: 34px;
+  z-index: 2;
+}
+
+/* 🧮 Coluna do índice (# e 1,2,3...) */
+.preview-table td:first-child,
+.preview-table th:first-child {
+  background-color: #000000;
+  color: white;
+  text-align: center;
+  position: sticky;
+  left: 0;
+  z-index: 4;
+  width: 50px;
+  font-weight: bold;
+  border-radius: 0 !important;
+}
+
+/* 🧭 Linhas pares alternadas */
+.preview-table tr:nth-child(even) {
+  background-color: #f5f5f5;
+}
+
+/* ⚠️ Estilo quando não há dados */
+.text-muted {
+  color: #777;
+  margin-top: 1rem;
+}
+
+@media (max-width: 768px) {
+  .btn {
+    width: 100%;
+    margin-bottom: 0.5rem;
+  }
+
+  .preview-table th,
+  .preview-table td {
+    font-size: 0.85rem;
+    min-width: 80px;
+  }
+}
+
+.actions-bar .btn {
+  padding: 0.6rem 1.2rem;
+  font-size: 1rem;
+  font-weight: bold;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  color: white;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+}
+
+.actions-bar .btn.btn-secondary {
+  background-color: #2196f3;
+}
+
+.actions-bar .btn.btn-secondary:hover {
+  background-color: #42a5f5;
+}
+
+.actions-bar .btn.btn-success {
+  background-color: #2ecc71;
+}
+
+.actions-bar .btn.btn-success:hover {
+  background-color: #27ae60;
+}
+
+/* 🟥 Exportar PDF – vermelho claro */
+.actions-bar .btn.btn-danger {
+  background-color: #e74c3c;
+}
+
+.actions-bar .btn.btn-danger:hover {
+  background-color: #c0392b;
+}
+
+/* Estilo base para todos os botões */
+button.btn {
+  padding: 0.6rem 1.2rem;
+  font-size: 1rem;
+  font-weight: bold;
+  border-radius: 8px;
+  cursor: pointer;
+  color: white;
+  border: 2px solid transparent;
+  transition: all 0.25s ease;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* 🔙 Voltar */
+button.voltar-button {
+  background-color: #1e88e5;
+  border-color: #1565c0;
+}
+
+button.voltar-button:hover {
+  background-color: #2196f3;
+  border-color: #0d47a1;
+}
+
+/* ⬇️ Exportar Excel */
+button.excel-button {
+  background-color: #2ecc71;
+  border-color: #27ae60;
+}
+
+button.excel-button:hover {
+  background-color: #58d68d;
+  border-color: #1e8449;
+}
+
+/* 📄 Exportar PDF */
+button.mongo-button {
+  background-color: #e74c3c;
+  border-color: #c0392b;
+}
+
+button.mongo-button:hover {
+  background-color: #ec7063;
+  border-color: #922b21;
+}
+
+.buttons {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+}
+
+/* Botões */
+button.btn {
+  padding: 0.6rem 1.2rem;
+  font-size: 1rem;
+  font-weight: bold;
+  border-radius: 8px;
+  cursor: pointer;
+  color: white;
+  border: 2px solid transparent;
+  transition: all 0.25s ease;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  min-width: 160px;
+}
+
+.destaque-titulo {
+  font-weight: 700;
+  color: #ffeb3b;
+  font-size: 1.05rem;
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
+}
+
+.app-container.preview {
+  max-width: 98%;
+  margin: 2rem auto 1rem auto;
+  padding: 2rem 2.5rem 1rem 2.5rem;
+  font-family: Arial, sans-serif;
+  background: linear-gradient(to right, #002f6c, #0052cc);
+  color: white;
+  border-radius: 2rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+main {
+  padding: 0;
+  margin: 0;
+}

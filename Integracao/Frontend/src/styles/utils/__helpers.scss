@@ -1,0 +1,51 @@
+@use '../abstracts/variables' as *;
+
+/* === MIXINS UTILITÁRIOS === */
+
+/* Trunca texto para X linhas com reticências */
+@mixin truncate($lines: 1) {
+  display: -webkit-box;
+  -webkit-line-clamp: $lines;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Remove completamente o scroll, útil para modais ou body fixo */
+@mixin no-scroll {
+  overflow: hidden;
+  height: 100%;
+}
+
+/* Reseta espaçamentos padrão */
+@mixin reset-spacing {
+  margin: 0;
+  padding: 0;
+}
+
+/* Flex row entre itens */
+@mixin flex-between {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Flex column entre itens */
+@mixin flex-col-between {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+/* Square responsivo com base em largura */
+@mixin square($size) {
+  width: $size;
+  height: $size;
+}
+
+/* === FUNÇÕES === */
+
+/* Converte px para rem com base em 16px */
+@function rem($px) {
+  @return #{$px / 16}rem;
+}

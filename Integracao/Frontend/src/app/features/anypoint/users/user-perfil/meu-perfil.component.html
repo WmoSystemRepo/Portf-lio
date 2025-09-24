@@ -1,0 +1,75 @@
+<div class="profile-container">
+  <div class="profile-wrapper">
+    <!-- Card Perfil -->
+    <div class="profile-form-card">
+      <h2 class="profile-title">Meu Perfil</h2>
+      <form [formGroup]="profileForm" (ngSubmit)="updateProfile()" class="profile-form">
+        <div class="form-group">
+          <label>Nome</label>
+          <div class="input-wrapper">
+            <i class="fa fa-user"></i>
+            <input type="text" formControlName="userName" />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>E-mail</label>
+          <div class="input-wrapper">
+            <i class="fa fa-envelope"></i>
+            <input type="email" formControlName="email" />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Telefone</label>
+          <div class="input-wrapper">
+            <i class="fa fa-phone"></i>
+            <input type="text" formControlName="phoneNumber" />
+          </div>
+        </div>
+
+        <button type="submit" class="btn-primary" [disabled]="profileForm.invalid || isLoading">
+          <i class="fa fa-save"></i> Salvar Alterações
+        </button>
+      </form>
+    </div>
+
+    <!-- Card Senha -->
+    <div class="senha-form-card">
+      <h2 class="profile-title">Alterar Senha</h2>
+      <form [formGroup]="senhaForm" (ngSubmit)="changesenha()" class="senha-form">
+        <div class="form-group">
+          <label>Senha atual</label>
+          <div class="input-wrapper">
+            <i class="fa fa-lock"></i>
+            <input type="password" formControlName="currentsenha" />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Nova senha</label>
+          <div class="input-wrapper">
+            <i class="fa fa-key"></i>
+            <input type="password" formControlName="newsenha" />
+          </div>
+          <div class="hint">Mínimo 8 caracteres</div>
+        </div>
+
+        <div class="form-group">
+          <label>Confirmar nova senha</label>
+          <div class="input-wrapper">
+            <i class="fa fa-key"></i>
+            <input type="password" formControlName="confirmsenha" />
+          </div>
+          <div class="error-message" *ngIf="senhaForm.hasError('notSame')">
+            As senhas não coincidem.
+          </div>
+        </div>
+
+        <button type="submit" class="btn-secondary" [disabled]="senhaForm.invalid || isLoading">
+          <i class="fa fa-lock"></i> Alterar Senha
+        </button>
+      </form>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,28 @@
+# 📚 Sumário
+
+- [🏠 Início](../README.md)
+- 📘 **Regras de Negócio**
+  - [Extraídas](../regras-negocio/regras_negocio_extraidas.md)
+  - [Algoritmos](../regras-negocio/regras_algoritmos.md)
+  - [SQL e Banco](../regras-negocio/regras_sql_banco.md)
+  - [Validações](../regras-negocio/regras_validacao.md)
+- 🔁 **Fluxo do Processo**
+  - [Fluxo de Atividades](../fluxo-processo/fluxo_atividades.md)
+  - [Passo a Passo](../fluxo-processo/passo_a_passo_detalhado.md)
+  - [Registros & Relatórios](../fluxo-processo/registros_relatorios.md)
+- 📊 **Diagramas**
+  - [Fluxo UML](../diagramas/diagrama_fluxo_uml.md)
+  - [Atividades](../diagramas/diagrama_atividades.md)
+  - [Sequência](../diagramas/diagrama_sequencia.md)
+- [📋 Backlog](../backlog/historias_usuario.md)
+- 🏛 **Arquitetura**
+  - [Decisões ADR](arquitetura/adr_decisoes.md)
+  - [Componentes](arquitetura/componentes_integracoes.md)
+  - [ColdFusion Legacy](arquitetura/coldfusion_legacy_ref.md)
+  - [Integração Hub](arquitetura/Arquitetura-Integração-AdobeHub.md)
+  - [Componente Hub](arquitetura/Componente-Integração-Adobe-Hub.md)
+- ✅ **Validação**
+  - [Checklist de Homologação](validacao/checklist_homologacao.md)
+- 🧰 **Suporte**
+  - [Glossário](suporte/glossario.md)
+  - [Modelo de Logs](suporte/modelo_logs.md)

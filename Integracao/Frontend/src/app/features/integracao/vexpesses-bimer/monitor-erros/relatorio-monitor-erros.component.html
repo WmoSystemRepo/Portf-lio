@@ -1,0 +1,104 @@
+<mat-card class="relatorio-card">
+  <!-- 🔄 Overlay de carregamento -->
+  <div class="loading-overlay" *ngIf="isLoading">
+    <mat-spinner diameter="48"></mat-spinner>
+    <p>Carregando erros...</p>
+  </div>
+
+  <!-- Título -->
+  <mat-card-title>Erros de Integração - Vexpenses x Bimmer</mat-card-title>
+
+  <!-- Tabela -->
+  <div class="table-wrapper grid-scroll-container">
+    <table
+      mat-table
+      [dataSource]="dataSourceErros"
+      class="mat-elevation-z8 interactive-table full-width-table"
+    >
+      <!-- Colunas -->
+      <ng-container matColumnDef="dataHora">
+        <th mat-header-cell *matHeaderCellDef>Data/Hora</th>
+        <td mat-cell *matCellDef="let item">
+          {{ item.dataHora | date : "dd/MM/yyyy HH:mm:ss" }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="endpoint">
+        <th mat-header-cell *matHeaderCellDef>Endpoint</th>
+        <td mat-cell *matCellDef="let item">{{ item.endpoint }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="payload">
+        <th mat-header-cell *matHeaderCellDef>Payload</th>
+        <td mat-cell *matCellDef="let item">[{{ item.payload }}]</td>
+      </ng-container>
+
+      <ng-container matColumnDef="migradoParaSql">
+        <th mat-header-cell *matHeaderCellDef>SQL</th>
+        <td mat-cell *matCellDef="let item">
+          <span
+            class="status-badge"
+            [ngClass]="
+              item.migradoParaSql ? 'status-aprovado' : 'status-rejeitado'
+            "
+          >
+            <span class="status-icon"></span>
+            {{ item.migradoParaSql ? "Sim" : "Não" }}
+          </span>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="erro">
+        <th mat-header-cell *matHeaderCellDef>Erro</th>
+        <td mat-cell *matCellDef="let item">
+          <div class="erro-preview">
+            {{ item.erro | slice : 0 : 200 }}...
+            <button
+              mat-button
+              color="primary"
+              (click)="abrirErroCompleto(item.erro)"
+            >
+              ver mais
+            </button>
+          </div>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumnsErros"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumnsErros"></tr>
+    </table>
+  </div>
+
+  <!-- Paginador -->
+  <mat-paginator
+    [length]="totalErrosItems"
+    [pageSize]="errosPageSize"
+    [pageIndex]="errosPageNumber - 1"
+    [pageSizeOptions]="[5, 10, 20]"
+    (page)="onErrosPageChange($event)"
+  >
+  </mat-paginator>
+</mat-card>
+
+<!-- Modal -->
+<div
+  class="custom-modal-backdrop"
+  *ngIf="modalErroAberto"
+  (click)="fecharModalErro()"
+>
+  <div class="custom-modal" (click)="$event.stopPropagation()">
+    <div class="modal-header">
+      <h2>Erro Completo</h2>
+      <button class="close-button" (click)="fecharModalErro()" aria-label="Fechar">×</button>
+    </div>
+
+    <div class="modal-body">
+      <pre class="erro-content">{{ erroSelecionado }}</pre>
+    </div>
+
+    <div class="modal-footer">
+      <button class="btn btn-secondary" (click)="copiarErro()">Copiar texto</button>
+    </div>
+  </div>
+</div>
+

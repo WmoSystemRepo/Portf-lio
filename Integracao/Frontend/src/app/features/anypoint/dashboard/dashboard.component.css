@@ -1,0 +1,213 @@
+.dashboard-container {
+  display: grid;
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: 1rem 2rem;
+  background: linear-gradient(to right, #0d47a1, #42a5f5);
+  color: #f5f5f5;
+  box-sizing: border-box;
+  min-height: 100vh;
+}
+
+.dashboard-title {
+  font-size: 2rem;
+  text-align: center;
+  font-weight: 700;
+  margin: 20px auto;
+  color: #fff;
+}
+
+.dashboard-kpi-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1rem;
+  padding: 1.5rem;
+}
+
+.dashboard-kpi-card {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0));
+  color: #fff;
+  border-radius: 8px;
+  padding: 1rem;
+  text-align: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(4px);
+  border-top: 5px solid #ffffff33;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.dashboard-kpi-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.dashboard-kpi-card h2 {
+  font-size: 1.2rem;
+  margin: 0;
+  font-weight: 500;
+}
+
+.dashboard-kpi-card p {
+  font-size: 1.8rem;
+  margin-top: 0.5rem;
+  font-weight: bold;
+}
+
+.kpi-usuarios     { background: linear-gradient(135deg, #1e88e5, #42a5f5); border-top-color: #3f51b5; }
+.kpi-integracoes  { background: linear-gradient(135deg, #009688, #4db6ac); border-top-color: #009688; }
+.kpi-permissoes   { background: linear-gradient(135deg, #ff9800, #ffb74d); border-top-color: #ff9800; }
+.kpi-roles        { background: linear-gradient(135deg, #9c27b0, #ba68c8); border-top-color: #9c27b0; }
+.kpi-menus        { background: linear-gradient(135deg, #795548, #a1887f); border-top-color: #795548; }
+.kpi-mapeamentos  { background: linear-gradient(135deg, #e91e63, #f06292); border-top-color: #e91e63; }
+.kpi-depara       { background: linear-gradient(135deg, #8bc34a, #aed581); border-top-color: #8bc34a; }
+
+.dashboard-charts-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 1.5rem;
+  padding: 1.5rem 0;
+}
+
+.dashboard-quad-chart-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* 👉 fixa 2 por linha */
+  gap: 2rem;
+}
+
+.dashboard-single-chart-grid {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 2rem;
+}
+
+.dashboard-chart-card {
+  background-color: #fff;
+  border-radius: 8px;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.08);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  overflow: hidden;           
+  min-height: 440px;         
+}
+
+.dashboard-chart-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.12);
+}
+
+.dashboard-chart-card h3 {
+  font-size: 1.1rem;
+  font-weight: 500;
+  text-align: center;
+  margin-bottom: 0.75rem;
+  color: #0d47a1;
+}
+
+.dashboard-chart-card canvas {
+  margin-bottom: 1rem;
+}
+
+.dashboard-section-title {
+  color: #fff;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.4);
+  margin: 2rem 0 1rem;
+  text-align: center;
+  font-weight: bold;
+  border-bottom: 2px solid #ffffff50;
+  padding-bottom: 0.5rem;
+}
+
+.no-data-text {
+  color: #999;
+  font-style: italic;
+  font-size: 0.95rem;
+  margin-top: 1rem;
+}
+
+.layout-toggle {
+  text-align: right;
+  margin: 1rem 0;
+}
+
+.layout-toggle button {
+  background-color: #fff;
+  color: #0d47a1;
+  border: none;
+  padding: 8px 16px;
+  font-weight: bold;
+  border-radius: 5px;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+  transition: background-color 0.3s ease;
+}
+
+.layout-toggle button:hover {
+  background-color: #f1f1f1;
+}
+
+/* 📌 Estilo para pizza com legenda ao lado (modo expandido) */
+.chart-legend-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 2rem;
+  width: 100%;
+  padding: 1rem 2rem;
+  max-width: 100%;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+.chart-legend-wrapper canvas {
+  width: 280px;
+  height: 280px;
+  max-width: 100%;
+}
+
+
+@media (max-width: 768px) {
+  .dashboard-kpi-container {
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  }
+
+  .dashboard-quad-chart-grid {
+    grid-template-columns: 1fr; /* empilha em 1 coluna */
+  }
+
+  .dashboard-chart-card {
+    min-height: 400px;
+  }
+}
+
+/* 🎨 Gráfico de pizza com simulação 3D */
+.pizza-chart-card canvas {
+  transform: perspective(800px) rotateX(20deg);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+  border-radius: 8px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.pizza-chart-card:hover canvas {
+  transform: perspective(800px) rotateX(10deg) scale(1.02);
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.35);
+}
+
+.kpi-mapeamentos {
+  cursor: pointer;
+}
+
+/* Novo layout para 3 cards lado a lado */
+.dashboard-triple-chart-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  padding-top: 1rem;
+}
+
+

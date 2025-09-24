@@ -1,0 +1,259 @@
+@use '../../../../styles/abstracts/variables' as *;
+@use '../../../../styles/abstracts/animations' as *;
+@use '../../../../styles/abstracts/mixins' as *;
+@use '../../../../styles/abstracts/placeholders' as *;
+
+/* 🌐 FUNDO GLOBAL */
+:host {
+  display: block;
+  min-height: 100vh;
+  @include gradient-bg($Black-color-primary-color-start, $Blue-sky-bright);
+  padding: 2rem 1rem;
+  font-family: $font-default;
+  color: $white-color;
+}
+
+/* 🧩 HEADER */
+.header {
+  @include flex-between;
+  flex-wrap: wrap;
+  margin-bottom: 2rem;
+}
+
+.title {
+  flex: 1 1 100%;
+  text-align: center;
+  margin: 1rem 0;
+}
+
+/* 🎛️ BOTÕES SUPERIORES */
+.tour-button,
+.new-integration-btn {
+  @extend %btn-base;
+  border-radius: $Radius-pill-75px;
+  font-size: 0.95rem;
+}
+
+.tour-button {
+  background: linear-gradient(90deg, $Gray-100, $Gray-50);
+  color: $Blue-sky-bright;
+}
+
+.new-integration-btn {
+  @include gradient-bg($Blue-royal-dark, $Blue-royal-dark);
+  color: $white-color;
+}
+
+/* 📊 KPI CARDS */
+.dashboard-kpi-container.summary-kpis {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1rem;
+  margin: 1rem 0;
+  padding: 0 0.5rem;
+}
+
+.dashboard-kpi-card {
+  @extend %btn-base;
+  @include gradient-bg($Green-pine-dark, $Green-mint-bright);
+  border-radius: $Radius-feature-card-50px;
+  text-align: center;
+  animation: fadeInUp 0.6s ease both;
+  cursor: pointer;
+  color: $white-color;
+
+  &:hover {
+    transform: translateY(-6px);
+    box-shadow: $Box-shadow-medium-2-4-px;
+  }
+
+  h2 {
+    font-size: 1rem;
+    margin: 0;
+  }
+
+  p {
+    font-size: 1.4rem;
+    font-weight: bold;
+    margin: 0.5rem 0 0;
+  }
+}
+
+/* 🧾 TABELA */
+.crud-table {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid $Gray-300;
+  border-radius: $Radius-small-sm-8px;
+  overflow: hidden;
+  margin-top: 1rem;
+  font-size: $font-size-base;
+  min-width: 900px;
+  background-color: $white-color;
+  color: $Black-color;
+}
+
+.crud-table-header {
+  display: flex;
+  background-color: $Gray-300est;
+  font-weight: bold;
+  border-bottom: 1px solid $Gray-300;
+}
+
+.crud-col {
+  @extend %crud-col;
+}
+
+.crud-col:last-child {
+  border-right: none;
+}
+
+.actions-col {
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.3rem 0.4rem;
+  padding: 0.4rem 0.2rem;
+  min-width: 160px;
+  flex: 0 1 auto;
+}
+
+/* 🛠️ BOTÕES DE AÇÃO */
+.action-btn.edit-btn {
+  @extend %action-btn;
+  @include gradient-bg($Green-pine-dark, $Green-mint-bright);
+  color: $white-color;
+}
+
+.action-btn.delete-btn {
+  @extend %action-btn;
+  @include gradient-bg($Red-danger-color-start, $Red-danger-color-end);
+  color: $white-color;
+}
+
+.action-btn.detail-btn,
+.action-btn.config-btn {
+  @extend %action-btn;
+  @include gradient-bg($Blue-sky-bright, $Blue-royal-dark);
+  color: $white-color;
+}
+
+/* 🧱 MODAL */
+.app-modal-overlay {
+  @extend %modal-overlay;
+}
+
+.app-modal-container {
+  @extend %modal-container;
+  max-width: 520px;
+}
+
+.modal-header {
+  font-size: 2.8rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 1rem;
+}
+
+.modal-title {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: $Gray-900;
+}
+
+.warning-icon {
+  font-size: 1.8rem;
+  color: $Red-danger-color-start;
+}
+
+/* 📋 ITENS DO MODAL */
+.field-visibility-list {
+  display: flex;
+  flex-direction: column;
+  max-height: 300px;
+  overflow-y: auto;
+  margin-top: 1rem;
+  width: 100%;
+  padding: 0 0.5rem;
+
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: $Gray-400;
+    border-radius: 3px;
+  }
+}
+
+.field-visibility-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.6rem 0;
+  font-size: 1rem;
+  color: $Gray-900;
+  border-bottom: 1px dashed $Gray-300;
+
+  &:hover {
+    background-color: $Gray-100;
+    border-radius: 4px;
+  }
+}
+
+/* 🔘 BOTÕES DO MODAL */
+.app-modal-buttons {
+  margin-top: 1.5rem;
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+
+  button {
+    padding: 0.6rem 1.5rem;
+    border-radius: $Radius-small-sm-8px;
+    border: none;
+    cursor: pointer;
+    font-size: 0.95rem;
+    font-weight: 600;
+    transition: background 0.3s ease, transform 0.2s ease;
+  }
+}
+
+.btn-danger {
+  @include gradient-bg($Red-danger-color-start, $Red-danger-color-end);
+  color: $white-color;
+
+  &:hover {
+    background: $Red-danger-color-end;
+    transform: translateY(-2px);
+  }
+}
+
+.btn-secondary {
+  @include gradient-bg($Gray-600, $Gray-900);
+  color: $white-color;
+
+  &:hover {
+    background: $Gray-800;
+    transform: translateY(-2px);
+  }
+}
+
+/* 🚫 MENSAGEM VAZIA */
+.no-details-message {
+  @include flex-center;
+  flex-direction: column;
+  padding: 2rem 1rem;
+  color: $Red-danger-color-start;
+  font-size: 1.2rem;
+  font-weight: 500;
+  text-align: center;
+  animation: fadeInUp 0.4s ease;
+
+  i {
+    font-size: 2.4rem;
+    margin-bottom: 0.5rem;
+  }
+}

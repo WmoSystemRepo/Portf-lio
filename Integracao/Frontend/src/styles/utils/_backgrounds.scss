@@ -1,0 +1,23 @@
+.bg-primary {
+  @include gradient-bg(var(--primary-color-start), var(--primary-color-end));
+}
+
+.bg-danger {
+  @include gradient-bg(var(--danger-color-start), var(--danger-color-end));
+}
+
+.bg-success {
+  @include gradient-bg(var(--Cor-successo-inicio), var(--Cor-sucesso-fim));
+}
+
+.bg-secondary {
+  @include gradient-bg(var(--secondary-color-start), var(--secondary-color-end));
+}
+
+.bg-dark {
+  background-color: #1a1a1a;
+}
+
+.bg-white {
+  background-color: #ffffff;
+}

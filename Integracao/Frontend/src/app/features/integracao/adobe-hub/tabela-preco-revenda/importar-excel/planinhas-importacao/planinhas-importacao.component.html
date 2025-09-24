@@ -1,0 +1,62 @@
+<div class="app-container">
+
+  <h2 class="title">
+    <i class="fas fa-file-import"></i>
+    Importar Excel ou CSV
+  </h2>
+
+  <div *ngIf="!semTipos; else vazio" class="template-selection">
+    <label *ngFor="let template of templates" class="template-option">
+      <input
+        type="radio"
+        name="template"
+        [checked]="selectedTemplateName === template.tipoTemplate?.sigla"
+        (change)="selectTemplate(template.tipoTemplate?.sigla ?? '')"
+      />
+      {{ template.tipoTemplate?.sigla }}
+    </label>
+  </div>
+
+  <ng-template #vazio>
+    <div class="template-selection">
+      <span class="text-muted">
+        {{ mensagemSemTipos }}
+      </span>
+    </div>
+  </ng-template>
+
+  <div class="action-buttons">
+    <label class="btn-success">
+      <input
+        type="file"
+        class="file-input"
+        (change)="onFileSelected($event)"
+        accept=".csv, .xls, .xlsx"
+      />
+      <i class="fas fa-upload"></i> Selecionar Arquivo
+    </label>
+
+    <button
+      class="btn-import"
+      [disabled]="semTipos || !selectedFile || !selectedTemplateName"
+      (click)="processFile()"
+    >
+      <i class="fas fa-file-import"></i>
+      Pré-visualizar Dados
+    </button>
+  </div>
+
+  <div class="file-preview" *ngIf="selectedFile">
+    <i class="file-icon fas fa-file-excel"></i>
+    <div class="file-info">
+      <span class="file-name">{{ selectedFile.name }}</span>
+      <span class="file-size">
+        {{ (selectedFile.size || 0) / 1024 | number:'1.0-2' }} KB
+      </span>
+    </div>
+    <button class="btn-danger" (click)="clearFile()" aria-label="Remover arquivo">
+      <i class="fas fa-times"></i>
+    </button>
+  </div>
+
+</div>

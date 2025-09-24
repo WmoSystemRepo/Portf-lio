@@ -1,0 +1,110 @@
+@use "../../../../styles/abstracts/variables" as *;
+
+:host {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background: linear-gradient(135deg, $Blue-royal-dark, $Blue-sky-bright);
+}
+
+.dashboard-wrapper {
+  width: 96%;
+  max-width: $max-width-container;
+  margin: 0 auto;
+  padding: 3rem 0;
+}
+
+.text-header {
+  text-align: center;
+  margin-bottom: 2.5rem;
+
+  .text-title {
+    font-size: 2rem;
+    color: $white-color;
+  }
+
+  .text-subtitle {
+    font-size: 1rem;
+    color: $white-color;
+    opacity: 0.85;
+  }
+}
+
+.modern-dashboard-grid {
+  display: grid;
+  gap: 2.2rem;
+  grid-template-columns: repeat(4, 1fr);
+  padding: 0 $padding-container;
+}
+
+.modern-card {
+  background: rgba($white-color, 0.07);
+  border-radius: $Radius-feature-card-50px;
+  padding: 2.5rem 1.5rem;
+  backdrop-filter: blur(14px);
+  box-shadow: $Box-shadow-small-1-2-px;
+  color: $white-color;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
+
+  &:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 12px 24px rgba($Black-color, 0.35);
+  }
+
+  .icon {
+    font-size: 2.8rem;
+    margin-bottom: 1.2rem;
+    animation: pulse 2s infinite;
+  }
+
+  h3 {
+    font-size: 1.3rem;
+    margin-bottom: 1.2rem;
+    font-weight: 600;
+  }
+
+  button {
+    margin-top: auto;
+    padding: 0.5rem 1rem;
+    border-radius: $Radius-small-sm-8px;
+    border: none;
+    background: rgba($white-color, 0.13);
+    color: $white-color;
+    font-weight: 500;
+    transition: background 0.3s;
+
+    &:hover {
+      background: rgba($white-color, 0.2);
+    }
+  }
+}
+
+.card-menu {
+  background: linear-gradient(135deg, $Green-forest, $Green-pine-dark);
+}
+
+.card-permissoes {
+  background: linear-gradient(135deg, $Green-forest, $Green-pine-dark);
+}
+
+.card-regras {
+  background: linear-gradient(135deg, $Green-forest, $Green-pine-dark);
+}
+
+.card-integracoes {
+  background: linear-gradient(135deg, $Green-forest, $Green-pine-dark);
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+}

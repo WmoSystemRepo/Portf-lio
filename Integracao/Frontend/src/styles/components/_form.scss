@@ -1,0 +1,60 @@
+@use "../abstracts/variables" as *;
+
+// === Form Wrapper ===
+.form-group {
+  margin-bottom: 1.5rem;
+
+  label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: $white-color;
+    font-weight: 600;
+  }
+
+  input,
+  select,
+  textarea {
+    width: 100%;
+    padding: 0.8rem;
+    border: 1px solid $Gray-300;
+    border-radius: $Radius-small-sm-8px;
+    background-color: $white-color;
+    color: $Black-color;
+    font-size: 1rem;
+    font-family: inherit;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+
+    &:focus {
+      outline: none;
+      border-color: $Blue-sky-bright;
+      box-shadow: 0 0 0 2px rgba($Blue-sky-bright, 0.3);
+    }
+  }
+}
+
+// === Select base ===
+select {
+  appearance: none;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+// === Error States ===
+.error {
+  color: $Red-danger-color-end;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+.error-small {
+  color: $Red-danger-color-start;
+  font-size: 0.85rem;
+  margin-top: -10px;
+  margin-bottom: 10px;
+  display: block;
+}
+
+// === Button spacing ===
+.btn-submit {
+  margin-top: 1rem;
+}

@@ -1,0 +1,171 @@
+@use '../abstracts/variables' as *;
+@use '../abstracts/mixins' as *;
+@use '../utils/utilities' as *;
+
+/* === 🔧 MIXINS EXCLUSIVOS DE MODAL === */
+@mixin modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba($Black-color, 0.4);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+@mixin modal-container($width: 95%) {
+  background: $white-color;
+  border-radius: $Radius-default-md-12px;
+  padding: 2rem 2rem 1.5rem;
+  width: $width;
+  box-shadow: 0 20px 60px rgba($Black-color, 0.25);
+  animation: slideFadeIn 0.35s ease;
+  font-family: "Segoe UI", sans-serif;
+  text-align: center;
+  position: relative;
+}
+
+/* === 🪟 MODAL OVERLAY === */
+.app-modal-overlay {
+  @include modal-overlay;
+}
+
+/* === MODAL CONTAINER === */
+.app-modal-container {
+  @include modal-container(520px);
+}
+
+/* === ANIMAÇÃO === */
+@keyframes slideFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* === HEADER DO MODAL === */
+.modal-header {
+  font-size: 2.8rem;
+  margin-right: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: var(--spacing-medium);
+}
+
+.modal-title {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #222;
+  margin: 0;
+}
+
+.warning-icon {
+  font-size: 1.8rem;
+  color: #f44336;
+}
+
+/* === LISTA DE CAMPOS NO MODAL === */
+.field-visibility-list {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  max-height: 300px;
+  overflow-y: auto;
+  margin-top: var(--spacing-medium);
+  width: 100%;
+  padding: 0 0.5rem;
+  scroll-behavior: smooth;
+
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: #ccc;
+    border-radius: 3px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .field-visibility-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.6rem 0;
+    font-size: 1rem;
+    color: #030303;
+    width: 100%;
+    border-bottom: 1px dashed #ddd;
+    transition: background 0.2s ease;
+
+    &:hover {
+      background-color: #f8f8f8;
+      border-radius: 4px;
+    }
+  }
+}
+
+/* === BOTÕES DO MODAL === */
+.app-modal-buttons {
+  margin-top: 1.5rem;
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+
+  button {
+    @include btn-reset;
+    padding: 0.6rem 1.5rem;
+    border-radius: 6px;
+    font-size: 0.95rem;
+    font-weight: 600;
+
+    &.btn-danger {
+      background: linear-gradient(90deg, #f44336, #c62828);
+      color: #fff;
+
+      &:hover {
+        background: #b71c1c;
+        transform: translateY(-2px);
+      }
+    }
+
+    &.btn-secondary {
+      background: linear-gradient(90deg, #646464, #121313, #646464);
+      color: #fff;
+
+      &:hover {
+        background: #7a7a7a;
+        transform: translateY(-2px);
+      }
+    }
+  }
+}
+
+/* === TAMANHOS MODAL === */
+.modal-sm {
+  max-width: 400px;
+}
+
+.modal-md {
+  max-width: 600px;
+}
+
+.modal-lg {
+  max-width: 800px;
+}
+
+.modal-xl {
+  max-width: 1000px;
+}

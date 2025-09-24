@@ -1,0 +1,9 @@
+<app-lista-crud
+  [title]="'Lista de Tipos Templates'"
+  [items]="model"
+  [excludeFields]="['integracaoId']"
+  (add)="add()"
+  (edit)="edit($event)"
+  (delete)="confirmDelete($event)"
+  (refresh)="carregarDadosNovamente()"
+></app-lista-crud>

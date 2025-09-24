@@ -1,0 +1,563 @@
+/* === HEADER (Cabeçalho da tela) === */
+.header {
+  margin-bottom: 2rem;
+  /* Espaço abaixo do cabeçalho */
+  display: flex;
+  /* Layout em linha com flexbox */
+  justify-content: space-between;
+  /* Espaço entre os botões e o título */
+  align-items: center;
+  /* Alinha verticalmente os itens ao centro */
+  flex-wrap: wrap;
+  /* Permite quebra de linha em telas pequenas */
+}
+
+.title {
+  flex: 1 1 100%;
+  /* Ocupa toda a largura */
+  text-align: center;
+  /* Centraliza o título */
+  margin: 1rem 0;
+  /* Espaçamento vertical do título */
+}
+
+.tour-button,
+.new-integration-btn {
+  border-radius: var(--radius-pill);
+  /* Bordas arredondadas (configurável por variável) */
+  padding: 0.6rem 1.2rem;
+  /* Espaçamento interno */
+  font-size: 0.95rem;
+  /* Tamanho da fonte */
+  cursor: pointer;
+  /* Cursor em forma de mãozinha */
+  border: none;
+  /* Remove borda padrão */
+}
+
+.tour-button {
+  background: linear-gradient(90deg, #ececec, #fafbfc 90%);
+  /* Gradiente claro */
+  color: var(--primary-color-end);
+  /* Cor da fonte via variável */
+}
+
+.new-integration-btn {
+  background: linear-gradient(90deg, var(--button-gradient-start), var(--button-gradient-end));
+  /* Gradiente colorido */
+  color: #fff;
+  /* Texto branco */
+}
+
+/* === WRAPPER DA TABELA (permite scroll horizontal) === */
+.table-wrapper {
+  width: 100%;
+  /* Ocupa toda a largura do container */
+  overflow-x: auto;
+  /* Scroll horizontal se necessário */
+}
+
+/* === CONTAINER DA TABELA === */
+.crud-table {
+  display: flex;
+  /* Layout em coluna usando flexbox */
+  flex-direction: column;
+  /* Itens um abaixo do outro */
+  border: 1px solid #ddd;
+  /* Borda externa da tabela */
+  border-radius: 4px;
+  /* Bordas levemente arredondadas */
+  overflow: hidden;
+  /* Esconde conteúdo que ultrapassa */
+  margin-top: 1rem;
+  /* Espaço acima da tabela */
+  font-family: Arial, sans-serif;
+  /* Fonte padrão */
+  font-size: 14px;
+  /* Tamanho base de fonte */
+  min-width: 900px;
+  /* Garante largura mínima para evitar quebra */
+}
+
+/* === CABEÇALHO DAS COLUNAS === */
+.crud-table-header {
+  display: flex;
+  /* Cabeçalho em linha */
+  background-color: #f4f4f4;
+  /* Fundo cinza claro */
+  font-weight: bold;
+  /* Texto em negrito */
+  border-bottom: 1px solid #ddd;
+  /* Linha inferior separadora */
+}
+
+.crud-col {
+  flex: 1;
+  /* Divide o espaço igualmente entre as colunas */
+  padding: 0.75rem 1rem;
+  /* Espaçamento interno */
+  border-right: 1px solid #ddd;
+  /* Divisor entre colunas */
+  display: flex;
+  /* Layout flex interno */
+  align-items: center;
+  /* Centraliza verticalmente */
+  position: relative;
+  /* Necessário para posicionar o resizer */
+}
+
+.crud-col:last-child {
+  border-right: none;
+  /* Remove borda do último item */
+}
+
+.crud-col.actions-col {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center; /* Centraliza horizontalmente */
+  align-items: center;
+  gap: 0.3rem 0.4rem; /* Menor espaçamento */
+  padding: 0.4rem 0.2rem; /* Reduzido nas laterais */
+  min-width: 160px;
+  flex: 0 1 auto;
+}
+
+
+
+/* === BARRA DE REDIMENSIONAMENTO DE COLUNAS === */
+.resizer {
+  width: 6px;
+  /* Largura da área clicável */
+  height: 100%;
+  /* Altura total da coluna */
+  position: absolute;
+  /* Posicionado em relação ao .crud-col */
+  top: 0;
+  right: 0;
+  cursor: col-resize;
+  /* Cursor de redimensionamento */
+  user-select: none;
+  /* Evita seleção de texto acidental */
+  background-color: transparent;
+  /* Invisível por padrão */
+}
+
+.resizer:hover {
+  background-color: #ccc;
+  /* Indicação visual ao passar o mouse */
+}
+
+/* === CORPO DA TABELA === */
+.table-body {
+  display: flex;
+  flex-direction: column;
+  /* Cada linha abaixo da outra */
+}
+
+.crud-table-row {
+  display: flex;
+  /* Linha horizontal com colunas */
+  border-bottom: 1px solid #eee;
+  /* Linha divisória */
+  transition: background-color 0.2s ease;
+  /* Suaviza o hover */
+}
+
+.crud-table-row:hover {
+  background-color: #fafafa;
+  /* Destaque ao passar o mouse */
+}
+
+.crud-table-row .crud-col {
+  padding: 0.75rem 1rem;
+  /* Espaço interno padrão */
+  flex: 1;
+  /* Expande proporcionalmente */
+  border-right: 1px solid #eee;
+  /* Divisor entre colunas */
+}
+
+.crud-table-row .crud-col:last-child {
+  border-right: none;
+  /* Remove divisor da última coluna */
+}
+
+/* === BOTÕES DE AÇÃO (EDITAR / EXCLUIR / DETALHES) === */
+.action-btn {
+  border-radius: 50%;
+  /* Botão circular */
+  width: 38px;
+  /* Tamanho fixo */
+  height: 38px;
+  font-size: 1.2em;
+  display: inline-flex;
+  /* Centraliza o ícone */
+  justify-content: center;
+  align-items: center;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  overflow: hidden;
+  transition: transform 0.2s ease;
+  /* Animação no hover */
+}
+
+.action-btn:hover {
+  transform: scale(1.1);
+  /* Aumenta ligeiramente ao passar o mouse */
+}
+
+.action-btn.edit-btn {
+  background: linear-gradient(135deg, #4caf50 20%, #388e3c);
+  /* Verde */
+  color: #fff;
+}
+
+.action-btn.delete-btn {
+  background: linear-gradient(135deg, #f44336 20%, #b71c1c);
+  /* Vermelho */
+  color: #fff;
+}
+
+.action-btn.detail-btn {
+  background: linear-gradient(135deg, #2196f3 20%, #1565c0);
+  /* Azul */
+  color: #fff;
+}
+
+.action-btn.config-btn {
+  background: linear-gradient(135deg, #2196f3 20%, #1565c0);
+  /* Azul */
+  color: #fff;
+}
+
+/* === MODAL OVERLAY === */
+.app-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.4);
+  /* Fundo escuro transparente */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+  /* Garante que fique acima de todos os elementos */
+}
+
+/* === MODAL CONTAINER === */
+.app-modal-container {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 2rem 2rem 1.5rem;
+  max-width: 520px;
+  width: 95%;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.25);
+  /* Sombra */
+  animation: slideFadeIn 0.35s ease;
+  /* Animação de entrada */
+  font-family: "Segoe UI", sans-serif;
+  text-align: center;
+  position: relative;
+}
+
+@keyframes slideFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+    /* Sobe ao entrar */
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* === HEADER DO MODAL === */
+.modal-header {
+  font-size: 2.8rem;
+  margin-right: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 1rem;
+}
+
+.modal-title {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #222;
+  margin: 0;
+}
+
+.warning-icon {
+  font-size: 1.8rem;
+  color: #f44336;
+}
+
+/* === LISTA DE CAMPOS NO MODAL === */
+.field-visibility-list {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  max-height: 300px;
+  overflow-y: auto;
+  margin-top: 1rem;
+  width: 100%;
+  padding: 0 0.5rem;
+  scroll-behavior: smooth;
+}
+
+.field-visibility-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.6rem 0;
+  font-size: 1rem;
+  color: #030303;
+  font-size: 1rem;
+  width: 100%;
+  border-bottom: 1px dashed #ddd;
+  transition: background 0.2s ease;
+}
+
+.field-visibility-item:hover {
+  background-color: #f8f8f8;
+  border-radius: 4px;
+}
+
+/* === BOTÕES DO MODAL === */
+.app-modal-buttons {
+  margin-top: 1.5rem;
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.app-modal-buttons button {
+  padding: 0.6rem 1.5rem;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  font-size: 0.95rem;
+  font-weight: 600;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.btn-danger {
+  background: linear-gradient(90deg, #f44336, #c62828);
+  color: #fff;
+}
+
+.btn-danger:hover {
+  background: #b71c1c;
+  transform: translateY(-2px);
+  /* Levanta o botão no hover */
+}
+
+.btn-secondary {
+  background: linear-gradient(90deg, #646464, #121313, #646464);
+  color: #fff;
+}
+
+.btn-secondary:hover {
+  background: #7a7a7a;
+  transform: translateY(-2px);
+}
+
+/* === SCROLL PERSONALIZADO === */
+.field-visibility-list::-webkit-scrollbar {
+  width: 6px;
+}
+
+.field-visibility-list::-webkit-scrollbar-thumb {
+  background-color: #ccc;
+  border-radius: 3px;
+}
+
+.field-visibility-list::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* === CARDS DE RESUMO === */
+.dashboard-kpi-container.summary-kpis {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  
+  gap: 1rem;
+  margin: 1rem 0;
+  padding: 0 0.5rem;
+}
+
+.dashboard-kpi-card {
+  background: linear-gradient(135deg, #2196f3 20%, #1565c0);
+  color: #fff;
+  border-radius: 36px;
+  text-align: center;
+  padding: 1rem;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+  overflow: hidden;
+  word-break: break-word;
+  overflow-wrap: break-word;
+}
+
+.dashboard-kpi-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+}
+
+.dashboard-kpi-card h2,
+.dashboard-kpi-card p {
+  margin: 0;
+  color: #fff;
+  word-break: break-word;
+  overflow-wrap: break-word;
+  white-space: normal;
+}
+
+/* === FILTROS POR COLUNA === */
+.filters-row {
+  display: flex;
+  background-color: #f4f4f4;
+  border-bottom: 1px solid #ddd;
+}
+
+.filters-row .crud-col {
+  padding: 0.5rem 1rem;
+  display: flex;
+  align-items: center;
+}
+
+.column-filter-input {
+  width: 100%;
+  padding: 0.4rem 0.6rem;
+  font-size: 13px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: #fff;
+  color: #000;
+}
+
+/* === ÍCONES COLORIDOS DINÂMICOS === */
+.text-red {
+  color: #e53935 !important;
+}
+
+.text-blue {
+  color: #2196f3 !important;
+}
+
+/* === MENSAGEM QUANDO TODOS CAMPOS JÁ ESTÃO VISÍVEIS === */
+.no-details-message {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1rem;
+  color: #e53935;
+  font-size: 1.2rem;
+  font-weight: 500;
+  text-align: center;
+  animation: fadeInUp 0.4s ease;
+}
+
+.no-details-message i {
+  font-size: 2.4rem;
+  margin-bottom: 0.5rem;
+}
+
+/* === DETALHES CENTRALIZADOS (opcional) === */
+.centered-details {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.actions-col.wide-actions {
+  min-width: 200px;
+  flex: 0 0 200px;
+  max-width: 200px;
+}
+
+/* Ícones de vínculo/desvínculo */
+.icon-btn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0.4rem;
+  font-size: 1.2rem;
+  transition: transform 0.2s ease;
+}
+
+.icon-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.icon-btn:hover:not(:disabled) {
+  transform: scale(1.15);
+}
+
+/* Tamanhos dinâmicos do modal */
+.modal-sm {
+  max-width: 400px;
+}
+
+.modal-md {
+  max-width: 600px;
+}
+
+.modal-lg {
+  max-width: 800px;
+}
+
+.modal-xl {
+  max-width: 1000px;
+}
+
+.align-left {
+  text-align: left;
+  justify-content: flex-start;
+}
+
+.align-center {
+  text-align: center;
+  justify-content: center;
+}
+
+.align-right {
+  text-align: right;
+  justify-content: flex-end;
+}
+
+.search-bar {
+  display: flex;
+  align-items: center;
+  max-width: 150px;
+  margin-bottom: 1rem;
+  border-radius: 12px;
+  overflow: hidden;
+  background: #fff;
+  border: 2px solid black;
+  transition: all 0.3s var(--transition-timing);
+}
+
+.search-bar input {
+  flex: 1;
+  border: none;
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
+  outline: none;
+  color: black;
+}
+
+.search-bar input::placeholder {
+  color: #aaa;
+}

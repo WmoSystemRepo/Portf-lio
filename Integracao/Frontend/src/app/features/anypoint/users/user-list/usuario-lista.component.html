@@ -1,0 +1,10 @@
+<app-lista-crud
+  [title]="'Lista de Usuarios'"
+  [items]="model"
+  [modelRefs]="modelRefs"
+  (add)="add()"
+  (help)="startTour()"
+  (edit)="edit($event)"
+  (delete)="confirmDelete($event)"
+  (reference)="carregarDadosNovamente()"
+></app-lista-crud>

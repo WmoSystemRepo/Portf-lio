@@ -1,0 +1,75 @@
+<div class="login-container">
+  <div class="login-glass-card">
+    <h2>Bem-vindo de Volta</h2>
+    <p>Faça login para acessar sua conta</p>
+
+    <form [formGroup]="loginForm" (ngSubmit)="login()">
+      <!-- Campo de E-mail -->
+      <div class="form-input-field" [class.invalid]="isInvalid('email')">
+        <i class="fas fa-envelope icon"></i>
+        <input
+          type="email"
+          formControlName="email"
+          placeholder="Digite seu e-mail"
+          autocomplete="username"
+          aria-label="E-mail"
+        />
+      </div>
+      <small class="error-small" *ngIf="isInvalid('email')">
+        <span *ngIf="loginForm.get('email')?.errors?.['required']">E-mail é obrigatório.</span>
+        <span *ngIf="loginForm.get('email')?.errors?.['email']">Formato inválido.</span>
+      </small>
+
+      <!-- Campo de Senha -->
+      <div class="form-input-field" [class.invalid]="isInvalid('senha')">
+        <i class="fas fa-lock icon"></i>
+        <input
+          type="password"
+          formControlName="senha"
+          placeholder="Digite sua senha"
+          autocomplete="current-password"
+          aria-label="Senha"
+        />
+      </div>
+      <small class="error-small" *ngIf="isInvalid('senha')">
+        <span *ngIf="loginForm.get('senha')?.errors?.['required']">Senha é obrigatória.</span>
+        <span *ngIf="loginForm.get('senha')?.errors?.['minlength']">Mínimo 8 caracteres.</span>
+        <span *ngIf="loginForm.get('senha')?.errors?.['pattern']">
+          A senha deve conter letra, número e caractere especial.
+        </span>
+      </small>
+
+      <!-- Opções -->
+      <div class="options">
+        <label>
+          <input type="checkbox" formControlName="rememberMe" />
+          <span>Lembrar de mim</span>
+        </label>
+        <a href="#" (click)="openModal($event)">Esqueceu a senha?</a>
+      </div>
+
+      <!-- Botão de Login -->
+      <button type="submit" class="btn-primary" [disabled]="loading || loginForm.invalid">
+        <span *ngIf="!loading">Entrar</span>
+        <span *ngIf="loading"><i class="fas fa-spinner fa-spin"></i></span>
+      </button>
+    </form>
+  </div>
+</div>
+
+<!-- Modal: Esqueci a senha -->
+<div class="app-modal-overlay" *ngIf="isModalOpen">
+  <div class="app-modal-container">
+    <h2>Redefinir Senha</h2>
+    <input
+      type="email"
+      [(ngModel)]="forgotsenhaEmail"
+      placeholder="Digite seu e-mail"
+      aria-label="E-mail para redefinir senha"
+    />
+    <div class="app-modal-buttons">
+      <button (click)="onForgotsenhaSubmit()">Enviar</button>
+      <button (click)="closeModal()" class="btn-secondary">Fechar</button>
+    </div>
+  </div>
+</div>

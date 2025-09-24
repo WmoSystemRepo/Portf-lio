@@ -1,0 +1,882 @@
+/* ================================
+   🎨 VARIÁVEIS GLOBAIS
+================================= */
+:root {
+  /* Cores principais */
+  --background-gradient-start: #032646;
+  --background-gradient-end: #0b5ed7;
+
+  --button-gradient-start: #041b83;
+  --button-gradient-end: #327ff3;
+
+  --button-gradient-select: #020220;
+
+  --text-light: #ffffff;
+  --text-dark: #000000;
+  --background-default: #ffffff;
+
+  /* Cores de ação */
+  --primary-color-start: #010b13;
+  --primary-color-end: #327ff3;
+
+  --danger-color-start: #e00808;
+  --danger-color-end: #ff887b;
+
+  --card-fallha-color-start: #640d0d;
+  --card-fallha-color-end: #ee220b;
+
+  --Cor-successo-inicio: #06411e;
+  --Cor-sucesso-fim: #2ecc71;
+
+  --secondary-color-start: #1d2124;
+  --secondary-color-end: #727272;
+
+  --import-color-start: #7c05fc;
+  --import-color-end: #062863;
+
+  --table-zebra-bg: #f4f4f4;
+
+  /* Raio de borda */
+  --radius-xs: 4px;
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-card: 50px;
+  --radius-pill: 75px;
+
+  /* Layout */
+  --max-width-container: 1600px;
+  --padding-container: 1.5rem;
+  --margin-container: 2rem auto;
+
+  /* NOVAS variáveis */
+  --hover-bg-sidebar: rgba(255, 255, 255, 0.15);
+  --dashboard-bg: #f5f7fa;
+}
+
+/* ================================
+   🆕 TIPOGRAFIA PADRÃO
+================================= */
+.text-title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--text-light);
+}
+
+.text-subtitle {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--text-light);
+}
+
+.text-label {
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: var(--text-light);
+}
+
+.text-body {
+  font-size: 1rem;
+  font-weight: 400;
+  color: var(--text-light);
+}
+
+.text-small {
+  font-size: 0.85rem;
+  color: var(--text-light);
+}
+
+.text-dark {
+  color: var(--text-dark) !important;
+}
+
+.text-light {
+  color: var(--text-light) !important;
+}
+
+/* ================================
+   🎨 FUNDOS UTILIZÁVEIS
+================================= */
+
+.bg-primary {
+  background: linear-gradient(to right, var(--primary-color-start), var(--primary-color-end));
+}
+
+.bg-danger {
+  background: linear-gradient(to right, var(--danger-color-start), var(--danger-color-end));
+}
+
+.bg-success {
+  background: linear-gradient(to right, var(--Cor-successo-inicio), var(--Cor-sucesso-fim));
+}
+
+.bg-secondary {
+  background: linear-gradient(to right, var(--secondary-color-start), var(--secondary-color-end));
+}
+
+.bg-dark {
+  background-color: #1a1a1a;
+}
+
+.bg-white {
+  background-color: #ffffff;
+}
+
+/* ================================
+   📦 CONTAINER PADRÃO
+================================= */
+
+.app-container {
+  max-width: var(--max-width-container);
+  margin: var(--margin-container);
+  padding: var(--padding-container);
+  border-radius: var(--radius-card);
+  background: linear-gradient(to right,
+      var(--background-gradient-start),
+      var(--background-gradient-end),
+      var(--background-gradient-start),
+      var(--background-gradient-end));
+  color: var(--text-light);
+}
+
+/* ================================
+   🔘 BOTÕES GLOBAIS
+================================= */
+
+button,
+.btn-primary,
+.btn-secondary,
+.btn-danger,
+.btn-success,
+.btn-import,
+.btn-novo,
+.btn-details {
+  background: var(--button-gradient-start);
+  color: var(--text-light);
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: var(--radius-pill);
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.btn-primary {
+  background: linear-gradient(to right, var(--primary-color-start), var(--primary-color-end));
+}
+
+.btn-secondary {
+  background: linear-gradient(to right, var(--secondary-color-start), var(--secondary-color-end));
+}
+
+.btn-danger {
+  background: linear-gradient(to right, var(--danger-color-start), var(--danger-color-end));
+}
+
+.btn-success {
+  background: linear-gradient(to right, var(--Cor-successo-inicio), var(--Cor-sucesso-fim));
+}
+
+.btn-import {
+  background: linear-gradient(to right, var(--import-color-start), var(--import-color-end));
+}
+
+.btn-novo {
+  background: linear-gradient(to right, var(--button-gradient-start), var(--button-gradient-end));
+}
+
+button:hover,
+.btn-primary:hover,
+.btn-secondary:hover,
+.btn-danger:hover,
+.btn-success:hover,
+.btn-import:hover,
+.btn-novo:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+  background: var(--button-gradient-select);
+}
+
+/* ================================
+   📋 CARD PADRÃO GLOBAL
+================================= */
+
+.status-card {
+  border-radius: var(--radius-card);
+  padding: 1.5rem;
+  background: linear-gradient(135deg, var(--error-gradient-start), var(--error-gradient-end));
+  color: var(--text-light);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.status-card.success {
+  background: linear-gradient(135deg, var(--Cor-successo-inicio), var(--Cor-sucesso-fim));
+}
+
+.status-card.failed {
+  background: linear-gradient(135deg, var(--card-fallha-color-start), var(--card-fallha-color-end));
+}
+
+.status-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.4);
+}
+
+.status-card h3 {
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+}
+
+.status-card p {
+  font-size: 0.95rem;
+  margin: 0.2rem 0 1rem 0;
+}
+
+.status-card .actions {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+/* ================================
+   🧾 TABELA GERAL
+================================= */
+
+.preview-table th,
+.preview-table td {
+  border: 1px solid #ddd;
+  padding: 0.5rem 0.75rem;
+  color: var(--text-dark);
+  white-space: nowrap;
+  border-radius: var(--radius-card);
+}
+
+.preview-table th {
+  background-color: var(--button-gradient-end);
+  color: var(--text-light);
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  border-radius: var(--radius-card);
+}
+
+.preview-table tr:nth-child(even) {
+  background-color: var(--table-zebra-bg);
+  border-radius: var(--radius-card);
+}
+
+/* ================================
+   🔽 SELECT / INPUT
+================================= */
+
+select {
+  padding: 0.4rem 0.8rem;
+  border-radius: var(--radius-sm);
+  background-color: var(--text-light);
+  color: #333;
+  font-weight: bold;
+  border: none;
+}
+
+/* ================================
+   🛠️ UTILITÁRIOS
+================================= */
+
+.loading,
+.error {
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+.error {
+  color: #e74c3c;
+}
+
+/* Novo: Error pequeno */
+.error-small {
+  color: red;
+  font-size: 0.85rem;
+  margin-top: -10px;
+  margin-bottom: 10px;
+  display: block;
+}
+
+/* ================================
+   📚 ANGULAR MATERIAL GLOBAL
+================================= */
+
+::ng-deep .mat-paginator,
+::ng-deep .mat-mdc-paginator-outer-container {
+  background-color: var(--background-default);
+  border-radius: var(--radius-sm);
+  border: 1px solid #e5e7eb;
+  margin-top: 10px;
+  color: var(--text-dark);
+}
+
+::ng-deep .mat-select {
+  background-color: #0080ff;
+  border-radius: var(--radius-sm);
+  border: 1px solid #e5e7eb;
+}
+
+::ng-deep .mat-select-trigger {
+  color: var(--text-dark);
+  font-size: 0.95rem;
+  padding: 0 8px;
+  height: 42px;
+  display: flex;
+  align-items: center;
+}
+
+::ng-deep .cdk-overlay-pane {
+  background-color: var(--text-light);
+  border-radius: var(--radius-sm);
+  border: 1px solid #e5e7eb;
+}
+
+/* ================================
+   📐 GRID DE CARDS
+================================= */
+
+.cards-container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+}
+
+@media (max-width: 1200px) {
+  .cards-container {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 900px) {
+  .cards-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .cards-container {
+    grid-template-columns: 1fr;
+  }
+
+  /* ================================
+   NOVAS CLASSES GLOBAIS ADICIONADAS
+================================= */
+
+  /* Form Input Field padrão */
+  .form-input-field {
+    display: flex;
+    align-items: center;
+    border: 2px solid #ddd;
+    border-radius: var(--radius-md);
+    background: white;
+    padding: 10px;
+    margin-bottom: 15px;
+  }
+
+  .form-input-field input {
+    flex: 1;
+    border: none;
+    outline: none;
+    font-size: 1rem;
+    padding: 10px;
+  }
+
+  .form-input-field.invalid {
+    border: 2px solid red;
+  }
+
+  /* Modal padrão da aplicação */
+  .app-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+  }
+
+  .app-modal-container {
+    background-color: #fff;
+    padding: 2rem;
+    border-radius: var(--radius-sm);
+    max-width: 400px;
+    width: 90%;
+    text-align: center;
+    animation: fadeIn 0.3s ease-out;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: scale(0.95);
+    }
+
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  .app-modal-container input[type="email"] {
+    width: 100%;
+    padding: 0.5rem;
+    margin: 1rem 0;
+    border: 1px solid #ccc;
+    border-radius: var(--radius-sm);
+  }
+
+  .app-modal-buttons {
+    display: flex;
+    justify-content: space-around;
+  }
+
+  .app-modal-container button {
+    background: linear-gradient(to right, var(--primary-color-start), var(--primary-color-end));
+    color: var(--text-light);
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s ease;
+  }
+
+  .app-modal-container button:hover {
+    background-color: var(--button-gradient-select);
+  }
+
+  /* Form Field padrão */
+  .form-input-field {
+    display: flex;
+    align-items: center;
+    border: 2px solid #ddd;
+    border-radius: var(--radius-md);
+    background: white;
+    padding: 10px;
+    margin-bottom: 15px;
+  }
+
+  .form-input-field input {
+    flex: 1;
+    border: none;
+    outline: none;
+    font-size: 1rem;
+    padding: 10px;
+  }
+
+  .form-input-field.invalid {
+    border: 2px solid red;
+  }
+
+  /* Modal padrão da aplicação */
+  .app-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+  }
+
+  .app-modal-container {
+    background-color: #fff;
+    padding: 2rem;
+    border-radius: var(--radius-sm);
+    max-width: 400px;
+    width: 90%;
+    text-align: center;
+    animation: fadeIn 0.3s ease-out;
+  }
+
+  .app-modal-container input[type="email"] {
+    width: 100%;
+    padding: 0.5rem;
+    margin: 1rem 0;
+    border: 1px solid #ccc;
+    border-radius: var(--radius-sm);
+  }
+
+  .app-modal-buttons {
+    display: flex;
+    justify-content: space-around;
+  }
+
+  .app-modal-container button {
+    background: linear-gradient(to right, var(--primary-color-start), var(--primary-color-end));
+    color: var(--text-light);
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s ease;
+  }
+
+  .app-modal-container button:hover {
+    background-color: var(--button-gradient-select);
+  }
+
+  /* Error pequeno */
+  .error-small {
+    color: red;
+    font-size: 0.85rem;
+    margin-top: -10px;
+    margin-bottom: 10px;
+    display: block;
+  }
+}
+
+/* 🔹 Reset básico */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* 🔹 Tipografia base */
+
+body {
+  font-family: 'Roboto', sans-serif;
+  background-color: #ecf0f3;
+  color: #333;
+  line-height: 1.6;
+}
+
+/* 🔹 Títulos */
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: #003b80;
+  font-weight: bold;
+}
+
+/* 🔹 Parágrafos */
+
+p {
+  color: #666;
+  margin-bottom: 1rem;
+}
+
+/* 🔹 Layout flex responsivo padrão */
+
+.flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* 🔹 Responsividade global */
+
+@media screen and (max-width: 768px) {
+  h1 {
+    font-size: 2rem;
+  }
+
+  p {
+    font-size: 1rem;
+  }
+}
+
+
+/* Reset básico */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font-family-base);
+  background-color: var(--secondary-color);
+  color: var(--text-color);
+  line-height: 1.6;
+  font-size: var(--font-size-base);
+}
+
+/* Títulos */
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: var(--primary-color);
+  font-weight: bold;
+}
+
+/* Parágrafos */
+
+p {
+  color: var(--text-muted-color);
+  margin-bottom: var(--spacing-medium);
+}
+
+/* Utilitários flex */
+.flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Responsividade global */
+
+@media screen and (max-width: 768px) {
+  h1 {
+    font-size: 2rem;
+  }
+
+  p {
+    font-size: var(--font-size-small);
+  }
+}
+
+/* ================================
+   🗂️ CRUD TABLE PADRÃO GLOBAL
+================================ */
+
+.crud-table {
+  border-radius: var(--radius-md);
+  overflow-x: auto;
+  background: var(--secondary-color-start);
+  box-shadow: 0 2px 12px #03264618;
+  color: var(--text-light);
+  font-size: 1rem;
+  margin-bottom: 2rem;
+}
+
+.crud-table-header,
+.crud-table-row {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  border-bottom: 1px solid #eef1f6;
+}
+
+.crud-table-header {
+  background: linear-gradient(90deg, #e6eefe, #f4f7fa 90%);
+  font-weight: 700;
+  color: var(--primary-color-end);
+  position: sticky;
+  top: 0;
+  z-index: 2;
+}
+
+.crud-col {
+  padding: 1rem 1.2rem;
+  border-right: 1px solid #eef1f6;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  flex: 1;
+  background: transparent;
+  font-size: 1.04rem;
+}
+
+.crud-col:last-child {
+  border-right: none;
+}
+
+/* Coluna de AÇÕES */
+.actions-col {
+  flex: 0 0 120px;
+  min-width: 120px;
+  max-width: 120px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0;
+}
+
+/* Hover na linha */
+.crud-table-row:hover {
+  background: linear-gradient(90deg, #1458af 30%, #f9fbfd 90%);
+  box-shadow: 0 2px 8px #327ff320;
+}
+
+/* Botões da coluna de ações — COM COR GRADIENTE */
+.crud-action-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  width: 38px;
+  height: 38px;
+  font-size: 1.5em;
+  transition: box-shadow 0.2s, background 0.2s, transform 0.2s;
+  cursor: pointer;
+  padding: 0;
+}
+
+.crud-action-btn.edit {
+  background: linear-gradient(135deg, var(--primary-color-end), #84b0ff80);
+  color: var(--text-light);
+}
+
+.crud-action-btn.delete {
+  background: linear-gradient(135deg, #f67b7b 20%, var(--danger-color-end));
+  color: #fff;
+}
+
+.crud-action-btn:hover {
+  box-shadow: 0 4px 16px #327ff320;
+  transform: scale(1.12);
+  background: #d4edfa;
+}
+
+.crud-action-btn.delete:hover {
+  background: var(--danger-color-end);
+}
+
+.crud-action-btn.edit:hover {
+  background: var(--primary-color-end);
+}
+
+/* Responsividade MOBILE */
+@media (max-width: 700px) {
+
+  .crud-table,
+  .crud-table-header,
+  .crud-table-row {
+    display: block;
+  }
+
+  .crud-col,
+  .actions-col {
+    display: flex;
+    width: 100%;
+    max-width: 100%;
+    border: none;
+    padding: 0.9rem 0.8rem;
+    justify-content: flex-start;
+    align-items: center;
+    position: relative;
+  }
+
+  .crud-table-row {
+    margin-bottom: 1.2rem;
+    background: #f9fbfd;
+    border-radius: var(--radius-md);
+    box-shadow: 0 2px 6px #03264614;
+    padding: 0.5rem 0;
+  }
+
+  .actions-col {
+    justify-content: center;
+    flex: 0 0 auto;
+    min-width: auto;
+    max-width: 100%;
+  }
+}
+
+/* ================================
+   🗂️ MODAL PADRÃO DA APLICAÇÃO
+================================ */
+
+/* Overlay escuro, modal centralizado */
+.app-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+/* Container principal do modal */
+.app-modal-container {
+  background-color: var(--background-default);
+  padding: 2rem;
+  border-radius: var(--radius-md);
+  max-width: 400px;
+  width: 90%;
+  text-align: center;
+  animation: fadeIn 0.3s ease-out;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+}
+
+/* Animação de entrada */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Estilo do título do modal */
+.app-modal-container h3 {
+  margin-bottom: 1rem;
+  font-size: 1.4rem;
+  color: var(--primary-color);
+}
+
+/* Estilo do texto/parágrafo do modal */
+.app-modal-container p {
+  border-radius: var(--radius-card);
+  margin-bottom: 1.5rem;
+  font-size: 1rem;
+  color: var(--text-dark);
+}
+
+/* Layout dos botões dentro do modal */
+.app-modal-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  border-radius: var(--radius-pill);
+}
+
+/* Estilo dos botões do modal (puxando as suas classes globais) */
+.app-modal-container button {
+  border-radius: var(--radius-card);
+  color: var(--text-light);
+  border: none;
+  padding: 0.75rem 1.5rem;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+/* Hover nos botões */
+.app-modal-container button:hover {
+  border-radius: var(--radius-card);
+  background: var(--button-gradient-select);
+  transform: translateY(-2px);
+}

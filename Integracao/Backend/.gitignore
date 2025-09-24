@@ -1,0 +1,84 @@
+# Arquivos de configuração do Visual Studio
+.vs/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Binários e arquivos de build
+**/bin/
+**/obj/
+**/publish/
+**/out/
+*.dll
+*.pdb
+*.exe
+*.cache
+*.csproj.user
+
+# Configuração específica do .NET
+**/Debug/
+**/Release/
+*.nupkg
+.nuget/
+
+# Logs e temporários
+*.log
+*.tmp
+*.temp
+*.bak
+secrets.json
+
+# IDEs adicionais
+.vscode/
+.idea/
+*.sln.ide
+
+# Arquivos gerados automaticamente pelo projeto (refatorei os caminhos específicos)
+**/obj/**/*.cs
+**/obj/**/*.cache
+**/obj/**/*.dll
+**/obj/**/*.pdb
+**/obj/**/*.json
+
+# Ambiente local
+.env
+.env.local
+/PARS-Inhouse-Systems-API/obj/Debug/net8.0/PARS-Inhouse-Systems-API.assets.cache
+/PARS-Inhouse-Systems-API/obj/Debug/net8.0/PARS-Inhouse-Systems-API.csproj.CoreCompileInputs.cache
+/PARS-Inhouse-Systems-API/bin/Debug/net8.0/PARS-Inhouse-Systems-API.deps.json
+/PARS-Inhouse-Systems-API/obj/Debug/net8.0/PARS-Inhouse-Systems-API.csproj.FileListAbsolute.txt
+/PARS-Inhouse-Systems-API/bin/Debug/net8.0/PARS.Inhouse.Systems.Domain.dll
+/PARS-Inhouse-Systems-API/bin/Debug/net8.0/PARS.Inhouse.Systems.Domain.pdb
+/PARS.Inhouse.Systems.Domain/bin/Debug/net8.0/PARS.Inhouse.Systems.Domain.pdb
+/PARS.Inhouse.Systems.Domain/obj/Debug/net8.0/ref/PARS.Inhouse.Systems.Domain.dll
+/PARS.Inhouse.Systems.Application/bin/Debug/net8.0/PARS.Inhouse.Systems.Domain.dll
+/PARS.Inhouse.Systems.Application/bin/Debug/net8.0/PARS.Inhouse.Systems.Domain.pdb
+/PARS.Inhouse.Systems.Infrastructure/bin/Debug/net8.0/PARS.Inhouse.Systems.Domain.dll
+/PARS.Inhouse.Systems.Infrastructure/bin/Debug/net8.0/PARS.Inhouse.Systems.Domain.pdb
+/PARS.Inhouse.Systems.Application/obj/Debug/net8.0/PARS.Inhouse.Systems.Application.csproj.CoreCompileInputs.cache
+/PARS.Inhouse.Systems.Application/bin/Debug/net8.0/PARS.Inhouse.Systems.Application.deps.json
+/PARS-Inhouse-Systems-API/bin/Debug/net8.0/PARS.Inhouse.Systems.Shared.pdb
+/PARS-Inhouse-Systems-API/obj/Debug/net8.0/staticwebassets/msbuild.build.PARS-Inhouse-Systems-API.props
+/PARS-Inhouse-Systems-API/obj/PARS-Inhouse-Systems-API.csproj.nuget.g.props
+/PARS.Inhouse.Systems.Application/obj/Debug/net8.0/PARS.Inhouse.Systems.Application.csproj.FileListAbsolute.txt
+/PARS.Inhouse.Systems.Application/obj/Debug/net8.0/PARS.Inhouse.Systems.Application.GeneratedMSBuildEditorConfig.editorconfig
+/PARS.Inhouse.Systems.Infrastructure/bin/Debug/net8.0/PARS.Inhouse.Systems.Infrastructure.deps.json
+/PARS.Inhouse.Systems.Infrastructure/obj/Debug/net8.0/PARS.Inhouse.Systems.Infrastructure.assets.cache
+/PARS.Inhouse.Systems.Infrastructure/obj/Debug/net8.0/PARS.Inhouse.Systems.Infrastructure.csproj.CoreCompileInputs.cache
+/PARS.Inhouse.Systems.Infrastructure/obj/Debug/net8.0/PARS.Inhouse.Systems.Infrastructure.csproj.FileListAbsolute.txt
+/PARS.Inhouse.Systems.Infrastructure/obj/Debug/net8.0/PARS.Inhouse.Systems.Infrastructure.GeneratedMSBuildEditorConfig.editorconfig
+/PARS.Inhouse.Systems.Infrastructure/obj/Debug/net8.0/PARS.Inhouse.Systems.Infrastructure.genruntimeconfig.cache
+/PARS.Inhouse.Systems.Infrastructure/obj/PARS.Inhouse.Systems.Infrastructure.csproj.nuget.dgspec.json
+/PARS.Inhouse.Systems.Infrastructure/obj/PARS.Inhouse.Systems.Infrastructure.csproj.nuget.g.props
+/PARS.Inhouse.Systems.Infrastructure/obj/project.assets.json
+/PARS.Inhouse.Systems.Infrastructure/obj/project.nuget.cache
+/PARS.Inhouse.Systems.Shared/obj/Debug/net8.0/PARS.Inhouse.Systems.Shared.assets.cache
+/PARS.Inhouse.Systems.Shared/obj/Debug/net8.0/PARS.Inhouse.Systems.Shared.csproj.CoreCompileInputs.cache
+/PARS.Inhouse.Systems.Shared/obj/Debug/net8.0/PARS.Inhouse.Systems.Shared.csproj.FileListAbsolute.txt
+/PARS.Inhouse.Systems.Shared/obj/Debug/net8.0/PARS.Inhouse.Systems.Shared.GeneratedMSBuildEditorConfig.editorconfig
+/PARS.Inhouse.Systems.Shared/obj/PARS.Inhouse.Systems.Shared.csproj.nuget.dgspec.json
+/PARS.Inhouse.Systems.Shared/obj/PARS.Inhouse.Systems.Shared.csproj.nuget.g.props
+/PARS.Inhouse.Systems.Shared/obj/project.assets.json
+/PARS.Inhouse.Systems.Shared/obj/project.nuget.cache
+/PARS.Inhouse.Systems.Domain/bin/Debug/net8.0/PARS.Inhouse.Systems.Domain.deps.json

@@ -1,0 +1,354 @@
+:host {
+  display: block;
+  padding: 1.5rem;
+  background-color: #fafafa;
+}
+
+.titulo-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 2rem;
+
+  .titulo-centralizado {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #003366;
+    margin-bottom: 1rem;
+  }
+
+  .ajuda-container {
+    align-self: flex-start;
+
+    .tour-button {
+      border-radius: var(--radius-pill);
+      padding: 0.6rem 1.2rem;
+      font-size: 0.95rem;
+      cursor: pointer;
+      border: none;
+      background: linear-gradient(to right, #465fee, #2196f3, #465fee);
+      color: white;
+    }
+  }
+}
+
+.subtitulo {
+  margin: 0 0 0.75rem 0.25rem;
+  color: #003366;
+  font-weight: 700;
+}
+
+.linha-filtros {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  background: #fff;
+  padding: 1rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(6, 4, 12, 0.726);
+  margin-bottom: 1rem;
+
+  mat-form-field {
+    flex: 1;
+    min-width: 220px;
+  }
+  .flex-dobro {
+    flex: 2;
+  }
+}
+
+.linha-acoes {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #fff;
+  padding: 1rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(6, 4, 12, 0.726);
+  margin-bottom: 1rem;
+
+  button {
+    min-width: 140px;
+    height: 48px;
+    font-weight: bold;
+
+    mat-icon {
+      margin-right: 4px;
+    }
+  }
+}
+
+.cards-status.cards-resumo {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+
+  .card {
+    flex: 1;
+    min-width: 200px;
+    padding: 1rem;
+    border-radius: 16px;
+    color: #fff;
+    text-align: center;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease;
+
+    &:hover {
+      transform: translateY(-2px);
+    }
+
+    &:focus-visible {
+      outline: 2px solid #2196f3;
+      outline-offset: 3px;
+    }
+
+    &:focus {
+      outline: 2px solid transparent;
+    }
+
+    .label {
+      font-size: 14px;
+      margin-bottom: 5px;
+    }
+
+    .valor {
+      font-size: 24px;
+      font-weight: bold;
+    }
+  }
+
+  .total {
+    background: #2196f3;
+    box-shadow: 0 4px 6px rgb(3, 5, 133);
+  }
+
+  .info {
+    background: #009688;
+    box-shadow: 0 4px 6px rgb(3, 80, 0);
+  }
+
+  .sucesso {
+    background: #4caf50;
+    box-shadow: 0 4px 6px rgb(3 80 0 / 60%);
+  }
+
+  .erro {
+    background: #f44336;
+    box-shadow: 0 4px 6px rgb(71, 11, 3);
+  }
+}
+
+.cards-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  align-items: stretch;
+}
+
+.card {
+  flex: 1;
+  min-width: 200px;
+  padding: 1rem;
+  border-radius: 16px;
+  color: #fff;
+  text-align: center;
+  cursor: pointer;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease;
+}
+
+.tabela-wrapper {
+  width: 100%;
+  overflow-x: auto;
+  border-radius: 12px;
+  background-color: white;
+}
+
+table {
+  width: 100%;
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.06);
+  border-collapse: collapse;
+
+  th {
+    background-color: #f9f9f9;
+    font-weight: bold;
+    text-transform: uppercase;
+    padding: 0.75rem;
+    font-size: 13px;
+    border-bottom: 1px solid #ddd;
+
+    &.col-acao {
+      text-align: center; /* ✅ Centraliza cabeçalho da coluna AÇÃO */
+    }
+  }
+
+  td {
+    padding: 0.75rem;
+    font-size: 14px;
+    border-bottom: 1px solid #eee;
+    color: #444;
+
+    &.col-acao {
+      text-align: center;
+      vertical-align: middle;
+    }
+
+    &.col-mensagem {
+      /* ✅ NOVO: Destaque para as mensagens */
+      font-weight: 500;
+      color: #1a237e;
+      font-size: 15px;
+      line-height: 1.4;
+      padding: 1rem 0.75rem;
+      word-break: break-word;
+      white-space: pre-line;
+    }
+  }
+
+  .col-acao {
+    text-align: right; /* fallback para outros usos */
+  }
+
+  button.mat-button {
+    color: #2196f3;
+    font-weight: 600;
+  }
+}
+
+.vazio {
+  padding: 1rem;
+  color: #666;
+}
+
+@media (max-width: 1024px) {
+  .cards-grid {
+    grid-template-columns: 1fr;
+  }
+  .cards-status.cards-resumo .card {
+    min-width: 160px;
+  }
+}
+
+/* ✅ Estilo do botão "Selecionar para alterar" */
+.botao-selecionar-alterar {
+  border-radius: var(--radius-pill);
+  padding: 0.6rem 1.2rem;
+  font-size: 0.9rem;
+  font-weight: bold;
+  cursor: pointer;
+  border: none;
+  background: #2196f3;
+  color: white;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+
+  box-shadow: 0 4px 6px rgb(3, 5, 133); /* ✅ mesma sombra dos cards */
+
+  mat-icon {
+    font-size: 18px;
+  }
+
+  &:hover {
+    filter: brightness(1.05);
+  }
+
+  &:focus-visible {
+    outline: 2px solid #2196f3;
+    outline-offset: 3px;
+  }
+
+  &:focus {
+    outline: none;
+  }
+}
+
+.scroll-mensagens-container {
+  max-height: 350px;
+  overflow-y: auto;
+
+  &::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: #888;
+    border-radius: 4px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background-color: transparent;
+  }
+}
+
+/* === MODAL OVERLAY === */
+.app-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.4);
+  /* Fundo escuro transparente */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+  /* Garante que fique acima de todos os elementos */
+}
+
+/* === MODAL CONTAINER === */
+.app-modal-container {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 2rem 2rem 1.5rem;
+  max-width: 520px;
+  width: 95%;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.25);
+  /* Sombra */
+  animation: slideFadeIn 0.35s ease;
+  /* Animação de entrada */
+  font-family: "Segoe UI", sans-serif;
+  text-align: center;
+  position: relative;
+}
+
+@keyframes slideFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+    /* Sobe ao entrar */
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* === HEADER DO MODAL === */
+.modal-header {
+  font-size: 2.8rem;
+  margin-right: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 1rem;
+}
+
+.modal-title {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #222;
+  margin: 0;
+}
+
+.warning-icon {
+  font-size: 1.8rem;
+  color: #f44336;
+}

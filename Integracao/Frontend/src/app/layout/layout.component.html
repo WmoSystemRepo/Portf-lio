@@ -1,0 +1,25 @@
+<!-- #region layout-container -->
+<div class="layout-container" [class.expanded]="isSidebarCollapsed">
+  <!-- - Container principal com classe dinâmica baseada no estado da sidebar -->
+<!-- #endregion -->
+
+  <!-- #region app-sidebar -->
+  <app-sidebar (toggle)="toggleSidebar($event)"></app-sidebar>
+  <!-- - Sidebar que emite (toggle) para colapsar/expandir -->
+  <!-- #endregion -->
+
+  <!-- #region content -->
+  <div class="content">
+    <!-- - Área de conteúdo principal -->
+  <!-- #endregion -->
+
+    <!-- #region router-outlet -->
+    <router-outlet></router-outlet>
+    <!-- - Ponto onde a rota ativa é renderizada -->
+    <!-- #endregion -->
+
+  </div>
+  <!-- .content -->
+
+</div>
+<!-- .layout-container -->

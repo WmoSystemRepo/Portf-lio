@@ -1,0 +1,92 @@
+<div class="app-container import-history">
+  <h2>📦 Histórico de Importações</h2>
+
+  <p>
+    Exibindo <strong>{{ filteredHistory.length }}</strong> de <strong>{{ historyList.length }}</strong> registros
+  </p>
+
+  <!-- Botão excluir todos -->
+  <button (click)="deleteAllHistory()" [disabled]="historyList.length === 0 || isLoading"
+    class="btn-delete-all">
+    <ng-container *ngIf="!isLoading; else loadingTemplate">
+      Excluir Todos Cards
+    </ng-container>
+    <ng-template #loadingTemplate>
+      <mat-spinner diameter="20" strokeWidth="4"></mat-spinner>
+    </ng-template>
+  </button>
+
+  <!-- Campo de busca -->
+  <input type="text" [(ngModel)]="searchTerm" (input)="applyFilter()" placeholder="Buscar por nome ou arquivo..."
+    class="search-input" />
+
+  <!-- Filtros -->
+  <div class="filter-section">
+    <label>
+      <input type="radio" name="status" value="all" [(ngModel)]="activeFilter" (change)="applyFilter()"> Todos
+    </label>
+    <label>
+      <input type="radio" name="status" value="success" [(ngModel)]="activeFilter" (change)="applyFilter()"> Sucesso
+    </label>
+    <label>
+      <input type="radio" name="status" value="failed" [(ngModel)]="activeFilter" (change)="applyFilter()"> Falha
+    </label>
+
+    <select [(ngModel)]="daysFilter" (change)="applyFilter()">
+      <option value="all">Todos os dias</option>
+      <option value="1">Último 1 dia</option>
+      <option value="2">Últimos 2 dias</option>
+      <option value="3">Últimos 3 dias</option>
+      <option value="4">Últimos 4 dias</option>
+      <option value="5">Últimos 5 dias</option>
+      <option value="6">Últimos 6 dias</option>
+      <option value="7">Últimos 7 dias</option>
+    </select>
+  </div>
+
+  <!-- Loading -->
+  <div *ngIf="isLoading" class="loading">
+    Carregando histórico...
+  </div>
+
+  <!-- Erro -->
+  <div *ngIf="errorMessage" class="error">
+    {{ errorMessage }}
+  </div>
+
+  <!-- Nenhum resultado -->
+  <div *ngIf="!isLoading && filteredHistory.length === 0">
+    <p>Nenhuma tentativa de importação encontrada.</p>
+  </div>
+
+  <!-- Cards -->
+  <div class="cards-container">
+    <div *ngFor="let history of paginatedHistory" class="history-card"
+      [ngClass]="history.success ? 'success-card' : 'failed-card'" [title]="'ID: ' + history.id">
+
+      <h3>{{ history.templateName }}</h3>
+      <p><strong>Arquivo:</strong> {{ history.fileName }}</p>
+      <p><strong>Data:</strong> {{ history.attemptDate | date: 'short' }}</p>
+
+      <p>
+        <strong>Status:</strong>
+        <span>{{ history.success ? 'Sucesso' : 'Falha' }}</span>
+      </p>
+
+      <button (click)="deleteHistory(history.id)" class="btn-delete">Excluir</button>
+
+      <a *ngIf="!history.success" [routerLink]="['/import-history/details', history.id]" class="btn-details">
+        Ver Detalhes
+      </a>
+    </div>
+  </div>
+
+  <!-- Paginação -->
+  <div class="pagination-controls" *ngIf="filteredHistory.length > itemsPerPage">
+    <button (click)="goToPage(currentPage - 1)" [disabled]="currentPage === 1">Anterior</button>
+    <span>
+      Página {{ currentPage }} de {{ totalPages }}
+    </span>
+    <button (click)="goToPage(currentPage + 1)" [disabled]="currentPage === totalPages">Próxima</button>
+  </div>
+</div>

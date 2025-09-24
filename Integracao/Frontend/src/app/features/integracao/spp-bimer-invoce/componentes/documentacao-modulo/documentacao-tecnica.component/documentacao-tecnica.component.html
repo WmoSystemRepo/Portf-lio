@@ -1,0 +1,16 @@
+<div class="doc-header">
+  <h2>Documentação Técnica: Monitoramento SPP x Bimer Invoice</h2>
+  <button (click)="baixarMarkdown()" class="download-btn">
+    Baixar Markdown (.md)
+  </button>
+</div>
+<div
+  class="markdown-body"
+  *ngIf="conteudoHtml"
+  [innerHTML]="conteudoHtml"
+  #markdownContainer>
+</div>
+<div *ngIf="loading">Carregando documentação...</div>
+<div *ngIf="erro" class="erro">
+  Erro ao carregar documentação. Verifique o caminho do arquivo ou permissões.
+</div>

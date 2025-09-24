@@ -1,0 +1,375 @@
+:root {
+  --primary-color: #2c3e50;
+  --secondary-color: #3498db;
+  --text-color: #2c3e50;
+  --background-light: #f8f9fa;
+  --transition-timing: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Container principal */
+.container {
+  padding: 2rem;
+  max-width: 1500px;
+  margin: 0 auto;
+  background-color: var(--background-light);
+}
+
+.section-heading {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #003b80;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+/* Container dos controles */
+.controls-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  align-items: center;
+}
+
+/* Barra de busca */
+.search-bar {
+  display: flex;
+  align-items: center;
+  max-width: 400px;
+  border-radius: 12px;
+  overflow: hidden;
+  background: #fff;
+  border: 2px solid black;
+}
+
+.search-bar input {
+  flex: 1;
+  border: none;
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
+  outline: none;
+  color: black;
+}
+
+.search-bar input::placeholder {
+  color: #aaa;
+}
+
+.search-bar button {
+  background: var(--secondary-color);
+  border: none;
+  padding: 0.75rem 1rem;
+  cursor: pointer;
+}
+
+.search-bar button mat-icon {
+  color: white;
+}
+
+/* Botão de ajuda */
+.tour-container {
+  margin-left: auto;
+}
+
+.tour-button {
+  background: linear-gradient(135deg, #3f51b5, #00bcd4);
+  color: #fff;
+  padding: 10px 20px;
+  font-weight: 500;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.2s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.tour-button:hover {
+  background: linear-gradient(135deg, #303f9f, #00acc1);
+  transform: translateY(-2px);
+}
+
+.tour-button:active {
+  transform: scale(0.98);
+}
+
+/* Container da tabela */
+.pendencias-container {
+  padding: 20px;
+  background: #fff;
+  border-radius: 8px;
+  margin-top: 15px;
+}
+
+/* Scroll horizontal e vertical com sombras */
+.grid-scroll-container {
+  position: relative;
+  max-height: 70vh;
+  overflow: hidden;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  margin-top: 15px;
+}
+
+.scroll-content {
+  overflow-y: auto;
+  max-height: inherit;
+  padding: 1rem 0;
+  scroll-behavior: smooth;
+}
+
+.scroll-content::-webkit-scrollbar {
+  width: 10px;
+  background: #f8f9fa;
+}
+
+.scroll-content::-webkit-scrollbar-thumb {
+  background: #c1c1c1;
+  border-radius: 20px;
+  border: 2px solid #f8f9fa;
+}
+
+.scroll-content::-webkit-scrollbar-thumb:hover {
+  background: #a8a8a8;
+}
+
+/* Mat Table */
+table.mat-table {
+  width: 100%;
+  border-spacing: 0;
+  border-collapse: collapse;
+  background: #fff;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.mat-header-row {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  background: #f8f9fa;
+  backdrop-filter: blur(4px);
+  font-weight: bold;
+}
+
+.mat-header-cell {
+  padding: 1rem;
+  font-size: 0.95rem;
+  color: var(--text-color);
+  border-bottom: 2px solid var(--secondary-color);
+}
+
+.mat-cell {
+  padding: 1rem;
+  font-size: 0.95rem;
+  color: var(--text-color);
+  border-bottom: 1px solid #eee;
+}
+
+/* Estilo da linha */
+.mat-row {
+  transition: all 0.3s var(--transition-timing);
+}
+
+.mat-row:hover {
+  background-color: #f1f5f9;
+  transform: scale(1.01);
+  z-index: 1;
+}
+
+/* Botão de ação */
+button[mat-icon-button] mat-icon {
+  color: #555;
+  transition: color 0.3s;
+}
+
+button[mat-icon-button]:hover mat-icon {
+  color: #2196f3;
+}
+
+/* Paginador */
+.mat-paginator {
+  margin-top: 15px;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  border: 1px solid #e2e8f0;
+}
+
+.mat-paginator-container {
+  padding: 0.5rem 1rem;
+}
+
+.mat-paginator-page-size-label,
+.mat-paginator-range-label {
+  color: #64748b;
+}
+
+.mat-paginator button {
+  background-color: #ffffff;
+}
+
+.mat-paginator button:hover:not([disabled]) {
+  background: #f1f5f9;
+}
+
+/* Acessibilidade */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
+
+/* MODAIS */
+
+/* Modal Overlay */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.45);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Conteúdo do modal */
+.modal-content {
+  background: #fff;
+  padding: 24px;
+  border-radius: 12px;
+  width: 90%;
+  max-width: 500px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.2);
+}
+
+.modal-content textarea {
+  font-family: inherit;
+  font-size: 1rem;
+  padding: 0.5rem;
+}
+
+/* Modal de Sucesso */
+.modal-content.sucesso {
+  border-left: 6px solid #2e7d32;
+}
+
+.modal-content.sucesso h3 {
+  color: #2e7d32;
+}
+
+.modal-content.sucesso p {
+  font-size: 16px;
+  margin: 10px 0 0;
+}
+
+/* Modal de Detalhes */
+.custom-modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.custom-modal {
+  background: white;
+  border-radius: 8px;
+  width: 90%;
+  max-width: 600px;
+  max-height: 90vh;
+  overflow-y: auto;
+  padding: 24px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+  animation: slideDown 0.3s ease-out;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.modal-body {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.modal-footer {
+  margin-top: 24px;
+  text-align: center;
+}
+
+.detail-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px;
+  background: #f9f9f9;
+  border-radius: 6px;
+}
+
+.close-button {
+  background: transparent;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  color: #444;
+}
+
+
+@media (max-width: 768px) {
+  .container {
+    padding: 1rem;
+  }
+
+  .controls-container {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .search-bar {
+    width: 100%;
+  }
+
+  .mat-header-cell,
+  .mat-cell {
+    padding: 0.75rem;
+    font-size: 0.875rem;
+  }
+
+  .grid-scroll-container {
+    max-height: 60vh;
+    margin: 0 -1rem;
+    width: calc(100% + 2rem);
+  }
+
+  .modal-content {
+    max-width: 90%;
+  }
+}

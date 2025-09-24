@@ -1,0 +1,63 @@
+@use '../abstracts/variables' as *;
+
+/* === MIXINS COMUNS === */
+
+@mixin flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin flex-x-center {
+  display: flex;
+  justify-content: center;
+}
+
+@mixin flex-y-center {
+  display: flex;
+  align-items: center;
+}
+
+@mixin visually-hidden {
+  position: absolute !important;
+  height: 1px; width: 1px;
+  overflow: hidden;
+  clip: rect(1px, 1px, 1px, 1px);
+  white-space: nowrap;
+}
+
+@mixin respond-to($breakpoint) {
+  @if $breakpoint == sm {
+    @media (max-width: 576px) { @content; }
+  } @else if $breakpoint == md {
+    @media (max-width: 768px) { @content; }
+  } @else if $breakpoint == lg {
+    @media (max-width: 992px) { @content; }
+  } @else if $breakpoint == xl {
+    @media (max-width: 1200px) { @content; }
+  }
+}
+
+@mixin full-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin gradient-bg($start-color, $end-color) {
+  background: linear-gradient(135deg, $start-color, $end-color);
+}
+
+@mixin flex-between {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+@mixin btn-reset {
+  all: unset;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: inherit;
+}
+

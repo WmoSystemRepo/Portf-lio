@@ -1,0 +1,266 @@
+@use "sass:map";
+@use "sass:color";
+
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap");
+
+// 🌈 Tokens de design (pode migrar para _variables.scss)
+$color-bg: #f9fafb;
+$color-card-bg: #ffffff;
+$color-text-primary: #2d3436;
+$color-text-secondary: #636e72;
+$color-border: #e0e0e0;
+$color-accent: #0984e3;
+$color-success: #00b894;
+$color-danger: #d63031;
+$radius: 12px;
+$shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+
+// 🌐 Container global
+.dashboard-container {
+  font-family: "Montserrat", sans-serif;
+  background-color: $color-bg;
+  min-height: 100vh;
+  padding: 2rem;
+  color: $color-text-primary;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+// 🧭 Cabeçalho
+.header-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+
+  .dashboard-title {
+    font-size: 1.8rem;
+    font-weight: 600;
+    margin: 0;
+  }
+
+  .currency-badge {
+    background-color: $color-accent;
+    color: #fff;
+    padding: 0.4rem 1rem;
+    border-radius: 50px;
+    font-size: 0.85rem;
+    font-weight: 500;
+  }
+
+  .last-update {
+    font-size: 0.85rem;
+    color: $color-text-secondary;
+  }
+}
+
+// 🧱 Layout principal
+.content-wrapper {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 2rem;
+
+  @media (max-width: 1024px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+// 📦 Cards reutilizáveis
+.elevated-card {
+  background-color: $color-card-bg;
+  border-radius: $radius;
+  box-shadow: $shadow;
+  padding: 1.5rem;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+  &:hover {
+    background-color: color.adjust($color-accent, $lightness: -10%);
+  }
+}
+
+// 💰 Cotação atual
+.quote-card {
+  .card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+
+    h2 {
+      margin: 0;
+      font-weight: 600;
+      font-size: 1.2rem;
+    }
+  }
+
+  .quote-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.8rem 0;
+    border-bottom: 1px solid $color-border;
+
+    &:last-child {
+      border-bottom: none;
+    }
+
+    .quote-label {
+      font-weight: 500;
+      color: $color-text-secondary;
+    }
+
+    .quote-value {
+      font-weight: 600;
+      color: $color-text-primary;
+    }
+  }
+
+  .trend-up {
+    color: $color-success;
+  }
+
+  .trend-down {
+    color: $color-danger;
+  }
+
+  .trend-neutral {
+    color: $color-text-secondary;
+  }
+}
+
+// 📊 Gráfico
+.chart-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+
+  .chart-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+
+    h3 {
+      margin: 0;
+      font-size: 1.1rem;
+      font-weight: 600;
+    }
+
+    .chart-controls {
+      display: flex;
+      gap: 0.5rem;
+
+      button {
+        background-color: transparent;
+        border: 1px solid $color-accent;
+        color: $color-accent;
+        padding: 0.3rem 0.8rem;
+        font-size: 0.8rem;
+        font-weight: 500;
+        border-radius: 20px;
+        cursor: pointer;
+        transition: 0.2s ease;
+
+        &.active {
+          background-color: $color-accent;
+          color: white;
+        }
+
+        &:hover {
+          background-color: color.adjust($color-accent, $lightness: 5%);
+          color: white;
+        }
+      }
+    }
+  }
+
+  .grafico-wrapper {
+    flex: 1;
+    padding: 1rem;
+  }
+}
+
+// 📅 Consulta
+.consulta-card {
+  .card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    h3 {
+      margin: 0;
+      font-size: 1.1rem;
+      font-weight: 600;
+    }
+
+    .search-icon {
+      color: $color-accent;
+    }
+  }
+
+  .form-label {
+    display: block;
+    font-weight: 500;
+    margin: 0.6rem 0 0.4rem;
+    font-size: 0.85rem;
+    color: $color-text-secondary;
+  }
+
+  .form-group {
+    margin-bottom: 1rem;
+  }
+
+  .date-range-group {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+
+    @media (max-width: 768px) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .buscar-button {
+    background-color: $color-accent;
+    color: white;
+    border-radius: $radius;
+    width: 100%;
+    padding: 0.8rem;
+    font-weight: 600;
+    transition: 0.3s ease;
+
+    mat-icon {
+      margin-right: 0.5rem;
+    }
+
+    &:hover {
+      background-color: color.adjust($color-accent, $lightness: -10%);
+    }
+  }
+}
+
+// 🧱 Layout principal (ajustado)
+.content-wrapper {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 2rem;
+  align-items: stretch;
+
+  @media (max-width: 1024px) {
+    grid-template-columns: 1fr;
+  }
+
+  .left-column {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    height: 100%;
+  }
+
+  .right-panel {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+}

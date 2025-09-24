@@ -1,0 +1,9 @@
+<app-lista-crud
+  [title]="'Lista de Integrações'"
+  [items]="integracoes"
+  (add)="add()"
+  (help)="startTour()"
+  (edit)="edit($event)"
+  (delete)="confirmDelete($event)"
+  (refresh)="carregarDadosNovamente()"
+></app-lista-crud>

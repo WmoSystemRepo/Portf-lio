@@ -1,0 +1,85 @@
+// ===================================
+// 📌 PLACEHOLDERS COMUNS (uso com @extend)
+// ===================================
+
+@use '../abstracts/variables' as *;
+
+
+// 🔘 Botões padrão reutilizáveis
+%btn-base {
+  border: none;
+  outline: none;
+  cursor: pointer;
+  font-family: inherit;
+  font-weight: bold;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease-in-out;
+  padding: 0.6rem 1.5rem;
+  border-radius: $Radius-small-sm-8px;
+}
+
+// 🔘 Botões circulares de ação
+%action-btn {
+  border-radius: 50%;
+  width: 38px;
+  height: 38px;
+  font-size: 1.2em;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  overflow: hidden;
+  transition: transform 0.2s ease;
+
+  &:hover {
+    transform: scale(1.1);
+  }
+}
+
+// 📊 Coluna genérica de tabela CRUD
+%crud-col {
+  flex: 1;
+  padding: 0.75rem 1rem;
+  border-right: 1px solid $Gray-300;
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+// 📋 Linha genérica de tabela CRUD
+%crud-row {
+  display: flex;
+  border-bottom: 1px solid $Gray-300;
+  transition: background-color 0.2s ease;
+}
+
+// 🧱 Container base para modal
+%modal-container {
+  background: $white-color;
+  border-radius: $Radius-default-md-12px;
+  padding: 2rem 2rem 1.5rem;
+  width: 95%;
+  box-shadow: 0 20px 60px rgba($Black-color, 0.25);
+  animation: slideFadeIn 0.35s ease;
+  font-family: "Segoe UI", sans-serif;
+  text-align: center;
+  position: relative;
+}
+
+// 🌒 Overlay escurecido de modal
+%modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba($Black-color, 0.4);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}

@@ -1,0 +1,55 @@
+@use 'abstracts/variables' as *;
+@use 'abstracts/mixins' as *;
+
+/* === 🔝 HEADER GERAL === */
+.app-header {
+  @include full-center;
+  justify-content: space-between;
+  background-color: $Black-color-primary-color-start;
+  padding: 1rem 2rem;
+  color: $white-color;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+/* === 📛 LOGO === */
+.app-header__logo {
+  font-size: 1.5rem;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+
+/* === 🔗 NAVEGAÇÃO === */
+.app-header__nav {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+
+  a {
+    color: $white-color;
+    text-decoration: none;
+    font-weight: 500;
+    transition: opacity 0.2s;
+
+    &:hover {
+      opacity: 0.75;
+    }
+  }
+}
+
+/* === 📱 RESPONSIVO === */
+@include respond-to(sm) {
+  .app-header {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 1rem;
+  }
+
+  .app-header__nav {
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-top: 0.5rem;
+  }
+}

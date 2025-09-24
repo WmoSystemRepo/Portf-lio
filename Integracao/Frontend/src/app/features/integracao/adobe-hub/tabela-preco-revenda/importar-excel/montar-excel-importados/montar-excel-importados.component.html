@@ -1,0 +1,57 @@
+<div class="app-container preview">
+  <h2>📄 Planilha: {{ fileName }}</h2>
+
+  <!-- Títulos destacados -->
+  <p>
+    <span class="destaque-titulo">Tipo:</span> {{ tipo }}
+  </p>
+  <p>
+    <span class="destaque-titulo">Template selecionado:</span> {{ selectedTemplate }}
+  </p>
+
+  <!-- Botões -->
+  <div class="buttons">
+    <button class="btn voltar-button" (click)="voltar()">
+      🔙 Voltar
+    </button>
+
+    <button class="btn excel-button" (click)="exportarExcel()">
+      ⬇️ Exportar Excel
+    </button>
+
+    <button class="btn mongo-button" (click)="exportarPDF()">
+      📄 Exportar PDF
+    </button>
+  </div>
+
+  <!-- Tabela com dados -->
+  <div *ngIf="dados?.length; else semDados" class="table-wrapper">
+    <table class="preview-table">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th *ngFor="let col of getCabecalhos(); let i = index">
+            {{ getColumnLetter(i) }}
+          </th>
+        </tr>
+        <tr class="header-row">
+          <td></td>
+          <td *ngFor="let col of getCabecalhos()">{{ col }}</td>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let linha of dados; let rowIndex = index">
+          <td>{{ rowIndex + 1 }}</td>
+          <td *ngFor="let col of getCabecalhos()">
+            {{ linha[col] }}
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Caso não tenha dados -->
+  <ng-template #semDados>
+    <p class="text-muted">⚠️ Nenhum dado recebido.</p>
+  </ng-template>
+</div>

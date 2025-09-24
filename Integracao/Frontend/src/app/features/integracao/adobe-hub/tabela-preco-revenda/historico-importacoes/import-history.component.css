@@ -1,0 +1,117 @@
+.app-container.import-history {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 2rem;
+  font-family: Arial, sans-serif;
+}
+
+.filter-section {
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.cards-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1rem;
+}
+
+.history-card {
+  border-radius: 8px;
+  padding: 1rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s;
+}
+
+.history-card:hover {
+  transform: translateY(-2px);
+}
+
+.success-card {
+  border-left: 6px solid #4CAF50;
+}
+
+.failed-card {
+  border-left: 6px solid #F44336;
+}
+
+.btn-delete {
+  background-color: #F44336;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-top: 0.5rem;
+}
+
+.btn-delete:hover {
+  background-color: #D32F2F;
+}
+
+.btn-details {
+  display: inline-block;
+  margin-top: 0.5rem;
+  color: #2196F3;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.btn-details:hover {
+  text-decoration: underline;
+}
+
+.pagination-controls {
+  margin-top: 1rem;
+  text-align: center;
+}
+
+.pagination-controls button {
+  background-color: #2196F3;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  margin: 0 0.5rem;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.pagination-controls button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.loading {
+  font-style: italic;
+  margin: 1rem 0;
+}
+
+.error {
+  color: red;
+  margin: 1rem 0;
+}
+
+.btn-delete-all {
+  margin-bottom: 1rem;
+  padding: 0.75rem 1.5rem;
+  background-color: #ff4d4d;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.btn-delete-all:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.search-input {
+  width: 300px;
+  padding: 0.5rem;
+  margin-bottom: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
